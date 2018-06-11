@@ -176,47 +176,47 @@ begin
         
         
         
-tx_path_top_inst1 : entity work.tx_path_top
-   generic map( 
-      dev_family        => dev_family,
-      iq_width          => tx_diq_width,
-      pct_size_w        => tx_pct_size_w,
-      n_buff            => tx_n_buff,
-      in_pct_data_w     => tx_in_pct_data_w,
-      out_pct_data_w    => tx_out_pct_data_w,
-      decomp_fifo_size  => tx_decomp_fifo_size
-      )
-   port map(
-      pct_wrclk         => tx_pct_wclk,
-      iq_rdclk          => tx_clk,
-      reset_n           => tx_logic_reset_n,
-      en                => tx_logic_reset_n,
-      
-      rx_sample_clk     => rx_clk,
-      rx_sample_nr      => inst0_smpl_nr_cnt,
-      
-      pct_sync_dis      => tx_sync_dis,
-      pct_loss_flg      => inst1_pct_loss_flg,
-      pct_loss_flg_clr  => rx_pct_loss_flg_clr,
-      
-      --Mode settings
-      mode              => lml_mode,
-      trxiqpulse        => lml_trxiqpulse,
-      ddr_en            => lml_ddr_en,
-      mimo_en           => lml_mimo_en,
-      ch_en             => lml_ch_en,
-      fidm              => lml_fidm,
-      sample_width      => lml_smpl_width,
-      --Tx interface data 
-      DIQ               => inst1_DIQ,
-      fsync             => inst1_fsync,
-      DIQ_h             => inst1_DIQ_h,
-      DIQ_l             => inst1_DIQ_l,
-      --fifo ports 
-      in_pct_wrreq      => tx_pct_wrreq,
-      in_pct_data       => tx_pct_data,
-      in_pct_full       => inst1_in_pct_full
-        );
+--tx_path_top_inst1 : entity work.tx_path_top
+--   generic map( 
+--      dev_family        => dev_family,
+--      iq_width          => tx_diq_width,
+--      pct_size_w        => tx_pct_size_w,
+--      n_buff            => tx_n_buff,
+--      in_pct_data_w     => tx_in_pct_data_w,
+--      out_pct_data_w    => tx_out_pct_data_w,
+--      decomp_fifo_size  => tx_decomp_fifo_size
+--      )
+--   port map(
+--      pct_wrclk         => tx_pct_wclk,
+--      iq_rdclk          => tx_clk,
+--      reset_n           => tx_logic_reset_n,
+--      en                => tx_logic_reset_n,
+--      
+--      rx_sample_clk     => rx_clk,
+--      rx_sample_nr      => inst0_smpl_nr_cnt,
+--      
+--      pct_sync_dis      => tx_sync_dis,
+--      pct_loss_flg      => inst1_pct_loss_flg,
+--      pct_loss_flg_clr  => rx_pct_loss_flg_clr,
+--      
+--      --Mode settings
+--      mode              => lml_mode,
+--      trxiqpulse        => lml_trxiqpulse,
+--      ddr_en            => lml_ddr_en,
+--      mimo_en           => lml_mimo_en,
+--      ch_en             => lml_ch_en,
+--      fidm              => lml_fidm,
+--      sample_width      => lml_smpl_width,
+--      --Tx interface data 
+--      DIQ               => inst1_DIQ,
+--      fsync             => inst1_fsync,
+--      DIQ_h             => inst1_DIQ_h,
+--      DIQ_l             => inst1_DIQ_l,
+--      --fifo ports 
+--      in_pct_wrreq      => tx_pct_wrreq,
+--      in_pct_data       => tx_pct_data,
+--      in_pct_full       => inst1_in_pct_full
+--        );
 
 -- ----------------------------------------------------------------------------
 -- Output ports
