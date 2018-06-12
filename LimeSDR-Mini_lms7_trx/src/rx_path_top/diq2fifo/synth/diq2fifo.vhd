@@ -38,7 +38,7 @@ entity diq2fifo is
       --fifo ports 
       fifo_wfull  : in std_logic;
       fifo_wrreq  : out std_logic;
-      fifo_wdata  : out std_logic_vector(iq_width*4-1 downto 0);
+      fifo_wdata  : out std_logic_vector(63 downto 0);
       --sample compare
       smpl_cmp_start : in std_logic;
       smpl_cmp_length: in std_logic_vector(15 downto 0);
@@ -68,6 +68,8 @@ signal mux0_diq_l			: std_logic_vector (iq_width downto 0);
 
 signal mux0_diq_h_reg	: std_logic_vector (iq_width downto 0); 
 signal mux0_diq_l_reg	: std_logic_vector (iq_width downto 0);
+
+signal counter : integer := 0;
   
 begin
 
@@ -88,59 +90,75 @@ inst0_lms7002_ddin : entity work.lms7002_ddin
 		data_out_l	=> inst0_diq_out_l 
         );
 		  
-DIQ_h <= inst0_diq_out_h;
-DIQ_l <= inst0_diq_out_l;      
-        
-inst1_rxiq : entity work.rxiq
-	generic map( 
-      dev_family				=> dev_family,
-      iq_width					=> iq_width
-	)
-	port map (
-      clk         => clk,
-      reset_n     => reset_n,
-      trxiqpulse  => trxiqpulse,
-		ddr_en 		=> ddr_en,
-		mimo_en		=> mimo_en,
-		ch_en			=> ch_en, 
-		fidm			=> fidm,
-      DIQ_h		 	=> mux0_diq_h_reg,
-		DIQ_l	 	   => mux0_diq_l_reg,
-      fifo_wfull  => fifo_wfull,
-      fifo_wrreq  => fifo_wrreq,
-      fifo_wdata  => fifo_wdata
-        );
-		  
-int2_test_data_dd	: entity work.test_data_dd
-generic map(
-   iq_width       => iq_width
-)
-port map(
-
-	clk       		=> clk,
-	reset_n   		=> reset_n,
-	fr_start	 		=> fidm,
-	mimo_en   		=> mimo_en,		  
-	data_h		  	=> inst2_data_h,
-	data_l		  	=> inst2_data_l
-
-);
-	
-
-mux0_diq_h <= 	inst0_diq_out_h when test_ptrn_en = '0' else inst2_data_h;
-mux0_diq_l <= 	inst0_diq_out_l when test_ptrn_en = '0' else inst2_data_l;	
-
 
 process(clk, reset_n)
 begin 
 	if reset_n = '0' then 
-		mux0_diq_h_reg <= (others=>'0');
-		mux0_diq_l_reg <= (others=>'0');
+		counter <= 0;
 	elsif (clk'event AND clk='1') then
-		mux0_diq_h_reg <= mux0_diq_h;
-		mux0_diq_l_reg <= mux0_diq_l;
+		counter <= counter + 1;	 
 	end if;
 end process;	  
+
+--fifo_wdata <= 	std_logic_vector(to_signed(counter, 32)) & "00000000000000000000000000000000";
+fifo_wdata <= 	std_logic_vector(shift_left(resize(signed(inst0_diq_out_h(11 downto 0)), 16), 4)) & 
+					std_logic_vector(shift_left(resize(signed(inst0_diq_out_l(11 downto 0)), 16), 4))
+					& "00000000000000000000000000000000";
+					
+fifo_wrreq <= not inst0_diq_out_h(12);
+--DIQ_h <= inst0_diq_out_h;
+--DIQ_l <= inst0_diq_out_l;      
+        
+--inst1_rxiq : entity work.rxiq
+--	generic map( 
+--      dev_family				=> dev_family,
+--      iq_width					=> iq_width
+--	)
+--	port map (
+--      clk         => clk,
+--      reset_n     => reset_n,
+--      trxiqpulse  => trxiqpulse,
+--		ddr_en 		=> ddr_en,
+--		mimo_en		=> mimo_en,
+--		ch_en			=> ch_en, 
+--		fidm			=> fidm,
+--      DIQ_h		 	=> mux0_diq_h_reg,
+--		DIQ_l	 	   => mux0_diq_l_reg,
+--      fifo_wfull  => fifo_wfull,
+--      fifo_wrreq  => fifo_wrreq,
+--      fifo_wdata  => fifo_wdata
+--        );
+		  
+--int2_test_data_dd	: entity work.test_data_dd
+--generic map(
+--   iq_width       => iq_width
+--)
+--port map(
+--
+--	clk       		=> clk,
+--	reset_n   		=> reset_n,
+--	fr_start	 		=> fidm,
+--	mimo_en   		=> mimo_en,		  
+--	data_h		  	=> inst2_data_h,
+--	data_l		  	=> inst2_data_l
+--
+--);
+	
+
+--mux0_diq_h <= 	inst0_diq_out_h when test_ptrn_en = '0' else inst2_data_h;
+--mux0_diq_l <= 	inst0_diq_out_l when test_ptrn_en = '0' else inst2_data_l;	
+--
+--
+--process(clk, reset_n)
+--begin 
+--	if reset_n = '0' then 
+--		mux0_diq_h_reg <= (others=>'0');
+--		mux0_diq_l_reg <= (others=>'0');
+--	elsif (clk'event AND clk='1') then
+--		mux0_diq_h_reg <= mux0_diq_h;
+--		mux0_diq_l_reg <= mux0_diq_l;
+--	end if;
+--end process;	  
 
 inst3_reset_n <= smpl_cmp_start;
 

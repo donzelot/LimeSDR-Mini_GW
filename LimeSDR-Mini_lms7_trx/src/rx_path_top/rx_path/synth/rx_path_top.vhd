@@ -219,8 +219,8 @@ diq2fifo_inst0 : entity work.diq2fifo
 		DIQ_l			      => DIQ_l,
       --fifo ports 
       fifo_wfull        => inst1_wrfull,
-      fifo_wrreq        => inst0_fifo_wrreq,
-      fifo_wdata        => inst0_fifo_wdata,
+      fifo_wrreq        => pct_fifo_wrreq,
+      fifo_wdata        => pct_fifo_wdata,
       smpl_cmp_start    => smpl_cmp_start_sync,
       smpl_cmp_length   => smpl_cmp_length_sync,
       smpl_cmp_done     => smpl_cmp_done,
@@ -228,23 +228,23 @@ diq2fifo_inst0 : entity work.diq2fifo
         );
         
         
-smpl_fifo_mux : process(clk, reset_n_sync)
-begin
-   if reset_n_sync = '0' then 
-      smpl_fifo_wrreq_mux <= '0';
-      smpl_fifo_data_mux <= (others => '0');
-   elsif (clk'event AND clk='1') then 
-      if smpl_src_sel_sync = '0' then 
-         smpl_fifo_wrreq_mux <= inst0_fifo_wrreq;
-         smpl_fifo_data_mux <= inst0_fifo_wdata;
-      else 
-         smpl_fifo_wrreq_mux <= smpl_fifo_wrreq;
-         smpl_fifo_data_mux <= smpl_fifo_data;
-      end if;
-   end if;
-end process;
-
-smpl_fifo_wrreq_out <= smpl_fifo_wrreq_mux;
+--smpl_fifo_mux : process(clk, reset_n_sync)
+--begin
+--   if reset_n_sync = '0' then 
+--      smpl_fifo_wrreq_mux <= '0';
+--      smpl_fifo_data_mux <= (others => '0');
+--   elsif (clk'event AND clk='1') then 
+--      if smpl_src_sel_sync = '0' then 
+--         smpl_fifo_wrreq_mux <= inst0_fifo_wrreq;
+--         smpl_fifo_data_mux <= inst0_fifo_wdata;
+--      else 
+--         smpl_fifo_wrreq_mux <= smpl_fifo_wrreq;
+--         smpl_fifo_data_mux <= smpl_fifo_data;
+--      end if;
+--   end if;
+--end process;
+--
+--smpl_fifo_wrreq_out <= smpl_fifo_wrreq_mux;
 
 
 
@@ -255,33 +255,33 @@ smpl_fifo_wrreq_out <= smpl_fifo_wrreq_mux;
 -- ----------------------------------------------------------------------------
 -- FIFO for storing samples
 -- ----------------------------------------------------------------------------       
-smpl_fifo_inst1 : entity work.fifo_inst
-  generic map(
-      dev_family	    => dev_family, 
-      wrwidth         => (iq_width*4),
-      wrusedw_witdth  => smpl_buff_rdusedw_w,
-      rdwidth         => (iq_width*4),
-      rdusedw_width   => smpl_buff_rdusedw_w,
-      show_ahead      => "OFF"
-  ) 
-
-  port map(
-      --input ports 
-      reset_n       => reset_n_sync,
-      wrclk         => clk,
-      wrreq         => smpl_fifo_wrreq_mux,
-      data          => smpl_fifo_data_mux,
-      wrfull        => inst1_wrfull,
-		wrempty		  => open,
-      wrusedw       => open,
-      rdclk 	     => clk,
-      rdreq         => inst2_smpl_buff_rdreq,
-      q             => inst1_q,
-      rdempty       => open,
-      rdusedw       => inst1_rdusedw  
-        );
-        
-   smpl_fifo_wfull <= inst1_wrfull;
+--smpl_fifo_inst1 : entity work.fifo_inst
+--  generic map(
+--      dev_family	    => dev_family, 
+--      wrwidth         => (iq_width*4),
+--      wrusedw_witdth  => smpl_buff_rdusedw_w,
+--      rdwidth         => (iq_width*4),
+--      rdusedw_width   => smpl_buff_rdusedw_w,
+--      show_ahead      => "OFF"
+--  ) 
+--
+--  port map(
+--      --input ports 
+--      reset_n       => reset_n_sync,
+--      wrclk         => clk,
+--      wrreq         => smpl_fifo_wrreq_mux,
+--      data          => smpl_fifo_data_mux,
+--      wrfull        => inst1_wrfull,
+--		wrempty		  => open,
+--      wrusedw       => open,
+--      rdclk 	     => clk,
+--      rdreq         => inst2_smpl_buff_rdreq,
+--      q             => inst1_q,
+--      rdempty       => open,
+--      rdusedw       => inst1_rdusedw  
+--        );
+--        
+--   smpl_fifo_wfull <= inst1_wrfull;
  
 --samples are placed to MSb LSb are filled with zeros 
 -- inst2_smpl_buff_rddata <=  inst1_q(47 downto 36) & "0000" & 
@@ -289,18 +289,18 @@ smpl_fifo_inst1 : entity work.fifo_inst
                            -- inst1_q(23 downto 12) & "0000" & 
                            -- inst1_q(11 downto 0) & "0000";
  
- 
-inst2_smpl_buff_rddata(63 downto 64-iq_width) <= inst1_q(iq_width*4-1 downto iq_width*3);
-inst2_smpl_buff_rddata(64-iq_width-1 downto 48) <= (others=>'0');
-
-inst2_smpl_buff_rddata(47 downto 48-iq_width) <= inst1_q(iq_width*3-1 downto iq_width*2);
-inst2_smpl_buff_rddata(48-iq_width-1 downto 32) <= (others=>'0');
-
-inst2_smpl_buff_rddata(31 downto 32-iq_width) <= inst1_q(iq_width*2-1 downto iq_width);
-inst2_smpl_buff_rddata(32-iq_width-1 downto 16) <= (others=>'0');
-
-inst2_smpl_buff_rddata(15 downto 16-iq_width) <= inst1_q(iq_width-1 downto 0);
-inst2_smpl_buff_rddata(16-iq_width-1 downto 0) <= (others=>'0');
+-- 
+--inst2_smpl_buff_rddata(63 downto 64-iq_width) <= inst1_q(iq_width*4-1 downto iq_width*3);
+--inst2_smpl_buff_rddata(64-iq_width-1 downto 48) <= (others=>'0');
+--
+--inst2_smpl_buff_rddata(47 downto 48-iq_width) <= inst1_q(iq_width*3-1 downto iq_width*2);
+--inst2_smpl_buff_rddata(48-iq_width-1 downto 32) <= (others=>'0');
+--
+--inst2_smpl_buff_rddata(31 downto 32-iq_width) <= inst1_q(iq_width*2-1 downto iq_width);
+--inst2_smpl_buff_rddata(32-iq_width-1 downto 16) <= (others=>'0');
+--
+--inst2_smpl_buff_rddata(15 downto 16-iq_width) <= inst1_q(iq_width-1 downto 0);
+--inst2_smpl_buff_rddata(16-iq_width-1 downto 0) <= (others=>'0');
                            
                            
 -------------------------------------------------------------------------------
@@ -323,100 +323,100 @@ inst2_smpl_buff_rddata(16-iq_width-1 downto 0) <= (others=>'0');
     
     
 --packet reserved bits  
-   inst2_pct_hdr_0(15 downto 0)   <="000000000000" & tx_pct_loss_sync & pct_fifo_wusedw(pct_buff_wrusedw_w-1 downto pct_buff_wrusedw_w-3);
-   inst2_pct_hdr_0(31 downto 16)  <=x"0201";
-   inst2_pct_hdr_0(47 downto 32)  <=x"0403";
-   inst2_pct_hdr_0(63 downto 48)  <=x"0605";
+--   inst2_pct_hdr_0(15 downto 0)   <="000000000000" & tx_pct_loss_sync & pct_fifo_wusedw(pct_buff_wrusedw_w-1 downto pct_buff_wrusedw_w-3);
+--   inst2_pct_hdr_0(31 downto 16)  <=x"0201";
+--   inst2_pct_hdr_0(47 downto 32)  <=x"0403";
+--   inst2_pct_hdr_0(63 downto 48)  <=x"0605";
 
         
--- ----------------------------------------------------------------------------
--- Instance for packing samples to packets
--- ----------------------------------------------------------------------------       
-data2packets_top_inst2 : entity work.data2packets_top
-   generic map(
-      smpl_buff_rdusedw_w => smpl_buff_rdusedw_w,  --bus width in bits 
-      pct_buff_wrusedw_w  => pct_buff_wrusedw_w    --bus width in bits            
-   )
-   port map(
-      clk               => clk,
-      reset_n           => reset_n_sync,
-      sample_width      => sample_width_sync,
-      pct_hdr_0         => inst2_pct_hdr_0,
-      pct_hdr_1         => inst2_pct_hdr_1,
-      pct_buff_wrusedw  => pct_fifo_wusedw,
-      pct_buff_wrreq    => pct_fifo_wrreq,
-      pct_buff_wrdata   => pct_fifo_wdata,
-      smpl_buff_rdusedw => inst1_rdusedw,
-      smpl_buff_rdreq   => inst2_smpl_buff_rdreq,
-      smpl_buff_rddata  => inst2_smpl_buff_rddata   
-        );
+---- ----------------------------------------------------------------------------
+---- Instance for packing samples to packets
+---- ----------------------------------------------------------------------------       
+--data2packets_top_inst2 : entity work.data2packets_top
+--   generic map(
+--      smpl_buff_rdusedw_w => smpl_buff_rdusedw_w,  --bus width in bits 
+--      pct_buff_wrusedw_w  => pct_buff_wrusedw_w    --bus width in bits            
+--   )
+--   port map(
+--      clk               => clk,
+--      reset_n           => reset_n_sync,
+--      sample_width      => sample_width_sync,
+--      pct_hdr_0         => inst2_pct_hdr_0,
+--      pct_hdr_1         => inst2_pct_hdr_1,
+--      pct_buff_wrusedw  => pct_fifo_wusedw,
+--      pct_buff_wrreq    => pct_fifo_wrreq,
+--      pct_buff_wrdata   => pct_fifo_wdata,
+--      smpl_buff_rdusedw => inst1_rdusedw,
+--      smpl_buff_rdreq   => inst2_smpl_buff_rdreq,
+--      smpl_buff_rddata  => inst2_smpl_buff_rddata   
+--        );
         
--- ----------------------------------------------------------------------------
--- Instance for packing sample counter for packet forming
--- ----------------------------------------------------------------------------        
-smpl_cnt_inst3 : entity work.smpl_cnt
-   generic map(
-      cnt_width   => 64
-   )
-   port map(
-
-      clk         => clk,
-      reset_n     => reset_n_sync,
-      mode			=> mode_sync,
-		trxiqpulse	=> trxiqpulse_sync,
-		ddr_en 		=> ddr_en_sync,
-		mimo_en		=> mimo_en_sync,
-		ch_en			=> ch_en_sync,
-      sclr        => clr_smpl_nr_sync,
-      sload       => ld_smpl_nr_sync,
-      data        => smpl_nr_in_sync,
-      cnt_en      => inst2_smpl_buff_rdreq,
-      q           => inst3_q        
-        );
-		  
--- ----------------------------------------------------------------------------
--- Instance for sample counter
--- ----------------------------------------------------------------------------        
-smpl_cnt_inst4 : entity work.smpl_cnt
-   generic map(
-      cnt_width   => 64
-   )
-   port map(
-
-      clk         => clk,
-      reset_n     => reset_n_sync,
-      mode			=> mode_sync,
-		trxiqpulse	=> trxiqpulse_sync,
-		ddr_en 		=> ddr_en_sync,
-		mimo_en		=> mimo_en_sync,
-		ch_en			=> ch_en_sync,
-      sclr        => clr_smpl_nr_sync,
-      sload       => ld_smpl_nr_sync,
-      data        => smpl_nr_in_sync,
-      cnt_en      => smpl_fifo_wrreq_mux,
-      q           => smpl_nr_cnt        
-        );
+---- ----------------------------------------------------------------------------
+---- Instance for packing sample counter for packet forming
+---- ----------------------------------------------------------------------------        
+--smpl_cnt_inst3 : entity work.smpl_cnt
+--   generic map(
+--      cnt_width   => 64
+--   )
+--   port map(
+--
+--      clk         => clk,
+--      reset_n     => reset_n_sync,
+--      mode			=> mode_sync,
+--		trxiqpulse	=> trxiqpulse_sync,
+--		ddr_en 		=> ddr_en_sync,
+--		mimo_en		=> mimo_en_sync,
+--		ch_en			=> ch_en_sync,
+--      sclr        => clr_smpl_nr_sync,
+--      sload       => ld_smpl_nr_sync,
+--      data        => smpl_nr_in_sync,
+--      cnt_en      => inst2_smpl_buff_rdreq,
+--      q           => inst3_q        
+--        );
+--		  
+---- ----------------------------------------------------------------------------
+---- Instance for sample counter
+---- ----------------------------------------------------------------------------        
+--smpl_cnt_inst4 : entity work.smpl_cnt
+--   generic map(
+--      cnt_width   => 64
+--   )
+--   port map(
+--
+--      clk         => clk,
+--      reset_n     => reset_n_sync,
+--      mode			=> mode_sync,
+--		trxiqpulse	=> trxiqpulse_sync,
+--		ddr_en 		=> ddr_en_sync,
+--		mimo_en		=> mimo_en_sync,
+--		ch_en			=> ch_en_sync,
+--      sclr        => clr_smpl_nr_sync,
+--      sload       => ld_smpl_nr_sync,
+--      data        => smpl_nr_in_sync,
+--      cnt_en      => smpl_fifo_wrreq_mux,
+--      q           => smpl_nr_cnt        
+--        );
         
--- ----------------------------------------------------------------------------
--- There is 6 clock cycle latency from smpl_fifo_inst1 to packet formation
--- and smpl_cnt has to be delayed 6 cycles
--- ----------------------------------------------------------------------------        
-delay_registers : process(clk, reset_n_sync)
-begin
-   if reset_n_sync = '0' then 
-      delay_chain <= (others=>(others=>'0'));
-   elsif (clk'event AND clk='1') then 
-      for i in 0 to 5 loop
-         if i=0 then 
-            delay_chain(i) <= inst3_q;
-         else 
-            delay_chain(i) <= delay_chain(i-1);
-         end if;
-      end loop;
-   end if;
-end process;
-        
- inst2_pct_hdr_1 <=  delay_chain(5);      
+---- ----------------------------------------------------------------------------
+---- There is 6 clock cycle latency from smpl_fifo_inst1 to packet formation
+---- and smpl_cnt has to be delayed 6 cycles
+---- ----------------------------------------------------------------------------        
+--delay_registers : process(clk, reset_n_sync)
+--begin
+--   if reset_n_sync = '0' then 
+--      delay_chain <= (others=>(others=>'0'));
+--   elsif (clk'event AND clk='1') then 
+--      for i in 0 to 5 loop
+--         if i=0 then 
+--            delay_chain(i) <= inst3_q;
+--         else 
+--            delay_chain(i) <= delay_chain(i-1);
+--         end if;
+--      end loop;
+--   end if;
+--end process;
+--        
+-- inst2_pct_hdr_1 <=  delay_chain(5);      
   
 end arch;   
 

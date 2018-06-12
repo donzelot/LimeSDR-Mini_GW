@@ -156,8 +156,8 @@ begin
       smpl_fifo_wrreq_out  => open,
       --Packet fifo ports  
       pct_fifo_wusedw      => rx_pct_fifo_wrusedw,
-      pct_fifo_wrreq       => inst0_pct_fifo_wrreq,
-      pct_fifo_wdata       => inst0_pct_fifo_wdata,
+      pct_fifo_wrreq       => rx_pct_fifo_wrreq,
+      pct_fifo_wdata       => rx_pct_fifo_wdata,
       --sample nr          
       clr_smpl_nr          => rx_smpl_nr_clr,
       ld_smpl_nr           => rx_smpl_nr_ld,
@@ -223,8 +223,8 @@ begin
 -- ----------------------------------------------------------------------------
 rx_diq_h          <= inst0_DIQ_h;
 rx_diq_l          <= inst0_DIQ_l;
-rx_pct_fifo_wrreq <= inst0_pct_fifo_wrreq;
-rx_pct_fifo_wdata <= inst0_pct_fifo_wdata;
+--rx_pct_fifo_wrreq <= inst0_pct_fifo_wrreq;
+--rx_pct_fifo_wdata <= inst0_pct_fifo_wdata;
 rx_smpl_nr_out    <= inst0_smpl_nr_cnt;
 
 tx_diq            <= inst1_DIQ;      

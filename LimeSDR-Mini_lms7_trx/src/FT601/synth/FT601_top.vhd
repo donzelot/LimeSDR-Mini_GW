@@ -282,8 +282,8 @@ port map(
 EP83_fifo : fifo_inst		
 generic map(
 		dev_family		=> "Cyclone IV",
-		wrwidth			=> EP83_wwidth,
-		wrusedw_witdth	=> 12, 			--11=1024 words x EP83_wwidth (8192KB)
+		wrwidth			=> 32,
+		wrusedw_witdth	=> 13, 			--11=1024 words x EP83_wwidth (8192KB)
 		rdwidth			=> 32,			--32 bits ftdi side, 
 		rdusedw_width	=> 13,				
 		show_ahead		=> "ON"
@@ -292,10 +292,10 @@ port map(
       reset_n       	=> EP83_aclrn, 
       wrclk				=> EP83_wclk,
       wrreq				=> EP83_wr,
-      data          	=> EP83_wdata,
+      data          	=> EP83_wdata(63 downto 32),
       wrfull        	=> EP83_wfull,
 		wrempty		  	=> open,
-      wrusedw       	=> EP83_wrusedw,
+      wrusedw       	=> open,
       rdclk 	     	=> clk,
       rdreq         	=> EP83_fifo_rdreq,
       q             	=> EP83_fifo_q,
