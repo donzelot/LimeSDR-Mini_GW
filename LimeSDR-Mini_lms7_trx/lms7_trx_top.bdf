@@ -5080,11 +5080,6 @@ refer to the applicable agreement for further details.
 	(pt 40 1008)
 )
 (connector
-	(text "lmsrx_clk" (rect -72 960 -26 971)(font "Arial" ))
-	(pt -120 976)
-	(pt 40 976)
-)
-(connector
 	(text "lte_ch_en[1..0]" (rect -98 928 -25 939)(font "Arial" ))
 	(pt -120 944)
 	(pt 40 944)
@@ -5671,7 +5666,12 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "LMS_MCLK2" (rect -2862 2040 -2796 2051)(font "Arial" ))
+	(text "LMS_MCLK1" (rect -72 960 -6 971)(font "Arial" ))
+	(pt -120 976)
+	(pt 40 976)
+)
+(connector
+	(text "LMS_MCLK1" (rect -2862 2040 -2796 2051)(font "Arial" ))
 	(pt -2664 2056)
 	(pt -2880 2056)
 )
