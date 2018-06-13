@@ -8133,6 +8133,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
     
     
     
+    
     </embedded_sof_file>
   </embedded_sof_files>
   <static_plugin_mnemonics/>
@@ -9030,7 +9031,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="C73FFEBD" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/06/27 14:21:35  #1" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="128" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="C73FFEBD" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/06/27 14:21:35  #1" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="128" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">
@@ -10104,7 +10105,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="9DF61AC2" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/06/28 14:28:07  #1" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="9DF61AC2" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/06/28 14:28:07  #1" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">
@@ -11082,7 +11083,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="5C86E6A5" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/07/13 17:10:06  #1" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="5C86E6A5" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/07/13 17:10:06  #1" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">'FT601_top:inst|FT601:ft_fsm|RD_data_valid' == rising edge
@@ -11322,7 +11323,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="7A53067B" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/07/20 10:57:19  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="7A53067B" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2017/07/20 10:57:19  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">
@@ -11898,7 +11899,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="1C008569" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/04/06 11:16:38  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="1C008569" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/04/06 11:16:38  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_sync_fsm:p2d_sync_fsm_inst2|pct_rd_fsm_done' == rising edge
@@ -12784,7 +12785,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="D360FD46" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/01/26 13:48:47  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="D360FD46" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/01/26 13:48:47  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">
@@ -13240,7 +13241,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="A5D427D" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/01/26 10:36:16  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="A5D427D" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/01/26 10:36:16  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">'limelight_top:inst12|rx_path_top:rx_path_top_inst0|diq2fifo:diq2fifo_inst0|smpl_cmp:inst3_smpl_cmp|cmp_done' == rising edge
@@ -14218,7 +14219,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="7E2065A4" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/02/05 13:30:52  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="7E2065A4" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/02/05 13:30:52  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">
@@ -14774,7 +14775,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="69498ABF" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/04/06 16:27:04  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="69498ABF" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/04/06 16:27:04  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="64" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|pct_data_buff_full' == rising edge &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[0]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[10]' == low &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[11]' == low &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[12]' == low &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[13]' == low &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[14]' == low &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[15]' == low &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[1]' == low &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[2]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[3]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[4]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[5]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[6]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[7]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[8]' == high &amp;&amp; 'limelight_top:inst12|tx_path_top:tx_path_top_inst1|packets2data_top:packets2data_top_inst0|packets2data:packets2data_inst0|p2d_rd_fsm:p2d_rd_fsm_inst3|rd_cnt[9]' == low
@@ -15048,7 +15049,7 @@ fV+cyXm7PU4PlRmP/46lfRT+7OB/AqDD2ZI=
         <trigger_in_editor/>
         <trigger_out_editor/>
       </presentation>
-      <trigger CRC="2A9CCE41" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/06/13 13:42:36  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="512" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
+      <trigger CRC="2A9CCE41" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2018/06/13 13:42:36  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="512" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_type="circular">
         <power_up_trigger position="pre" storage_qualifier_disabled="no"/>
         <events use_custom_flow_control="no">
           <level enabled="yes" name="condition1" type="basic">
