@@ -318,11 +318,11 @@ port map(
 --	end if;
 --end process;	 
 	
-fft_pll_inst : fft_pll PORT MAP ( 
-    inclk0   => EP83_wclk, 
-    c0   => fft_clk 
-  ); 
-  
+--fft_pll_inst : fft_pll PORT MAP ( 
+--    inclk0   => EP83_wclk, 
+--    c0   => fft_clk 
+--  ); 
+--  
   
 process(EP83_wclk)
 begin 
@@ -349,8 +349,8 @@ generic map(
 )
 port map(
       reset_n       	=> EP83_aclrn, 
-      wrclk				=> fft_clk,
-      wrreq				=> '1',
+      wrclk				=> EP83_wclk,
+      wrreq				=> EP83_wr,
       data          	=> real_a & imag_a,
       wrfull        	=> open,
 		wrempty		  	=> open,
