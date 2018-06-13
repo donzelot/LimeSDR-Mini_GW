@@ -699,13 +699,14 @@ port map(
    outclk   => c2_global
 );
 
-clkctrl_inst11 : clkctrl 
-port map(
-   inclk    => c3_mux,
-   ena      => clk_ena(3),
-   outclk   => c3_global
-);
+--clkctrl_inst11 : clkctrl 
+--port map(
+--   inclk    => c3_mux,
+--   ena      => '1',
+--   outclk   => c3_global
+--);
 
+c3_global <= inst3_clk(3);
 -- ----------------------------------------------------------------------------
 -- To output ports
 -- ----------------------------------------------------------------------------

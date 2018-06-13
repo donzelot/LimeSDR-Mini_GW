@@ -197,6 +197,18 @@ component FT601 is
         );
 end component;
   
+ 
+component fft_pll
+	PORT
+	(
+		inclk0		: IN STD_LOGIC  := '0';
+		c0		: OUT STD_LOGIC 
+	);
+end component;
+
+ 
+  signal fft_clk : std_logic;
+  signal real_a, imag_a: std_logic_vector(15 downto 0);
 begin
 
 
@@ -278,6 +290,53 @@ port map(
 --      rdusedw       	=> open             
 --        );	
 	
+
+	
+	--fft: entity work.top
+--    port map (
+--        clk       => fft_clk,
+--        rst_n   	=> '1', 
+--		  
+--        -- inputs
+--        in0 => real_a & imag_a,
+--
+--        -- outputs
+--        out0 => fft_out
+--    );
+--	 
+--
+--fifo_wdata <= fft_out(17 downto 0) & fft_out(31 downto 18) & "00000000000000000000000000000000";
+--fifo_wrreq <= fft_out(50) and inst0_diq_out_h(12);			
+		  
+
+--process(clk, reset_n)
+--begin 
+--	if reset_n = '0' then 
+--		counter <= 0;
+--	elsif (clk'event AND clk='1') then
+--		counter <= counter + 1;	 
+--	end if;
+--end process;	 
+	
+fft_pll_inst : fft_pll PORT MAP ( 
+    inclk0   => EP83_wclk, 
+    c0   => fft_clk 
+  ); 
+  
+  
+process(EP83_wclk)
+begin 
+	if (EP83_wclk'event AND EP83_wclk='1') then
+		real_a <= real_a;
+		imag_a <= imag_a;
+		if EP83_wr = '1' then
+			real_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(63 downto 52)), 16), 4));
+			imag_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(51 downto 40)), 16), 4));
+		end if;
+	end if;
+end process;	
+
+	
 -- stream FPGA->PC
 EP83_fifo : fifo_inst		
 generic map(
@@ -290,10 +349,10 @@ generic map(
 )
 port map(
       reset_n       	=> EP83_aclrn, 
-      wrclk				=> EP83_wclk,
-      wrreq				=> EP83_wr,
-      data          	=> EP83_wdata(63 downto 32),
-      wrfull        	=> EP83_wfull,
+      wrclk				=> fft_clk,
+      wrreq				=> '1',
+      data          	=> real_a & imag_a,
+      wrfull        	=> open,
 		wrempty		  	=> open,
       wrusedw       	=> open,
       rdclk 	     	=> clk,
