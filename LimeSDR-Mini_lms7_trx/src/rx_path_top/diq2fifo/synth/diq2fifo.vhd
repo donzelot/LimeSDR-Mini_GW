@@ -70,6 +70,8 @@ signal mux0_diq_h_reg	: std_logic_vector (iq_width downto 0);
 signal mux0_diq_l_reg	: std_logic_vector (iq_width downto 0);
 
 signal counter : integer := 0;
+signal norm_i, norm_q : std_logic_vector(17 downto 0);
+signal fft_out : std_logic_vector(50 downto 0);
   
 begin
 
@@ -91,21 +93,44 @@ inst0_lms7002_ddin : entity work.lms7002_ddin
         );
 		  
 
-process(clk, reset_n)
-begin 
-	if reset_n = '0' then 
-		counter <= 0;
-	elsif (clk'event AND clk='1') then
-		counter <= counter + 1;	 
-	end if;
-end process;	  
+norm_i <= std_logic_vector(shift_left(resize(signed(inst0_diq_out_h(11 downto 0)), 18), 6));
+norm_q <= std_logic_vector(shift_left(resize(signed(inst0_diq_out_l(11 downto 0)), 18), 6));
+		  
+fft: entity work.top
+    port map (
+        clk       => clk,
+        rst_n   	=> inst0_reset_n, 
+		  enable 	=> inst0_diq_out_h(12),
+		  
+        -- inputs
+        in0 => norm_i & norm_q,
 
---fifo_wdata <= 	std_logic_vector(to_signed(counter, 32)) & "00000000000000000000000000000000";
-fifo_wdata <= 	std_logic_vector(shift_left(resize(signed(inst0_diq_out_h(11 downto 0)), 16), 4)) & 
-					std_logic_vector(shift_left(resize(signed(inst0_diq_out_l(11 downto 0)), 16), 4))
-					& "00000000000000000000000000000000";
-					
-fifo_wrreq <= not inst0_diq_out_h(12);
+        -- outputs
+        out0 => fft_out
+    );
+	 
+
+fifo_wdata <= fft_out(17 downto 0) & fft_out(31 downto 18) & "00000000000000000000000000000000";
+fifo_wrreq <= fft_out(50) and inst0_diq_out_h(12);			
+		  
+
+--process(clk, reset_n)
+--begin 
+--	if reset_n = '0' then 
+--		counter <= 0;
+--	elsif (clk'event AND clk='1') then
+--		counter <= counter + 1;	 
+--	end if;
+--end process;	  
+--
+----fifo_wdata <= 	std_logic_vector(to_signed(counter, 32)) & "00000000000000000000000000000000";
+--fifo_wdata <= 	std_logic_vector(shift_left(resize(signed(inst0_diq_out_h(11 downto 0)), 16), 4)) & 
+--					std_logic_vector(shift_left(resize(signed(inst0_diq_out_l(11 downto 0)), 16), 4))
+--					& "00000000000000000000000000000000";
+--					
+--fifo_wrreq <= not inst0_diq_out_h(12);
+
+
 --DIQ_h <= inst0_diq_out_h;
 --DIQ_l <= inst0_diq_out_l;      
         
