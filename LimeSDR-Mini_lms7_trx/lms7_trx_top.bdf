@@ -3140,7 +3140,7 @@ refer to the applicable agreement for further details.
 		(text "DC (%)" (rect 132 89 168 100)(font "Arial" ))
 		(text "c0" (rect 54 101 65 112)(font "Arial" ))
 		(text "1/1" (rect 76 101 91 112)(font "Arial" ))
-		(text "180.00" (rect 98 101 132 112)(font "Arial" ))
+		(text "90.00" (rect 101 101 129 112)(font "Arial" ))
 		(text "50.00" (rect 136 101 164 112)(font "Arial" ))
 		(line (pt 0 0)(pt 241 0))
 		(line (pt 241 0)(pt 241 145))
@@ -4402,11 +4402,6 @@ refer to the applicable agreement for further details.
 	(pt -208 976)
 )
 (connector
-	(text "LMS_MCLK1" (rect -964 904 -902 917)(font "Intel Clear" ))
-	(pt -904 920)
-	(pt -1008 920)
-)
-(connector
 	(text "FFT_CLK" (rect -604 904 -560 917)(font "Intel Clear" ))
 	(pt -664 920)
 	(pt -560 920)
@@ -4420,6 +4415,11 @@ refer to the applicable agreement for further details.
 	(text "FFT_CLK" (rect -2862 2040 -2813 2051)(font "Arial" ))
 	(pt -2664 2056)
 	(pt -2880 2056)
+)
+(connector
+	(text "LMS_MCLK2" (rect -964 904 -902 917)(font "Intel Clear" ))
+	(pt -904 920)
+	(pt -1008 920)
 )
 (junction (pt -2624 4472))
 (junction (pt -2624 4488))

@@ -46,7 +46,7 @@ refer to the applicable agreement for further details.
 		(text "DC (%)" (rect 132 89 294 187)(font "Arial" ))
 		(text "c0" (rect 54 101 117 211)(font "Arial" ))
 		(text "1/1" (rect 76 101 163 211)(font "Arial" ))
-		(text "180.00" (rect 98 101 223 211)(font "Arial" ))
+		(text "90.00" (rect 101 101 224 211)(font "Arial" ))
 		(text "50.00" (rect 136 101 294 211)(font "Arial" ))
 		(line (pt 0 0)(pt 241 0))
 		(line (pt 241 0)(pt 241 145))
