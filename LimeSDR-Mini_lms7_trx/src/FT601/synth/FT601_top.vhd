@@ -20,8 +20,9 @@ entity FT601_top is
 			EP82_wwidth				: integer := 8;
 			EP82_wsize  			: integer := 64;  --packet size in bytes, has to be multiple of 4 bytes				
 			EP03_rwidth				: integer := 32;
-			EP83_wwidth				: integer := 64;
-			EP83_wsize  			: integer := 2048 --packet size in bytes, has to be multiple of 4 bytes	
+			EP83_wwidth				: integer := 32;
+			EP83_fifo_rwidth : integer := 13;
+			EP83_wsize  			: integer := 1024 --packet size in bytes, has to be multiple of 4 bytes	
 	);
 	port (
 			--input ports 
@@ -133,8 +134,8 @@ component FT601_arb is
 	generic(	
 			EP82_fifo_rwidth	: integer := 9;
 			EP82_wsize       	: integer := 64;  --packet size in bytes, has to be multiple of 4 bytes
-			EP83_fifo_rwidth	: integer := 11;
-			EP83_wsize       	: integer := 2048 --packet size in bytes, has to be multiple of 4 bytes
+			EP83_fifo_rwidth	: integer := EP83_fifo_rwidth;
+			EP83_wsize       	: integer := EP83_wsize --packet size in bytes, has to be multiple of 4 bytes
 	);
   port (
 			--input ports 
@@ -176,7 +177,7 @@ end component;
 component FT601 is
     generic(
 			EP82_wsize       : integer := 64;  	--packet size in bytes, has to be multiple of 4 bytes
-			EP83_wsize       : integer := 2048 	--packet size in bytes, has to be multiple of 4 bytes
+			EP83_wsize       : integer := EP83_wsize 	--packet size in bytes, has to be multiple of 4 bytes
 			);
   port (
 			clk			   : in std_logic;
@@ -342,9 +343,9 @@ EP83_fifo : fifo_inst
 generic map(
 		dev_family		=> "Cyclone IV",
 		wrwidth			=> 32,
-		wrusedw_witdth	=> 13, 			--11=1024 words x EP83_wwidth (8192KB)
+		wrusedw_witdth	=> EP83_fifo_rwidth, 			--11=1024 words x EP83_wwidth (8192KB)
 		rdwidth			=> 32,			--32 bits ftdi side, 
-		rdusedw_width	=> 13,				
+		rdusedw_width	=> EP83_fifo_rwidth,				
 		show_ahead		=> "ON"
 )
 port map(
@@ -369,7 +370,7 @@ port map(
 	generic map(	
 			EP82_fifo_rwidth	=> EP82_wrusedw_width,
 			EP82_wsize       	=> EP82_wsize,
-			EP83_fifo_rwidth	=> 13,
+			EP83_fifo_rwidth	=> EP83_fifo_rwidth,
 			EP83_wsize       	=> EP83_wsize
 	)
   port map(
