@@ -2062,7 +2062,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect -2464 832 -2432 848)
+	(rect -2368 864 -2336 880)
 	(text "VCC" (rect 7 0 27 10)(font "Arial" (font_size 6)))
 	(text "inst8" (rect 3 5 27 18)(font "Intel Clear" )(invisible))
 	(port
@@ -2114,6 +2114,87 @@ refer to the applicable agreement for further details.
 	(rect -200 1312 -168 1344)
 	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
 	(text "inst16" (rect 3 21 34 34)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 0)
+		(output)
+		(text "1" (rect 18 0 25 11)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 18 0 25 11)(font "Courier New" (bold))(invisible))
+		(line (pt 16 8)(pt 16 0))
+	)
+	(drawing
+		(line (pt 8 8)(pt 16 16))
+		(line (pt 16 16)(pt 24 8))
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
+	(rect -2392 952 -2360 968)
+	(text "VCC" (rect 7 0 27 10)(font "Arial" (font_size 6)))
+	(text "inst20" (rect 3 5 34 18)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 16)
+		(output)
+		(text "1" (rect 19 7 26 18)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 19 7 26 18)(font "Courier New" (bold))(invisible))
+		(line (pt 16 16)(pt 16 8))
+	)
+	(drawing
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
+	(rect -1776 3440 -1744 3456)
+	(text "VCC" (rect 7 0 27 10)(font "Arial" (font_size 6)))
+	(text "inst21" (rect 3 5 34 18)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 16)
+		(output)
+		(text "1" (rect 19 7 26 18)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 19 7 26 18)(font "Courier New" (bold))(invisible))
+		(line (pt 16 16)(pt 16 8))
+	)
+	(drawing
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
+	(rect -1744 3424 -1712 3456)
+	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
+	(text "inst22" (rect 3 21 34 34)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 0)
+		(output)
+		(text "1" (rect 18 0 25 11)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 18 0 25 11)(font "Courier New" (bold))(invisible))
+		(line (pt 16 8)(pt 16 0))
+	)
+	(drawing
+		(line (pt 8 8)(pt 16 16))
+		(line (pt 16 16)(pt 24 8))
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
+	(rect -1752 3512 -1720 3544)
+	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
+	(text "inst24" (rect 3 21 34 34)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 0)
+		(output)
+		(text "1" (rect 18 0 25 11)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 18 0 25 11)(font "Courier New" (bold))(invisible))
+		(line (pt 16 8)(pt 16 0))
+	)
+	(drawing
+		(line (pt 8 8)(pt 16 16))
+		(line (pt 16 16)(pt 24 8))
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
+	(rect -1760 3584 -1728 3616)
+	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
+	(text "inst25" (rect 3 21 34 34)(font "Intel Clear" )(invisible))
 	(port
 		(pt 16 0)
 		(output)
@@ -2861,12 +2942,6 @@ refer to the applicable agreement for further details.
 	(pt -2296 840)
 )
 (connector
-	(text "FPGA_LED1_CTRL[2..0]" (rect -2420 936 -2297 947)(font "Arial" ))
-	(pt -2376 952)
-	(pt -2288 952)
-	(bus)
-)
-(connector
 	(text "rx_ptrn_en" (rect -2420 696 -2367 707)(font "Arial" ))
 	(pt -2376 712)
 	(pt -2296 712)
@@ -2882,59 +2957,12 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "GPIO[15..0]" (rect -2412 920 -2353 931)(font "Arial" ))
-	(pt -2376 936)
-	(pt -2288 936)
-	(bus)
-)
-(connector
-	(text "fpgacfg_smpl_cmp_en" (rect -2403 1000 -2293 1011)(font "Arial" ))
-	(pt -2376 1016)
-	(pt -2296 1016)
-)
-(connector
-	(pt -2456 856)
-	(pt -2456 848)
-)
-(connector
-	(pt -2456 848)
-	(pt -2448 848)
-)
-(connector
 	(pt -2456 880)
 	(pt -2456 872)
 )
 (connector
-	(pt -2296 872)
-	(pt -2376 872)
-)
-(connector
 	(pt -2376 872)
 	(pt -2456 872)
-)
-(connector
-	(pt -2376 872)
-	(pt -2376 888)
-)
-(connector
-	(pt -2376 888)
-	(pt -2376 904)
-)
-(connector
-	(pt -2296 920)
-	(pt -2528 920)
-)
-(connector
-	(pt -2528 920)
-	(pt -2528 856)
-)
-(connector
-	(pt -2528 856)
-	(pt -2456 856)
-)
-(connector
-	(pt -2456 856)
-	(pt -2296 856)
 )
 (connector
 	(pt -1888 -728)
@@ -2971,57 +2999,122 @@ refer to the applicable agreement for further details.
 	(pt -1792 3440)
 )
 (connector
-	(pt -1712 3440)
-	(pt -1704 3440)
-)
-(connector
 	(pt -1800 3456)
 	(pt -1792 3456)
-)
-(connector
-	(pt -1712 3456)
-	(pt -1704 3456)
 )
 (connector
 	(pt -1800 3496)
 	(pt -1792 3496)
 )
 (connector
-	(pt -1712 3496)
-	(pt -1704 3496)
-)
-(connector
 	(pt -1800 3512)
 	(pt -1792 3512)
-)
-(connector
-	(pt -1712 3512)
-	(pt -1704 3512)
 )
 (connector
 	(pt -1800 3552)
 	(pt -1792 3552)
 )
 (connector
-	(pt -1712 3552)
-	(pt -1704 3552)
-)
-(connector
 	(pt -1800 3568)
 	(pt -1792 3568)
 )
 (connector
-	(pt -1712 3568)
+	(pt -2296 856)
+	(pt -2376 856)
+)
+(connector
+	(pt -2376 856)
+	(pt -2376 872)
+)
+(connector
+	(pt -2376 872)
+	(pt -2376 888)
+)
+(connector
+	(pt -2352 880)
+	(pt -2304 880)
+)
+(connector
+	(pt -2296 872)
+	(pt -2304 872)
+)
+(connector
+	(pt -2304 880)
+	(pt -2304 872)
+)
+(connector
+	(pt -2296 920)
+	(pt -2376 920)
+)
+(connector
+	(pt -2376 968)
+	(pt -2376 920)
+)
+(connector
+	(pt -2376 920)
+	(pt -2376 904)
+)
+(connector
+	(pt -1760 3456)
+	(pt -1704 3456)
+)
+(connector
+	(pt -1704 3440)
+	(pt -1712 3440)
+)
+(connector
+	(pt -1712 3440)
+	(pt -1712 3416)
+)
+(connector
+	(pt -1712 3416)
+	(pt -1728 3416)
+)
+(connector
+	(pt -1728 3416)
+	(pt -1728 3424)
+)
+(connector
+	(pt -1760 3456)
+	(pt -1760 3496)
+)
+(connector
+	(pt -1704 3512)
+	(pt -1736 3512)
+)
+(connector
+	(pt -1768 3552)
+	(pt -1704 3552)
+)
+(connector
+	(pt -1768 3552)
+	(pt -1768 3496)
+)
+(connector
+	(pt -1768 3496)
+	(pt -1760 3496)
+)
+(connector
+	(pt -1760 3496)
+	(pt -1704 3496)
+)
+(connector
+	(pt -1744 3568)
 	(pt -1704 3568)
+)
+(connector
+	(pt -1744 3584)
+	(pt -1744 3568)
 )
 (junction (pt 24 896))
 (junction (pt 16 1232))
 (junction (pt 24 880))
 (junction (pt -1728 3328))
 (junction (pt -2376 872))
-(junction (pt -2376 888))
-(junction (pt -2456 856))
 (junction (pt -2712 3152))
+(junction (pt -2376 920))
+(junction (pt -1760 3456))
+(junction (pt -1760 3496))
 (text "General I/O, clock pins, ect" (rect -3032 -904 -2750 -883)(font "Arial" (font_size 14)(bold)))
 (text "PLL`s and pll control" (rect -1256 -912 -1006 -887)(font "Arial" (font_size 16)(bold)))
 (text "Board SPI" (rect -3024 336 -2918 357)(font "Arial" (font_size 14)(bold)))
