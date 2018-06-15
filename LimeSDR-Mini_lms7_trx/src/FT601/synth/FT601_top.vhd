@@ -27,6 +27,7 @@ entity FT601_top is
 	port (
 			--input ports 
 			clk         	: in std_logic;			--FTDI CLK
+			fft_clk			: in std_logic;
 			reset_n   		: in std_logic;
 			--FTDI external ports
 			FT_wr_n			: out std_logic;
@@ -197,19 +198,11 @@ component FT601 is
 			txe_n			   : in std_logic
         );
 end component;
-  
- 
-component fft_pll
-	PORT
-	(
-		inclk0		: IN STD_LOGIC  := '0';
-		c0		: OUT STD_LOGIC 
-	);
-end component;
+
 
  
-  signal fft_clk : std_logic;
   signal real_a, imag_a: std_logic_vector(15 downto 0);
+  signal real_a_final, imag_a_final: std_logic_vector(15 downto 0);
 begin
 
 
@@ -324,7 +317,8 @@ port map(
 --    c0   => fft_clk 
 --  ); 
 --  
-  
+
+-- IQ register with 2x clock rate
 process(EP83_wclk)
 begin 
 	if (EP83_wclk'event AND EP83_wclk='1') then
@@ -336,6 +330,16 @@ begin
 		end if;
 	end if;
 end process;	
+
+-- downsample by 2
+process(fft_clk)
+begin 
+	if (fft_clk'event AND fft_clk='1') then
+		real_a_final <= real_a;
+		imag_a_final <= imag_a;
+	end if;
+end process;	
+
 
 	
 -- stream FPGA->PC
@@ -350,9 +354,9 @@ generic map(
 )
 port map(
       reset_n       	=> EP83_aclrn, 
-      wrclk				=> EP83_wclk,
-      wrreq				=> EP83_wr,
-      data          	=> real_a & imag_a,
+      wrclk				=> fft_clk,
+      wrreq				=> '1',
+      data          	=> real_a_final & imag_a_final,
       wrfull        	=> open,
 		wrempty		  	=> open,
       wrusedw       	=> open,
