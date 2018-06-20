@@ -33,6 +33,14 @@ library work;
     use work.StageR2SDF_7.all;
     use work.ShiftRegister_8.all;
     use work.StageR2SDF_8.all;
+    use work.ShiftRegister_9.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_10.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_11.all;
+    use work.StageR2SDF_11.all;
+    use work.ShiftRegister_12.all;
+    use work.StageR2SDF_12.all;
     use work.R2SDF_1.all;
 
 
@@ -70,7 +78,7 @@ package body ConjMult_0 is
     begin
         conjugate(self, self_next, self_const, inp.data, pyha_ret_0);
         conj := resize(pyha_ret_0, 0, -17, fixed_wrap, fixed_truncate);
-        self_next.\out\.data := resize((get_real(conj) * get_real(inp.data)) - (get_imag(conj) * get_imag(inp.data)), 0, -17, fixed_wrap, fixed_truncate);
+        self_next.\out\.data := resize((get_real(conj) * get_real(inp.data)) - (get_imag(conj) * get_imag(inp.data)), 0, -35, fixed_wrap, fixed_truncate);
         self_next.\out\.index := inp.index;
         -- self.out = (self.conjugate(complex_in) * complex_in).real
         ret_0 := self.\out\;

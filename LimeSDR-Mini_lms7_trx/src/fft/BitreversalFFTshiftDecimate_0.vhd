@@ -33,6 +33,14 @@ library work;
     use work.StageR2SDF_7.all;
     use work.ShiftRegister_8.all;
     use work.StageR2SDF_8.all;
+    use work.ShiftRegister_9.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_10.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_11.all;
+    use work.StageR2SDF_11.all;
+    use work.ShiftRegister_12.all;
+    use work.StageR2SDF_12.all;
     use work.R2SDF_1.all;
     use work.ConjMult_0.all;
     use work.RAM_0.all;
@@ -51,7 +59,7 @@ package BitreversalFFTshiftDecimate_0 is
         DECIMATION: integer;
         DECIMATION_BITS: integer;
         FFT_SIZE: integer;
-        LUT: Typedefs.integer_list_t(0 to 511);
+        LUT: Typedefs.integer_list_t(0 to 8191);
         mem0: RAM_0.self_t_const;
         mem1: RAM_0.self_t_const;
         \out\: DataWithIndex_3.self_t_const;
@@ -67,38 +75,38 @@ package body BitreversalFFTshiftDecimate_0 is
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataWithIndex_3.self_t; ret_0:out DataWithIndex_3.self_t) is
 
         variable \out\: DataWithIndex_3.self_t;
-        variable res: sfixed(2 downto -17);
-        variable read: sfixed(2 downto -17);
+        variable res: sfixed(0 downto -35);
+        variable read: sfixed(0 downto -35);
         variable write_index_future: integer;
         variable write_index: integer;
-        variable pyha_ret_0: sfixed(2 downto -17);
-        variable pyha_ret_1: sfixed(2 downto -17);
-        variable pyha_ret_2: sfixed(2 downto -17);
-        variable pyha_ret_3: sfixed(2 downto -17);
-        variable pyha_ret_4: sfixed(2 downto -17);
-        variable pyha_ret_5: sfixed(2 downto -17);
+        variable pyha_ret_0: sfixed(0 downto -35);
+        variable pyha_ret_1: sfixed(0 downto -35);
+        variable pyha_ret_2: sfixed(0 downto -35);
+        variable pyha_ret_3: sfixed(0 downto -35);
+        variable pyha_ret_4: sfixed(0 downto -35);
+        variable pyha_ret_5: sfixed(0 downto -35);
     begin
         write_index := self_const.LUT(inp.index);
         write_index_future := self_const.LUT((inp.index + 1) mod self_const.FFT_SIZE);
 
         if self.state then
             RAM_0.delayed_read(self.mem0, self_next.mem0, self_const.mem0, write_index_future, pyha_ret_0);
-            read := resize(pyha_ret_0, 2, -17, fixed_wrap, fixed_truncate);
+            read := resize(pyha_ret_0, 0, -35, fixed_wrap, fixed_truncate);
             if inp.index = 0 then
-                read := Sfix(0.0, 2, -17);
+                read := Sfix(0.0, 0, -35);
             end if;
-            res := resize(resize(read + inp.data, self_const.DECIMATION_BITS, -17, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 2, -17, fixed_wrap, fixed_truncate);
+            res := resize(resize(read + (inp.data sra self_const.DECIMATION_BITS), 0, -35, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 0, -35, fixed_wrap, fixed_truncate);
             RAM_0.delayed_write(self.mem0, self_next.mem0, self_const.mem0, write_index, res);
 
             if inp.index < self_const.FFT_SIZE / self_const.DECIMATION then
                 RAM_0.delayed_read(self.mem1, self_next.mem1, self_const.mem1, inp.index, pyha_ret_1);
-                read := resize(pyha_ret_1 sra self_const.DECIMATION_BITS, 2, -17, fixed_wrap, fixed_truncate);
+                read := resize(pyha_ret_1, 0, -35, fixed_wrap, fixed_truncate);
                 if True then
-                    self_next.\out\.data := resize(read, 0, -17, fixed_wrap, fixed_truncate);
+                    self_next.\out\.data := resize(read, 0, -35, fixed_wrap, fixed_truncate);
                     self_next.\out\.index := inp.index;
                     self_next.\out\.valid := True;
                 end if;
-                res := resize(Sfix(0.0, self_const.DECIMATION_BITS, -17, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 2, -17, fixed_wrap, fixed_truncate);
+                res := resize(Sfix(0.0, 0, -35, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 0, -35, fixed_wrap, fixed_truncate);
                 RAM_0.delayed_write(self.mem1, self_next.mem1, self_const.mem1, inp.index, res);
                 -- self.out = DataWithIndex(self.mem1[inp.index] >> self.DECIMATION_BITS, index=inp.index, valid=True)
                 -- self.mem1[inp.index] = 0.0
@@ -108,21 +116,21 @@ package body BitreversalFFTshiftDecimate_0 is
             end if;
         else
             RAM_0.delayed_read(self.mem1, self_next.mem1, self_const.mem1, write_index_future, pyha_ret_2);
-            read := resize(pyha_ret_2, 2, -17, fixed_wrap, fixed_truncate);
+            read := resize(pyha_ret_2, 0, -35, fixed_wrap, fixed_truncate);
             if inp.index = 0 then
-                read := Sfix(0.0, 2, -17);
+                read := Sfix(0.0, 0, -35);
             end if;
-            res := resize(resize(read + inp.data, self_const.DECIMATION_BITS, -17, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 2, -17, fixed_wrap, fixed_truncate);
+            res := resize(resize(read + (inp.data sra self_const.DECIMATION_BITS), 0, -35, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 0, -35, fixed_wrap, fixed_truncate);
             RAM_0.delayed_write(self.mem1, self_next.mem1, self_const.mem1, write_index, res);
             if inp.index < self_const.FFT_SIZE / self_const.DECIMATION then
                 RAM_0.delayed_read(self.mem0, self_next.mem0, self_const.mem0, inp.index, pyha_ret_3);
-                read := resize(pyha_ret_3 sra self_const.DECIMATION_BITS, 2, -17, fixed_wrap, fixed_truncate);
+                read := resize(pyha_ret_3, 0, -35, fixed_wrap, fixed_truncate);
                 if True then
-                    self_next.\out\.data := resize(read, 0, -17, fixed_wrap, fixed_truncate);
+                    self_next.\out\.data := resize(read, 0, -35, fixed_wrap, fixed_truncate);
                     self_next.\out\.index := inp.index;
                     self_next.\out\.valid := True;
                 end if;
-                res := resize(Sfix(0.0, self_const.DECIMATION_BITS, -17, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 2, -17, fixed_wrap, fixed_truncate);
+                res := resize(Sfix(0.0, 0, -35, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 0, -35, fixed_wrap, fixed_truncate);
                 RAM_0.delayed_write(self.mem0, self_next.mem0, self_const.mem0, inp.index, res);
                 -- self.out = DataWithIndex(self.mem0[inp.index] >> self.DECIMATION_BITS, index=inp.index, valid=True)
                 -- self.mem0[inp.index] = 0.0
@@ -138,16 +146,16 @@ package body BitreversalFFTshiftDecimate_0 is
             -- return self.out
         end if;
         if True then
-            \out\.data := resize(read, 0, -17, fixed_wrap, fixed_truncate);
+            \out\.data := resize(read, 0, -35, fixed_wrap, fixed_truncate);
             \out\.index := self.\out\.index;
             \out\.valid := self.\out\.valid;
         end if;
         if self.state then
             RAM_0.get_readregister(self.mem1, self_next.mem1, self_const.mem1, pyha_ret_4);
-            \out\.data := resize(resize(pyha_ret_4 sra self_const.DECIMATION_BITS, 0, -17, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 0, -17, fixed_wrap, fixed_truncate);
+            \out\.data := resize(pyha_ret_4, 0, -35, fixed_wrap, fixed_truncate);
         else
             RAM_0.get_readregister(self.mem0, self_next.mem0, self_const.mem0, pyha_ret_5);
-            \out\.data := resize(resize(pyha_ret_5 sra self_const.DECIMATION_BITS, 0, -17, overflow_style=>fixed_wrap, round_style=>fixed_truncate), 0, -17, fixed_wrap, fixed_truncate);
+            \out\.data := resize(pyha_ret_5, 0, -35, fixed_wrap, fixed_truncate);
 
         end if;
         ret_0 := \out\;

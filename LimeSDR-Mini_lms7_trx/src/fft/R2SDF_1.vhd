@@ -33,11 +33,19 @@ library work;
     use work.StageR2SDF_7.all;
     use work.ShiftRegister_8.all;
     use work.StageR2SDF_8.all;
+    use work.ShiftRegister_9.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_10.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_11.all;
+    use work.StageR2SDF_11.all;
+    use work.ShiftRegister_12.all;
+    use work.StageR2SDF_12.all;
 
 
 package R2SDF_1 is
     type self_t is record
-        stages: StageR2SDF_0.StageR2SDF_0_self_t_list_t(0 to 8);
+        stages: StageR2SDF_0.StageR2SDF_0_self_t_list_t(0 to 12);
         stages_0: StageR2SDF_0.self_t;
         stages_1: StageR2SDF_1.self_t;
         stages_2: StageR2SDF_2.self_t;
@@ -47,6 +55,10 @@ package R2SDF_1 is
         stages_6: StageR2SDF_6.self_t;
         stages_7: StageR2SDF_7.self_t;
         stages_8: StageR2SDF_8.self_t;
+        stages_9: StageR2SDF_9.self_t;
+        stages_10: StageR2SDF_10.self_t;
+        stages_11: StageR2SDF_11.self_t;
+        stages_12: StageR2SDF_12.self_t;
         \out\: DataWithIndex_0.self_t;
     end record;
     type R2SDF_1_self_t_list_t is array (natural range <>) of R2SDF_1.self_t;
@@ -54,7 +66,7 @@ package R2SDF_1 is
     type self_t_const is record
         FFT_SIZE: integer;
         N_STAGES: integer;
-        stages: StageR2SDF_0.StageR2SDF_0_self_t_const_list_t_const(0 to 8);
+        stages: StageR2SDF_0.StageR2SDF_0_self_t_const_list_t_const(0 to 12);
         stages_0: StageR2SDF_0.self_t_const;
         stages_1: StageR2SDF_1.self_t_const;
         stages_2: StageR2SDF_2.self_t_const;
@@ -64,6 +76,10 @@ package R2SDF_1 is
         stages_6: StageR2SDF_6.self_t_const;
         stages_7: StageR2SDF_7.self_t_const;
         stages_8: StageR2SDF_8.self_t_const;
+        stages_9: StageR2SDF_9.self_t_const;
+        stages_10: StageR2SDF_10.self_t_const;
+        stages_11: StageR2SDF_11.self_t_const;
+        stages_12: StageR2SDF_12.self_t_const;
         GAIN_CORRECTION: sfixed(0 downto -17);
         DELAY: integer;
         \out\: DataWithIndex_0.self_t_const;
@@ -71,7 +87,7 @@ package R2SDF_1 is
     type R2SDF_1_self_t_const_list_t_const is array (natural range <>) of R2SDF_1.self_t_const;
 
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; x: DataWithIndex_0.self_t; ret_0:out DataWithIndex_0.self_t);
-    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_1.self_t;stages_2: StageR2SDF_2.self_t;stages_3: StageR2SDF_3.self_t;stages_4: StageR2SDF_4.self_t;stages_5: StageR2SDF_5.self_t;stages_6: StageR2SDF_6.self_t;stages_7: StageR2SDF_7.self_t;stages_8: StageR2SDF_8.self_t; \out\: DataWithIndex_0.self_t) return self_t;
+    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_1.self_t;stages_2: StageR2SDF_2.self_t;stages_3: StageR2SDF_3.self_t;stages_4: StageR2SDF_4.self_t;stages_5: StageR2SDF_5.self_t;stages_6: StageR2SDF_6.self_t;stages_7: StageR2SDF_7.self_t;stages_8: StageR2SDF_8.self_t;stages_9: StageR2SDF_9.self_t;stages_10: StageR2SDF_10.self_t;stages_11: StageR2SDF_11.self_t;stages_12: StageR2SDF_12.self_t; \out\: DataWithIndex_0.self_t) return self_t;
 end package;
 
 package body R2SDF_1 is
@@ -89,6 +105,10 @@ package body R2SDF_1 is
         variable pyha_ret_6: complex_t(1 downto -34);
         variable pyha_ret_7: complex_t(1 downto -34);
         variable pyha_ret_8: complex_t(1 downto -34);
+        variable pyha_ret_9: complex_t(1 downto -34);
+        variable pyha_ret_10: complex_t(1 downto -34);
+        variable pyha_ret_11: complex_t(1 downto -34);
+        variable pyha_ret_12: complex_t(1 downto -34);
     begin
         -- execute stages
         \out\ := resize(x.data, 0, -17, fixed_wrap, fixed_truncate);
@@ -122,6 +142,18 @@ package body R2SDF_1 is
                 elsif i = 8 then
                     StageR2SDF_8.main(self.stages_8, self_next.stages_8, self_const.stages_8, \out\, index, pyha_ret_8);
                     \out\ := resize(pyha_ret_8, 0, -17, fixed_wrap, fixed_truncate);
+                elsif i = 9 then
+                    StageR2SDF_9.main(self.stages_9, self_next.stages_9, self_const.stages_9, \out\, index, pyha_ret_9);
+                    \out\ := resize(pyha_ret_9, 0, -17, fixed_wrap, fixed_truncate);
+                elsif i = 10 then
+                    StageR2SDF_10.main(self.stages_10, self_next.stages_10, self_const.stages_10, \out\, index, pyha_ret_10);
+                    \out\ := resize(pyha_ret_10, 0, -17, fixed_wrap, fixed_truncate);
+                elsif i = 11 then
+                    StageR2SDF_11.main(self.stages_11, self_next.stages_11, self_const.stages_11, \out\, index, pyha_ret_11);
+                    \out\ := resize(pyha_ret_11, 0, -17, fixed_wrap, fixed_truncate);
+                elsif i = 12 then
+                    StageR2SDF_12.main(self.stages_12, self_next.stages_12, self_const.stages_12, \out\, index, pyha_ret_12);
+                    \out\ := resize(pyha_ret_12, 0, -17, fixed_wrap, fixed_truncate);
                 end if;
             end if;
             -- for stage in self.stages:
@@ -135,7 +167,7 @@ package body R2SDF_1 is
         return;
     end procedure;
 
-    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_1.self_t;stages_2: StageR2SDF_2.self_t;stages_3: StageR2SDF_3.self_t;stages_4: StageR2SDF_4.self_t;stages_5: StageR2SDF_5.self_t;stages_6: StageR2SDF_6.self_t;stages_7: StageR2SDF_7.self_t;stages_8: StageR2SDF_8.self_t; \out\: DataWithIndex_0.self_t) return self_t is
+    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_1.self_t;stages_2: StageR2SDF_2.self_t;stages_3: StageR2SDF_3.self_t;stages_4: StageR2SDF_4.self_t;stages_5: StageR2SDF_5.self_t;stages_6: StageR2SDF_6.self_t;stages_7: StageR2SDF_7.self_t;stages_8: StageR2SDF_8.self_t;stages_9: StageR2SDF_9.self_t;stages_10: StageR2SDF_10.self_t;stages_11: StageR2SDF_11.self_t;stages_12: StageR2SDF_12.self_t; \out\: DataWithIndex_0.self_t) return self_t is
         -- limited constructor
         variable self: self_t;
     begin
@@ -148,6 +180,10 @@ package body R2SDF_1 is
         self.stages_6 := stages_6;
         self.stages_7 := stages_7;
         self.stages_8 := stages_8;
+        self.stages_9 := stages_9;
+        self.stages_10 := stages_10;
+        self.stages_11 := stages_11;
+        self.stages_12 := stages_12;
         self.\out\ := \out\;
         return self;
     end function;

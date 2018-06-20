@@ -33,17 +33,25 @@ library work;
     use work.StageR2SDF_7.all;
     use work.ShiftRegister_8.all;
     use work.StageR2SDF_8.all;
+    use work.ShiftRegister_9.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_10.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_11.all;
+    use work.StageR2SDF_11.all;
+    use work.ShiftRegister_12.all;
+    use work.StageR2SDF_12.all;
     use work.R2SDF_1.all;
     use work.ConjMult_0.all;
 
 -- Inital values works. No LUTs used if init is all 0, if init is omited some LUTs will be strangely used.
 package RAM_0 is
     type self_t is record
-        data: Typedefs.sfixed2downto_17_list_t(0 to 127);
-        write_value: sfixed(2 downto -17);
+        data: Typedefs.sfixed0downto_35_list_t(0 to 255);
+        write_value: sfixed(0 downto -35);
         write_enable: boolean;
         write_address: integer;
-        read_reg: sfixed(2 downto -17);
+        read_reg: sfixed(0 downto -35);
         read_address: integer;
     end record;
     type RAM_0_self_t_list_t is array (natural range <>) of RAM_0.self_t;
@@ -53,14 +61,14 @@ package RAM_0 is
     end record;
     type RAM_0_self_t_const_list_t_const is array (natural range <>) of RAM_0.self_t_const;
 
-    procedure delayed_read(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; ret_0:out sfixed(2 downto -17));
-    procedure delayed_write(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; value: sfixed(2 downto -17));
-    procedure get_readregister(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out sfixed(2 downto -17));
-    function RAM(data: Typedefs.sfixed2downto_17_list_t(0 to 127); write_value: sfixed(2 downto -17); write_enable: boolean; write_address: integer; read_reg: sfixed(2 downto -17); read_address: integer) return self_t;
+    procedure delayed_read(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; ret_0:out sfixed(0 downto -35));
+    procedure delayed_write(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; value: sfixed(0 downto -35));
+    procedure get_readregister(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out sfixed(0 downto -35));
+    function RAM(data: Typedefs.sfixed0downto_35_list_t(0 to 255); write_value: sfixed(0 downto -35); write_enable: boolean; write_address: integer; read_reg: sfixed(0 downto -35); read_address: integer) return self_t;
 end package;
 
 package body RAM_0 is
-    procedure delayed_read(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; ret_0:out sfixed(2 downto -17)) is
+    procedure delayed_read(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; ret_0:out sfixed(0 downto -35)) is
 
 
     begin
@@ -69,16 +77,16 @@ package body RAM_0 is
         return;
     end procedure;
 
-    procedure delayed_write(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; value: sfixed(2 downto -17)) is
+    procedure delayed_write(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; value: sfixed(0 downto -35)) is
 
 
     begin
         self_next.write_address := address;
         self_next.write_enable := True;
-        self_next.write_value := resize(value, 2, -17, fixed_wrap, fixed_truncate);
+        self_next.write_value := resize(value, 0, -35, fixed_wrap, fixed_truncate);
     end procedure;
 
-    procedure get_readregister(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out sfixed(2 downto -17)) is
+    procedure get_readregister(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out sfixed(0 downto -35)) is
 
 
     begin
@@ -86,7 +94,7 @@ package body RAM_0 is
         return;
     end procedure;
 
-    function RAM(data: Typedefs.sfixed2downto_17_list_t(0 to 127); write_value: sfixed(2 downto -17); write_enable: boolean; write_address: integer; read_reg: sfixed(2 downto -17); read_address: integer) return self_t is
+    function RAM(data: Typedefs.sfixed0downto_35_list_t(0 to 255); write_value: sfixed(0 downto -35); write_enable: boolean; write_address: integer; read_reg: sfixed(0 downto -35); read_address: integer) return self_t is
         -- limited constructor
         variable self: self_t;
     begin

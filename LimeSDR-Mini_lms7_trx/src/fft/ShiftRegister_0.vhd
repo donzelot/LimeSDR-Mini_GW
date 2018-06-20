@@ -19,7 +19,7 @@ library work;
 
 package ShiftRegister_0 is
     type self_t is record
-        data: Typedefs.complex_t1downto_34_list_t(0 to 255);
+        data: Typedefs.complex_t1downto_34_list_t(0 to 4095);
         to_push: complex_t(1 downto -34);
     end record;
     type ShiftRegister_0_self_t_list_t is array (natural range <>) of ShiftRegister_0.self_t;
@@ -31,7 +31,7 @@ package ShiftRegister_0 is
 
     procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34));
     procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34));
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 255); to_push: complex_t(1 downto -34)) return self_t;
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 4095); to_push: complex_t(1 downto -34)) return self_t;
 end package;
 
 package body ShiftRegister_0 is
@@ -52,7 +52,7 @@ package body ShiftRegister_0 is
         self_next.data := self.data(1 to self.data'high) & item;
     end procedure;
 
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 255); to_push: complex_t(1 downto -34)) return self_t is
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 4095); to_push: complex_t(1 downto -34)) return self_t is
         -- limited constructor
         variable self: self_t;
     begin

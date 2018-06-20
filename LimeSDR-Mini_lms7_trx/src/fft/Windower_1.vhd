@@ -18,21 +18,21 @@ library work;
 
 package Windower_1 is
     type self_t is record
-        window_pure: Typedefs.sfixed0downto_17_list_t(0 to 511);
+        window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191);
         \out\: DataWithIndex_0.self_t;
     end record;
     type Windower_1_self_t_list_t is array (natural range <>) of Windower_1.self_t;
 
     type self_t_const is record
         M: integer;
-        WINDOW: Typedefs.sfixed0downto_7_list_t(0 to 511);
+        WINDOW: Typedefs.sfixed0downto_7_list_t(0 to 8191);
         \out\: DataWithIndex_0.self_t_const;
         DELAY: integer;
     end record;
     type Windower_1_self_t_const_list_t_const is array (natural range <>) of Windower_1.self_t_const;
 
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataWithIndex_0.self_t; ret_0:out DataWithIndex_0.self_t);
-    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 511); \out\: DataWithIndex_0.self_t) return self_t;
+    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); \out\: DataWithIndex_0.self_t) return self_t;
 end package;
 
 package body Windower_1 is
@@ -47,7 +47,7 @@ package body Windower_1 is
         return;
     end procedure;
 
-    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 511); \out\: DataWithIndex_0.self_t) return self_t is
+    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); \out\: DataWithIndex_0.self_t) return self_t is
         -- limited constructor
         variable self: self_t;
     begin

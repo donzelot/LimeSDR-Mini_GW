@@ -16,7 +16,7 @@ library work;
 
 package DataWithIndex_3 is
     type self_t is record
-        data: sfixed(0 downto -17);
+        data: sfixed(0 downto -35);
         index: integer;
         valid: boolean;
     end record;
@@ -28,13 +28,13 @@ package DataWithIndex_3 is
     type DataWithIndex_3_self_t_const_list_t_const is array (natural range <>) of DataWithIndex_3.self_t_const;
 
 
-    function DataWithIndex(data: sfixed(0 downto -17); index: integer; valid: boolean) return self_t;
+    function DataWithIndex(data: sfixed(0 downto -35); index: integer; valid: boolean) return self_t;
 end package;
 
 package body DataWithIndex_3 is
 
 
-    function DataWithIndex(data: sfixed(0 downto -17); index: integer; valid: boolean) return self_t is
+    function DataWithIndex(data: sfixed(0 downto -35); index: integer; valid: boolean) return self_t is
         -- limited constructor
         variable self: self_t;
     begin

@@ -21,8 +21,8 @@ entity FT601_top is
 			EP82_wsize  			: integer := 64;  --packet size in bytes, has to be multiple of 4 bytes				
 			EP03_rwidth				: integer := 32;
 			EP83_wwidth				: integer := 32;
-			EP83_fifo_rwidth : integer := 13;
-			EP83_wsize  			: integer := 1024 --packet size in bytes, has to be multiple of 4 bytes	
+			EP83_fifo_rwidth : integer := 8;
+			EP83_wsize  			: integer := 512 --packet size in bytes, has to be multiple of 4 bytes	
 	);
 	port (
 			--input ports 
@@ -201,8 +201,10 @@ end component;
 
 
  
-  signal real_a, imag_a: std_logic_vector(15 downto 0);
-  signal real_a_final, imag_a_final: std_logic_vector(15 downto 0);
+--  signal real_a, imag_a, real_a_final, imag_a_final: std_logic_vector(15 downto 0);
+  signal real_a, imag_a, real_a_final, imag_a_final: std_logic_vector(17 downto 0);
+  signal fft_out :std_logic_vector (68 downto 0);
+  signal package_start: std_logic;
 begin
 
 
@@ -259,7 +261,35 @@ port map(
       rdusedw       	=> EP82_fifo_rdusedw           
         );
 
---stream PC->FPGA		  
+
+		  
+		  
+--stream PC->FPGA		
+
+
+-- IQ register with 2x clock rate
+process(EP83_wclk)
+begin 
+	if (EP83_wclk'event AND EP83_wclk='1') then
+		real_a <= real_a;
+		imag_a <= imag_a;
+		if EP83_wr = '1' then
+			real_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(63 downto 52)), 18), 6));
+			imag_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(51 downto 40)), 18), 6));
+		end if;
+	end if;
+end process;	
+
+-- downsample by 2
+process(fft_clk)
+begin 
+	if (fft_clk'event AND fft_clk='1') then
+		real_a_final <= real_a;
+		imag_a_final <= imag_a;
+	end if;
+end process;	
+
+
 --EP03_fifo : fifo_inst		
 --generic map(
 --		dev_family		=> "Cyclone IV",
@@ -286,62 +316,19 @@ port map(
 	
 
 	
-	--fft: entity work.top
---    port map (
---        clk       => fft_clk,
---        rst_n   	=> '1', 
---		  
---        -- inputs
---        in0 => real_a & imag_a,
---
---        -- outputs
---        out0 => fft_out
---    );
---	 
---
---fifo_wdata <= fft_out(17 downto 0) & fft_out(31 downto 18) & "00000000000000000000000000000000";
---fifo_wrreq <= fft_out(50) and inst0_diq_out_h(12);			
+fft: entity work.top
+    port map (
+        clk       => fft_clk,
+        rst_n   	=> '1', 
 		  
+        -- inputs
+        in0 => real_a_final & imag_a_final,
 
---process(clk, reset_n)
---begin 
---	if reset_n = '0' then 
---		counter <= 0;
---	elsif (clk'event AND clk='1') then
---		counter <= counter + 1;	 
---	end if;
---end process;	 
-	
---fft_pll_inst : fft_pll PORT MAP ( 
---    inclk0   => EP83_wclk, 
---    c0   => fft_clk 
---  ); 
---  
-
--- IQ register with 2x clock rate
-process(EP83_wclk)
-begin 
-	if (EP83_wclk'event AND EP83_wclk='1') then
-		real_a <= real_a;
-		imag_a <= imag_a;
-		if EP83_wr = '1' then
-			real_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(63 downto 52)), 16), 4));
-			imag_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(51 downto 40)), 16), 4));
-		end if;
-	end if;
-end process;	
-
--- downsample by 2
-process(fft_clk)
-begin 
-	if (fft_clk'event AND fft_clk='1') then
-		real_a_final <= real_a;
-		imag_a_final <= imag_a;
-	end if;
-end process;	
+        -- outputs
+        out0 => fft_out
+    );
 
 
-	
 -- stream FPGA->PC
 EP83_fifo : fifo_inst		
 generic map(
@@ -355,8 +342,8 @@ generic map(
 port map(
       reset_n       	=> EP83_aclrn, 
       wrclk				=> fft_clk,
-      wrreq				=> '1',
-      data          	=> real_a_final & imag_a_final,
+      wrreq        => fft_out(68), 
+      data            => fft_out(35 downto 5) & package_start, 
       wrfull        	=> open,
 		wrempty		  	=> open,
       wrusedw       	=> open,
@@ -366,6 +353,56 @@ port map(
       rdempty       	=> open,
       rdusedw       	=> EP83_fifo_rdusedw           
 		);
+		 
+
+---- IQ register with 2x clock rate
+--process(EP83_wclk)
+--begin 
+--	if (EP83_wclk'event AND EP83_wclk='1') then
+--		real_a <= real_a;
+--		imag_a <= imag_a;
+--		if EP83_wr = '1' then
+--			real_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(63 downto 52)), 16), 4));
+--			imag_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(51 downto 40)), 16), 4));
+--		end if;
+--	end if;
+--end process;	
+--
+---- downsample by 2
+--process(fft_clk)
+--begin 
+--	if (fft_clk'event AND fft_clk='1') then
+--		real_a_final <= real_a;
+--		imag_a_final <= imag_a;
+--	end if;
+--end process;	
+--
+--
+--	
+---- stream FPGA->PC
+--EP83_fifo : fifo_inst		
+--generic map(
+--		dev_family		=> "Cyclone IV",
+--		wrwidth			=> 32,
+--		wrusedw_witdth	=> EP83_fifo_rwidth, 			--11=1024 words x EP83_wwidth (8192KB)
+--		rdwidth			=> 32,			--32 bits ftdi side, 
+--		rdusedw_width	=> EP83_fifo_rwidth,				
+--		show_ahead		=> "ON"
+--)
+--port map(
+--      reset_n       	=> EP83_aclrn, 
+--      wrclk				=> fft_clk,
+--      wrreq				=> '1',
+--      data          	=> real_a_final & imag_a_final,
+--      wrfull        	=> open,
+--		wrempty		  	=> open,
+--      wrusedw       	=> open,
+--      rdclk 	     	=> clk,
+--      rdreq         	=> EP83_fifo_rdreq,
+--      q             	=> EP83_fifo_q,
+--      rdempty       	=> open,
+--      rdusedw       	=> EP83_fifo_rdusedw           
+--		);
 		 
 -- ----------------------------------------------------------------------------
 -- FTDI arbiter

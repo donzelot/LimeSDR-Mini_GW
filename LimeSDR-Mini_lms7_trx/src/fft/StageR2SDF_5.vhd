@@ -40,17 +40,17 @@ package StageR2SDF_5 is
         FFT_HALF: integer;
         CONTROL_MASK: integer;
         shr: ShiftRegister_5.self_t_const;
-        TWIDDLES: Typedefs.complex_t1downto_34_list_t(0 to 7);
+        TWIDDLES: Typedefs.complex_t1downto_16_list_t(0 to 127);
     end record;
     type StageR2SDF_5_self_t_const_list_t_const is array (natural range <>) of StageR2SDF_5.self_t_const;
 
-    procedure butterfly(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; in_up: complex_t(1 downto -34); in_down: complex_t(1 downto -34); twiddle: complex_t(1 downto -34); ret_0:out complex_t(1 downto -34); ret_1:out complex_t(1 downto -34));
+    procedure butterfly(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; in_up: complex_t(1 downto -34); in_down: complex_t(1 downto -34); twiddle: complex_t(1 downto -16); ret_0:out complex_t(1 downto -34); ret_1:out complex_t(1 downto -34));
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; x: complex_t(1 downto -34); control: integer; ret_0:out complex_t(1 downto -34));
     function StageR2SDF(shr: ShiftRegister_5.self_t; \out\: complex_t(1 downto -34)) return self_t;
 end package;
 
 package body StageR2SDF_5 is
-    procedure butterfly(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; in_up: complex_t(1 downto -34); in_down: complex_t(1 downto -34); twiddle: complex_t(1 downto -34); ret_0:out complex_t(1 downto -34); ret_1:out complex_t(1 downto -34)) is
+    procedure butterfly(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; in_up: complex_t(1 downto -34); in_down: complex_t(1 downto -34); twiddle: complex_t(1 downto -16); ret_0:out complex_t(1 downto -34); ret_1:out complex_t(1 downto -34)) is
 
         variable down: complex_t(1 downto -34);
         variable down_part: complex_t(1 downto -34);
@@ -87,7 +87,7 @@ package body StageR2SDF_5 is
 
         variable down: complex_t(1 downto -34);
         variable up: complex_t(1 downto -34);
-        variable twid: complex_t(1 downto -34);
+        variable twid: complex_t(1 downto -16);
         variable pyha_ret_0: complex_t(1 downto -34);
         variable pyha_ret_1: complex_t(1 downto -34);
         variable pyha_ret_2: complex_t(1 downto -34);
@@ -100,7 +100,7 @@ package body StageR2SDF_5 is
             ShiftRegister_5.peek(self.shr, self_next.shr, self_const.shr, pyha_ret_0);
             self_next.\out\ := resize(pyha_ret_0, 0, -17, fixed_wrap, fixed_truncate);
         else
-            twid := resize(self_const.TWIDDLES(control and self_const.CONTROL_MASK), 0, -17, fixed_saturate, fixed_round);
+            twid := resize(self_const.TWIDDLES(control and self_const.CONTROL_MASK), 0, -8, fixed_saturate, fixed_round);
             ShiftRegister_5.peek(self.shr, self_next.shr, self_const.shr, pyha_ret_1);
             butterfly(self, self_next, self_const, pyha_ret_1, x, twid, pyha_ret_2, pyha_ret_3);
             up := resize(pyha_ret_2, 0, -17, fixed_wrap, fixed_round);
