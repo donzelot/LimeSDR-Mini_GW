@@ -329,6 +329,7 @@ fft: entity work.top
     );
 
 
+package_start <= '1' when to_integer(signed(fft_out(67 downto 36))) = 0 else '0';
 -- stream FPGA->PC
 EP83_fifo : fifo_inst		
 generic map(
