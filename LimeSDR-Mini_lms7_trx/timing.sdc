@@ -167,3 +167,8 @@ set_false_path -to [get_ports LMS_RXEN]
 set_false_path -to [get_ports LMS_TXEN]
 set_false_path -to [get_ports LMS_TXNRX1]
 set_false_path -to [get_ports LMS_TXNRX2]
+
+
+
+# HACK (i have no idea what i am doing)
+derive_pll_clocks
