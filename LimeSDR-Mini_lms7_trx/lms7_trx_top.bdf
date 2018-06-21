@@ -2195,12 +2195,12 @@ refer to the applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"EP83_fifo_rwidth"
-		"9"
+		"11"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"EP83_wsize"
-		"512"
+		"1024"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing

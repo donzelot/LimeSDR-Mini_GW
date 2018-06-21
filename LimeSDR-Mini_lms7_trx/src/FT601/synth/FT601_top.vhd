@@ -203,6 +203,7 @@ end component;
  
   signal real_a, imag_a: std_logic_vector(15 downto 0);
   signal real_a_final, imag_a_final: std_logic_vector(15 downto 0);
+  signal counter: integer;
 begin
 
 
@@ -303,14 +304,14 @@ port map(
 --fifo_wrreq <= fft_out(50) and inst0_diq_out_h(12);			
 		  
 
---process(clk, reset_n)
---begin 
---	if reset_n = '0' then 
---		counter <= 0;
---	elsif (clk'event AND clk='1') then
---		counter <= counter + 1;	 
---	end if;
---end process;	 
+process(fft_clk, reset_n)
+begin 
+	if reset_n = '0' then 
+		counter <= 0;
+	elsif (fft_clk'event AND fft_clk='1') then
+		counter <= counter + 1;	 
+	end if;
+end process;	 
 	
 --fft_pll_inst : fft_pll PORT MAP ( 
 --    inclk0   => EP83_wclk, 
@@ -356,7 +357,7 @@ port map(
       reset_n       	=> EP83_aclrn, 
       wrclk				=> fft_clk,
       wrreq				=> '1',
-      data          	=> real_a_final & imag_a_final,
+      data          	=> std_logic_vector(to_signed(counter,32)),
       wrfull        	=> open,
 		wrempty		  	=> open,
       wrusedw       	=> open,
