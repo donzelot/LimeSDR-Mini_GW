@@ -21,8 +21,8 @@ entity FT601_top is
 			EP82_wsize  			: integer := 64;  --packet size in bytes, has to be multiple of 4 bytes				
 			EP03_rwidth				: integer := 32;
 			EP83_wwidth				: integer := 32;
-			EP83_fifo_rwidth : integer := 8;
-			EP83_wsize  			: integer := 512 --packet size in bytes, has to be multiple of 4 bytes	
+			EP83_fifo_rwidth : integer := 9;
+			EP83_wsize  			: integer := 512
 	);
 	port (
 			--input ports 
@@ -86,7 +86,7 @@ signal EP03_wr					: std_logic;
 signal EP03_wdata				: std_logic_vector(31 downto 0);
 
 --EP83 fifo signals
-signal EP83_fifo_rdusedw	: std_logic_vector(12 downto 0);
+signal EP83_fifo_rdusedw	: std_logic_vector(EP83_fifo_rwidth-1 downto 0);
 signal EP83_fifo_q			: std_logic_vector(31 downto 0);
 signal EP83_fifo_rdreq		: std_logic;
 
