@@ -13,6 +13,8 @@ library work;
     use work.all;
     use work.DataWithIndex_3.all;
     use work.DataWithIndex_0.all;
+    use work.MovingAverage_0.all;
+    use work.DCRemoval_0.all;
     use work.Packager_0.all;
 
 

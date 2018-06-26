@@ -13,32 +13,10 @@ library work;
     use work.all;
     use work.DataWithIndex_3.all;
     use work.DataWithIndex_0.all;
+    use work.MovingAverage_0.all;
+    use work.DCRemoval_0.all;
     use work.Packager_0.all;
     use work.Windower_1.all;
-    use work.ShiftRegister_0.all;
-    use work.StageR2SDF_0.all;
-    use work.ShiftRegister_1.all;
-    use work.StageR2SDF_1.all;
-    use work.ShiftRegister_2.all;
-    use work.StageR2SDF_2.all;
-    use work.ShiftRegister_3.all;
-    use work.StageR2SDF_3.all;
-    use work.ShiftRegister_4.all;
-    use work.StageR2SDF_4.all;
-    use work.ShiftRegister_5.all;
-    use work.StageR2SDF_5.all;
-    use work.ShiftRegister_6.all;
-    use work.StageR2SDF_6.all;
-    use work.ShiftRegister_7.all;
-    use work.StageR2SDF_7.all;
-    use work.ShiftRegister_8.all;
-    use work.StageR2SDF_8.all;
-    use work.ShiftRegister_9.all;
-    use work.StageR2SDF_9.all;
-    use work.ShiftRegister_10.all;
-    use work.StageR2SDF_10.all;
-    use work.ShiftRegister_11.all;
-    use work.StageR2SDF_11.all;
 
 
 package ShiftRegister_12 is

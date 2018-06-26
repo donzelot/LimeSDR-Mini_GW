@@ -13,8 +13,12 @@ library work;
     use work.all;
     use work.DataWithIndex_3.all;
     use work.DataWithIndex_0.all;
+    use work.MovingAverage_0.all;
+    use work.DCRemoval_0.all;
     use work.Packager_0.all;
     use work.Windower_1.all;
+    use work.ShiftRegister_12.all;
+    use work.StageR2SDF_12.all;
     use work.ShiftRegister_0.all;
     use work.StageR2SDF_0.all;
 

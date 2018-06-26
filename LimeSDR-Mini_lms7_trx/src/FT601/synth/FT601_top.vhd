@@ -344,7 +344,7 @@ port map(
       reset_n       	=> EP83_aclrn, 
       wrclk				=> fft_clk,
       wrreq        => fft_out(68), 
-      data            => fft_out(35 downto 5) & package_start, 
+      data            => fft_out(30 downto 0) & package_start, 
       wrfull        	=> open,
 		wrempty		  	=> open,
       wrusedw       	=> open,

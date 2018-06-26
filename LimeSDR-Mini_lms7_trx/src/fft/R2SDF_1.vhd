@@ -13,8 +13,12 @@ library work;
     use work.all;
     use work.DataWithIndex_3.all;
     use work.DataWithIndex_0.all;
+    use work.MovingAverage_0.all;
+    use work.DCRemoval_0.all;
     use work.Packager_0.all;
     use work.Windower_1.all;
+    use work.ShiftRegister_12.all;
+    use work.StageR2SDF_12.all;
     use work.ShiftRegister_0.all;
     use work.StageR2SDF_0.all;
     use work.ShiftRegister_1.all;
@@ -39,8 +43,6 @@ library work;
     use work.StageR2SDF_10.all;
     use work.ShiftRegister_11.all;
     use work.StageR2SDF_11.all;
-    use work.ShiftRegister_12.all;
-    use work.StageR2SDF_12.all;
 
 
 package R2SDF_1 is
@@ -93,75 +95,99 @@ end package;
 package body R2SDF_1 is
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; x: DataWithIndex_0.self_t; ret_0:out DataWithIndex_0.self_t) is
 
+        variable stage: StageR2SDF_12.self_t;
+        variable out_index: integer;
         variable \out\: complex_t(1 downto -34);
-        variable index: integer;
-        variable i: integer;
         variable pyha_ret_0: complex_t(1 downto -34);
-        variable pyha_ret_1: complex_t(1 downto -34);
+        variable pyha_ret_1: integer;
         variable pyha_ret_2: complex_t(1 downto -34);
-        variable pyha_ret_3: complex_t(1 downto -34);
+        variable pyha_ret_3: integer;
         variable pyha_ret_4: complex_t(1 downto -34);
-        variable pyha_ret_5: complex_t(1 downto -34);
+        variable pyha_ret_5: integer;
         variable pyha_ret_6: complex_t(1 downto -34);
-        variable pyha_ret_7: complex_t(1 downto -34);
+        variable pyha_ret_7: integer;
         variable pyha_ret_8: complex_t(1 downto -34);
-        variable pyha_ret_9: complex_t(1 downto -34);
+        variable pyha_ret_9: integer;
         variable pyha_ret_10: complex_t(1 downto -34);
-        variable pyha_ret_11: complex_t(1 downto -34);
+        variable pyha_ret_11: integer;
         variable pyha_ret_12: complex_t(1 downto -34);
+        variable pyha_ret_13: integer;
+        variable pyha_ret_14: complex_t(1 downto -34);
+        variable pyha_ret_15: integer;
+        variable pyha_ret_16: complex_t(1 downto -34);
+        variable pyha_ret_17: integer;
+        variable pyha_ret_18: complex_t(1 downto -34);
+        variable pyha_ret_19: integer;
+        variable pyha_ret_20: complex_t(1 downto -34);
+        variable pyha_ret_21: integer;
+        variable pyha_ret_22: complex_t(1 downto -34);
+        variable pyha_ret_23: integer;
+        variable pyha_ret_24: complex_t(1 downto -34);
+        variable pyha_ret_25: integer;
     begin
         -- execute stages
-        \out\ := resize(x.data, 0, -17, fixed_wrap, fixed_truncate);
-        for i in self.stages'range loop
-            index := (x.index - i) mod self_const.FFT_SIZE;
+        \out\ := resize(x.data, 0, -17, fixed_wrap, fixed_round);
+        out_index := x.index;
+        for \_i_\ in self.stages'range loop
             if True then
-                if i = 0 then
-                    StageR2SDF_0.main(self.stages_0, self_next.stages_0, self_const.stages_0, \out\, index, pyha_ret_0);
-                    \out\ := resize(pyha_ret_0, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 1 then
-                    StageR2SDF_1.main(self.stages_1, self_next.stages_1, self_const.stages_1, \out\, index, pyha_ret_1);
-                    \out\ := resize(pyha_ret_1, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 2 then
-                    StageR2SDF_2.main(self.stages_2, self_next.stages_2, self_const.stages_2, \out\, index, pyha_ret_2);
-                    \out\ := resize(pyha_ret_2, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 3 then
-                    StageR2SDF_3.main(self.stages_3, self_next.stages_3, self_const.stages_3, \out\, index, pyha_ret_3);
-                    \out\ := resize(pyha_ret_3, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 4 then
-                    StageR2SDF_4.main(self.stages_4, self_next.stages_4, self_const.stages_4, \out\, index, pyha_ret_4);
-                    \out\ := resize(pyha_ret_4, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 5 then
-                    StageR2SDF_5.main(self.stages_5, self_next.stages_5, self_const.stages_5, \out\, index, pyha_ret_5);
-                    \out\ := resize(pyha_ret_5, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 6 then
-                    StageR2SDF_6.main(self.stages_6, self_next.stages_6, self_const.stages_6, \out\, index, pyha_ret_6);
-                    \out\ := resize(pyha_ret_6, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 7 then
-                    StageR2SDF_7.main(self.stages_7, self_next.stages_7, self_const.stages_7, \out\, index, pyha_ret_7);
-                    \out\ := resize(pyha_ret_7, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 8 then
-                    StageR2SDF_8.main(self.stages_8, self_next.stages_8, self_const.stages_8, \out\, index, pyha_ret_8);
-                    \out\ := resize(pyha_ret_8, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 9 then
-                    StageR2SDF_9.main(self.stages_9, self_next.stages_9, self_const.stages_9, \out\, index, pyha_ret_9);
-                    \out\ := resize(pyha_ret_9, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 10 then
-                    StageR2SDF_10.main(self.stages_10, self_next.stages_10, self_const.stages_10, \out\, index, pyha_ret_10);
-                    \out\ := resize(pyha_ret_10, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 11 then
-                    StageR2SDF_11.main(self.stages_11, self_next.stages_11, self_const.stages_11, \out\, index, pyha_ret_11);
-                    \out\ := resize(pyha_ret_11, 0, -17, fixed_wrap, fixed_truncate);
-                elsif i = 12 then
-                    StageR2SDF_12.main(self.stages_12, self_next.stages_12, self_const.stages_12, \out\, index, pyha_ret_12);
-                    \out\ := resize(pyha_ret_12, 0, -17, fixed_wrap, fixed_truncate);
+                if \_i_\ = 0 then
+                    StageR2SDF_0.main(self.stages_0, self_next.stages_0, self_const.stages_0, \out\, out_index, pyha_ret_0, pyha_ret_1);
+                    \out\ := resize(pyha_ret_0, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_1;
+                elsif \_i_\ = 1 then
+                    StageR2SDF_1.main(self.stages_1, self_next.stages_1, self_const.stages_1, \out\, out_index, pyha_ret_2, pyha_ret_3);
+                    \out\ := resize(pyha_ret_2, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_3;
+                elsif \_i_\ = 2 then
+                    StageR2SDF_2.main(self.stages_2, self_next.stages_2, self_const.stages_2, \out\, out_index, pyha_ret_4, pyha_ret_5);
+                    \out\ := resize(pyha_ret_4, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_5;
+                elsif \_i_\ = 3 then
+                    StageR2SDF_3.main(self.stages_3, self_next.stages_3, self_const.stages_3, \out\, out_index, pyha_ret_6, pyha_ret_7);
+                    \out\ := resize(pyha_ret_6, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_7;
+                elsif \_i_\ = 4 then
+                    StageR2SDF_4.main(self.stages_4, self_next.stages_4, self_const.stages_4, \out\, out_index, pyha_ret_8, pyha_ret_9);
+                    \out\ := resize(pyha_ret_8, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_9;
+                elsif \_i_\ = 5 then
+                    StageR2SDF_5.main(self.stages_5, self_next.stages_5, self_const.stages_5, \out\, out_index, pyha_ret_10, pyha_ret_11);
+                    \out\ := resize(pyha_ret_10, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_11;
+                elsif \_i_\ = 6 then
+                    StageR2SDF_6.main(self.stages_6, self_next.stages_6, self_const.stages_6, \out\, out_index, pyha_ret_12, pyha_ret_13);
+                    \out\ := resize(pyha_ret_12, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_13;
+                elsif \_i_\ = 7 then
+                    StageR2SDF_7.main(self.stages_7, self_next.stages_7, self_const.stages_7, \out\, out_index, pyha_ret_14, pyha_ret_15);
+                    \out\ := resize(pyha_ret_14, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_15;
+                elsif \_i_\ = 8 then
+                    StageR2SDF_8.main(self.stages_8, self_next.stages_8, self_const.stages_8, \out\, out_index, pyha_ret_16, pyha_ret_17);
+                    \out\ := resize(pyha_ret_16, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_17;
+                elsif \_i_\ = 9 then
+                    StageR2SDF_9.main(self.stages_9, self_next.stages_9, self_const.stages_9, \out\, out_index, pyha_ret_18, pyha_ret_19);
+                    \out\ := resize(pyha_ret_18, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_19;
+                elsif \_i_\ = 10 then
+                    StageR2SDF_10.main(self.stages_10, self_next.stages_10, self_const.stages_10, \out\, out_index, pyha_ret_20, pyha_ret_21);
+                    \out\ := resize(pyha_ret_20, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_21;
+                elsif \_i_\ = 11 then
+                    StageR2SDF_11.main(self.stages_11, self_next.stages_11, self_const.stages_11, \out\, out_index, pyha_ret_22, pyha_ret_23);
+                    \out\ := resize(pyha_ret_22, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_23;
+                elsif \_i_\ = 12 then
+                    StageR2SDF_12.main(self.stages_12, self_next.stages_12, self_const.stages_12, \out\, out_index, pyha_ret_24, pyha_ret_25);
+                    \out\ := resize(pyha_ret_24, 0, -17, fixed_wrap, fixed_round);
+                    out_index := pyha_ret_25;
                 end if;
             end if;
-            -- for stage in self.stages:
-            --     out = stage.main(out, x.index)
 
         end loop;
         self_next.\out\.data := resize(\out\, 0, -17, fixed_wrap, fixed_round);
-        self_next.\out\.index := (x.index - (self_const.N_STAGES - 1)) mod self_const.FFT_SIZE;
+        self_next.\out\.index := (out_index + 1) mod self_const.FFT_SIZE;
         self_next.\out\.valid := x.valid;
         ret_0 := self.\out\;
         return;

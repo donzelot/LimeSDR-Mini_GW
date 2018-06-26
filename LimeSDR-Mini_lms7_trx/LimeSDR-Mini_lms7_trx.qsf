@@ -409,6 +409,8 @@ set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/RAM_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/R2SDF_1.vhd
 set_global_assignment -name VHDL_FILE src/fft/Packager_0.vhd
+set_global_assignment -name VHDL_FILE src/fft/MovingAverage_0.vhd
+set_global_assignment -name VHDL_FILE src/fft/DCRemoval_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataWithIndex_3.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataWithIndex_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/ConjMult_0.vhd
