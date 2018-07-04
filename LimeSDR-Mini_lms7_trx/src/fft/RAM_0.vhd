@@ -49,7 +49,7 @@ library work;
 -- Inital values works. No LUTs used if init is all 0, if init is omited some LUTs will be strangely used.
 package RAM_0 is
     type self_t is record
-        data: Typedefs.sfixed0downto_35_list_t(0 to 255);
+        data: Typedefs.sfixed0downto_35_list_t(0 to 511);
         write_value: sfixed(0 downto -35);
         write_enable: boolean;
         write_address: integer;
@@ -66,7 +66,7 @@ package RAM_0 is
     procedure delayed_read(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; ret_0:out sfixed(0 downto -35));
     procedure delayed_write(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; address: integer; value: sfixed(0 downto -35));
     procedure get_readregister(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out sfixed(0 downto -35));
-    function RAM(data: Typedefs.sfixed0downto_35_list_t(0 to 255); write_value: sfixed(0 downto -35); write_enable: boolean; write_address: integer; read_reg: sfixed(0 downto -35); read_address: integer) return self_t;
+    function RAM(data: Typedefs.sfixed0downto_35_list_t(0 to 511); write_value: sfixed(0 downto -35); write_enable: boolean; write_address: integer; read_reg: sfixed(0 downto -35); read_address: integer) return self_t;
 end package;
 
 package body RAM_0 is
@@ -96,7 +96,7 @@ package body RAM_0 is
         return;
     end procedure;
 
-    function RAM(data: Typedefs.sfixed0downto_35_list_t(0 to 255); write_value: sfixed(0 downto -35); write_enable: boolean; write_address: integer; read_reg: sfixed(0 downto -35); read_address: integer) return self_t is
+    function RAM(data: Typedefs.sfixed0downto_35_list_t(0 to 511); write_value: sfixed(0 downto -35); write_enable: boolean; write_address: integer; read_reg: sfixed(0 downto -35); read_address: integer) return self_t is
         -- limited constructor
         variable self: self_t;
     begin
