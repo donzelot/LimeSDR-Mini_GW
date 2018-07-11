@@ -271,23 +271,11 @@ port map(
 process(EP83_wclk)
 begin 
 	if (EP83_wclk'event AND EP83_wclk='1') then
-		real_a <= real_a;
-		imag_a <= imag_a;
-		if EP83_wr = '1' then
-			real_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(63 downto 52)), 18), 6));
-			imag_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(51 downto 40)), 18), 6));
-		end if;
+		real_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(63 downto 52)), 18), 6));
+		imag_a <= std_logic_vector(shift_left(resize(signed(EP83_wdata(51 downto 40)), 18), 6));
 	end if;
 end process;	
 
--- downsample by 2
-process(fft_clk)
-begin 
-	if (fft_clk'event AND fft_clk='1') then
-		real_a_final <= real_a;
-		imag_a_final <= imag_a;
-	end if;
-end process;	
 
 
 --EP03_fifo : fifo_inst		
@@ -319,10 +307,10 @@ end process;
 fft: entity work.top
     port map (
         clk       => fft_clk,
-        rst_n   	=> '1', 
+        rst_n   	=> '1',
 		  
         -- inputs
-        in0 => real_a_final & imag_a_final,
+        in0 => real_a & imag_a,
 
         -- outputs
         out0 => fft_out
