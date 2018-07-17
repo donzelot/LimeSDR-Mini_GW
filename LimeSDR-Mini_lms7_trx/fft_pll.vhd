@@ -136,13 +136,13 @@ BEGIN
 		clk0_divide_by => 1,
 		clk0_duty_cycle => 50,
 		clk0_multiply_by => 1,
-		clk0_phase_shift => "3125",
+		clk0_phase_shift => "6250",
 		compensate_clock => "CLK0",
 		inclk0_input_frequency => 12500,
 		intended_device_family => "MAX 10",
 		lpm_hint => "CBX_MODULE_PREFIX=fft_pll",
 		lpm_type => "altpll",
-		operation_mode => "NORMAL",
+		operation_mode => "SOURCE_SYNCHRONOUS",
 		pll_type => "AUTO",
 		port_activeclock => "PORT_UNUSED",
 		port_areset => "PORT_UNUSED",
@@ -241,13 +241,13 @@ END SYN;
 -- Retrieval info: PRIVATE: MIG_DEVICE_SPEED_GRADE STRING "Any"
 -- Retrieval info: PRIVATE: MIRROR_CLK0 STRING "0"
 -- Retrieval info: PRIVATE: MULT_FACTOR0 NUMERIC "1"
--- Retrieval info: PRIVATE: NORMAL_MODE_RADIO STRING "1"
+-- Retrieval info: PRIVATE: NORMAL_MODE_RADIO STRING "0"
 -- Retrieval info: PRIVATE: OUTPUT_FREQ0 STRING "100.00000000"
 -- Retrieval info: PRIVATE: OUTPUT_FREQ_MODE0 STRING "0"
 -- Retrieval info: PRIVATE: OUTPUT_FREQ_UNIT0 STRING "MHz"
 -- Retrieval info: PRIVATE: PHASE_RECONFIG_FEATURE_ENABLED STRING "1"
 -- Retrieval info: PRIVATE: PHASE_RECONFIG_INPUTS_CHECK STRING "0"
--- Retrieval info: PRIVATE: PHASE_SHIFT0 STRING "90.00000000"
+-- Retrieval info: PRIVATE: PHASE_SHIFT0 STRING "180.00000000"
 -- Retrieval info: PRIVATE: PHASE_SHIFT_STEP_ENABLED_CHECK STRING "0"
 -- Retrieval info: PRIVATE: PHASE_SHIFT_UNIT0 STRING "deg"
 -- Retrieval info: PRIVATE: PLL_ADVANCED_PARAM_CHECK STRING "0"
@@ -270,7 +270,7 @@ END SYN;
 -- Retrieval info: PRIVATE: SPREAD_FREQ_UNIT STRING "KHz"
 -- Retrieval info: PRIVATE: SPREAD_PERCENT STRING "0.500"
 -- Retrieval info: PRIVATE: SPREAD_USE STRING "0"
--- Retrieval info: PRIVATE: SRC_SYNCH_COMP_RADIO STRING "0"
+-- Retrieval info: PRIVATE: SRC_SYNCH_COMP_RADIO STRING "1"
 -- Retrieval info: PRIVATE: STICKY_CLK0 STRING "1"
 -- Retrieval info: PRIVATE: STICKY_CLK1 STRING "0"
 -- Retrieval info: PRIVATE: STICKY_CLK2 STRING "0"
@@ -288,12 +288,12 @@ END SYN;
 -- Retrieval info: CONSTANT: CLK0_DIVIDE_BY NUMERIC "1"
 -- Retrieval info: CONSTANT: CLK0_DUTY_CYCLE NUMERIC "50"
 -- Retrieval info: CONSTANT: CLK0_MULTIPLY_BY NUMERIC "1"
--- Retrieval info: CONSTANT: CLK0_PHASE_SHIFT STRING "3125"
+-- Retrieval info: CONSTANT: CLK0_PHASE_SHIFT STRING "6250"
 -- Retrieval info: CONSTANT: COMPENSATE_CLOCK STRING "CLK0"
 -- Retrieval info: CONSTANT: INCLK0_INPUT_FREQUENCY NUMERIC "12500"
 -- Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "MAX 10"
 -- Retrieval info: CONSTANT: LPM_TYPE STRING "altpll"
--- Retrieval info: CONSTANT: OPERATION_MODE STRING "NORMAL"
+-- Retrieval info: CONSTANT: OPERATION_MODE STRING "SOURCE_SYNCHRONOUS"
 -- Retrieval info: CONSTANT: PLL_TYPE STRING "AUTO"
 -- Retrieval info: CONSTANT: PORT_ACTIVECLOCK STRING "PORT_UNUSED"
 -- Retrieval info: CONSTANT: PORT_ARESET STRING "PORT_UNUSED"
