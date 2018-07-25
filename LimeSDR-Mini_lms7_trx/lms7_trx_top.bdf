@@ -2242,6 +2242,21 @@ refer to the applicable agreement for further details.
 		(line (pt 223 64)(pt 199 64))
 	)
 )
+(symbol
+	(rect -2728 3112 -2696 3128)
+	(text "VCC" (rect 7 0 24 9)(font "Arial" (font_size 6)))
+	(text "inst26" (rect 3 5 30 16)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 16)
+		(output)
+		(text "1" (rect 19 7 24 17)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 19 7 24 17)(font "Courier New" (bold))(invisible))
+		(line (pt 16 16)(pt 16 8))
+	)
+	(drawing
+		(line (pt 8 8)(pt 24 8))
+	)
+)
 (connector
 	(text "beat" (rect -2082 -776 -2062 -766)(font "Arial" ))
 	(pt -2112 -760)
@@ -2979,18 +2994,6 @@ refer to the applicable agreement for further details.
 	(pt -2616 3136)
 )
 (connector
-	(pt -2712 3136)
-	(pt -2712 3152)
-)
-(connector
-	(pt -2728 3152)
-	(pt -2712 3152)
-)
-(connector
-	(pt -2712 3152)
-	(pt -2616 3152)
-)
-(connector
 	(pt 40 1312)
 	(pt -184 1312)
 )
@@ -3192,12 +3195,19 @@ refer to the applicable agreement for further details.
 	(pt -680 920)
 	(pt -560 920)
 )
+(connector
+	(pt -2728 3152)
+	(pt -2616 3152)
+)
+(connector
+	(pt -2712 3128)
+	(pt -2712 3136)
+)
 (junction (pt 24 896))
 (junction (pt 16 1232))
 (junction (pt 24 880))
 (junction (pt -1728 3328))
 (junction (pt -2376 872))
-(junction (pt -2712 3152))
 (junction (pt -2376 920))
 (junction (pt -1760 3456))
 (junction (pt -1760 3496))
@@ -3235,6 +3245,7 @@ refer to the applicable agreement for further details.
 (text "- ON" (rect -1744 3832 -1722 3843)(font "Arial" (font_size 8)))
 (text "- OFF" (rect -1704 3832 -1675 3843)(font "Arial" (font_size 8)))
 (text "FPGA registers" (rect -3016 4056 -2863 4077)(font "Arial" (font_size 16)(bold)))
+(text "HAVING VCC HERE IS FUCKING!!!! IMPORTANT" (rect -2760 3088 -2539 3100)(font "Intel Clear" (font_size 8)))
 (rectangle (rect -3240 -1056 1352 5984)(color 0 0 0)(line_width 3))
 (rectangle (rect -3048 -920 -1352 272)(color 0 85 0)(line_width 2))
 (rectangle (rect -3048 -920 -1352 -872)(color 0 85 0)(line_width 2))
