@@ -116,30 +116,12 @@ architecture fpgacfg_arch of fpgacfg is
    signal bom_ver_int         : std_logic_vector(BOM_VER'length-1 downto 0);
    
    signal COMPILE_REV_reg     : std_logic_vector(7 downto 0);
-   attribute noprune          : boolean;
-   attribute noprune of COMPILE_REV_reg: signal is true;
    
-	
 	-- Components
 	use work.mcfg_components.mcfg32wm_fsm;
 	for all: mcfg32wm_fsm use entity work.mcfg32wm_fsm(mcfg32wm_fsm_arch);
 
 begin
-
-
-
-   ---------------------------------------------------------------------------------------------
-	-- To avoid optimizations
-	-- ---------------------------------------------------------------------------------------------
-	process(sclk, lreset)
-	begin
-		if lreset = '0' then
-			COMPILE_REV_reg <= std_logic_vector(to_unsigned(COMPILE_REV, 8));
-		elsif sclk'event and sclk = '1' then
-         COMPILE_REV_reg <= std_logic_vector(to_unsigned(COMPILE_REV, 8));
-		end if;
-	end process;
-
 
 	-- ---------------------------------------------------------------------------------------------
 	-- Finite state machines
@@ -175,13 +157,13 @@ begin
 	begin
 		if lreset = '0' then
 			din_reg <= (others => '0');
-		elsif sclk'event and sclk = '1' then
-			if din_reg_en = '1' then
-				for i in 15 downto 1 loop
-					din_reg(i) <= din_reg(i-1);
-				end loop;
-				din_reg(0) <= sdin;
-			end if;
+--		elsif sclk'event and sclk = '1' then
+--			if din_reg_en = '1' then
+--				for i in 15 downto 1 loop
+--					din_reg(i) <= din_reg(i-1);
+--				end loop;
+--				din_reg(0) <= sdin;
+--			end if;
 		end if;
 	end process din_reg_proc;
 
@@ -288,16 +270,16 @@ begin
 			mem(28)	<= "0000000000000000"; --  0 free, Reserved[15:4],FX3_LED_G,FX3_LED_R,FX3_LED_OVRD
 			mem(29)	<= "0000000000000001"; --  0 free, FCLK_ENA[1:0]
 			
-		elsif sclk'event and sclk = '1' then
-				if mem_we = '1' then
-					mem(to_integer(unsigned(inst_reg(4 downto 0)))) <= din_reg(14 downto 0) & sdin;
-				end if;
-				
-				if dout_reg_len = '0' then
---					for_loop : for i in 0 to 3 loop 				
---						mem(3)(i+4) <= not mem(3)(i);
---					end loop;
-				end if;
+--		elsif sclk'event and sclk = '1' then
+--				if mem_we = '1' then
+--					mem(to_integer(unsigned(inst_reg(4 downto 0)))) <= din_reg(14 downto 0) & sdin;
+--				end if;
+--				
+--				if dout_reg_len = '0' then
+----					for_loop : for i in 0 to 3 loop 				
+----						mem(3)(i+4) <= not mem(3)(i);
+----					end loop;
+--				end if;
 				
 		end if;
 	end process ram;
