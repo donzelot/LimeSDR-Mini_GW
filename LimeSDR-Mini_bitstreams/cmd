@@ -1,1 +1,2 @@
  LimeUtil --fpga=/home/gaspar/git/LimeSDR-Mini_GW/LimeSDR-Mini_bitstreams/LimeSDR-Mini_lms7_trx_HW_1.2_auto.rpd
+quartus_cpf -c ../LimeSDR-Mini_bitstreams/gen_pof_file.cof
