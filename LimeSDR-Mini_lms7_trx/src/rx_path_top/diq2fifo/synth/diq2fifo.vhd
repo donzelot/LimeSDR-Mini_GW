@@ -68,7 +68,8 @@ signal mux0_diq_l			: std_logic_vector (iq_width downto 0);
 
 signal mux0_diq_h_reg	: std_logic_vector (iq_width downto 0); 
 signal mux0_diq_l_reg	: std_logic_vector (iq_width downto 0);
-  
+
+signal dc_removal_out 	: std_logic_vector(24 downto 0);
 begin
 
 inst0_reset_n <= io_reset_n when smpl_cmp_start = '0' else '1';
@@ -125,10 +126,23 @@ port map(
 	data_l		  	=> inst2_data_l
 
 );
+
+dc_removal: entity work.top
+    port map (
+        clk       => clk,
+        rst_n     => reset_n,
+      
+        -- inputs
+        in0 => inst2_data_h(11 downto 0) & inst2_data_l(11 downto 0) & '1', -- & '1' is "valid"
+
+        -- outputs
+        out0 => dc_removal_out
+    );
 	
 
-mux0_diq_h <= 	inst0_diq_out_h when test_ptrn_en = '0' else inst2_data_h;
-mux0_diq_l <= 	inst0_diq_out_l when test_ptrn_en = '0' else inst2_data_l;	
+-- Note: dc_removal_out(24) is "valid", which is ignored here
+mux0_diq_h <= 	'1' & dc_removal_out(23 downto 12) when test_ptrn_en = '0' else inst2_data_h;
+mux0_diq_l <= 	'1' & dc_removal_out(11 downto 0) when test_ptrn_en = '0' else inst2_data_l;	
 
 
 process(clk, reset_n)
