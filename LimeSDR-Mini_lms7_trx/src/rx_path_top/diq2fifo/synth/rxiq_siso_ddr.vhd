@@ -54,8 +54,8 @@ signal fifo_data_valid	   : std_logic;
 begin
 
 
-diq_valid<= (reg_h_0(iq_width) XNOR DIQ_h(iq_width)) AND (DIQ_h(iq_width) XOR DIQ_l(iq_width)) AND 
-			   (reg_l_0(iq_width) XNOR DIQ_l(iq_width));
+				
+diq_valid<= '1';
 
 
  reg_proc : process(reset_n, clk)
@@ -91,7 +91,7 @@ diq_valid<= (reg_h_0(iq_width) XNOR DIQ_h(iq_width)) AND (DIQ_h(iq_width) XOR DI
       if reset_n='0' then
          diq_pos0_reg 		<= (others=>'0');
       elsif (clk'event and clk = '1') then
-			if DIQ_l(iq_width) = fidm AND diq_valid='1' AND diq_pos0_1_cap_en='0' then 
+			if diq_pos0_1_cap_en='0' then 
          	diq_pos0_reg 		<= DIQ_l(iq_width-1 downto 0);
 			else 
 				diq_pos0_reg   	<= diq_pos0_reg;
@@ -107,7 +107,7 @@ diq_valid<= (reg_h_0(iq_width) XNOR DIQ_h(iq_width)) AND (DIQ_h(iq_width) XOR DI
       if reset_n='0' then
          diq_pos1_reg <= (others=>'0');
       elsif (clk'event and clk = '1') then
-			if DIQ_h(iq_width) = NOT fidm AND diq_valid='1' AND diq_pos0_1_cap_en='0' then 
+			if diq_pos0_1_cap_en='0' then 
          	diq_pos1_reg <= DIQ_h(iq_width-1 downto 0);
 			else 
 				diq_pos1_reg <= diq_pos1_reg;
@@ -123,7 +123,7 @@ diq_valid<= (reg_h_0(iq_width) XNOR DIQ_h(iq_width)) AND (DIQ_h(iq_width) XOR DI
       if reset_n='0' then
          diq_pos2_reg <= (others=>'0');
       elsif (clk'event and clk = '1') then
-			if DIQ_l(iq_width) = fidm AND diq_valid='1' AND diq_pos0_1_cap_en='1' then 
+			if diq_pos0_1_cap_en='1' then 
          	diq_pos2_reg <= DIQ_l(iq_width-1 downto 0);
 			else 
 				diq_pos2_reg <= diq_pos2_reg;
@@ -139,7 +139,7 @@ diq_pos3_reg_proc : process(reset_n, clk)
       if reset_n='0' then
          diq_pos3_reg <= (others=>'0'); 
       elsif (clk'event and clk = '1') then
-			if DIQ_h(iq_width) = NOT fidm AND diq_valid='1' AND diq_pos0_1_cap_en='1' then 
+			if diq_pos0_1_cap_en='1' then 
          	diq_pos3_reg <= DIQ_h(iq_width-1 downto 0);
 			else 
 				diq_pos3_reg <= diq_pos3_reg;

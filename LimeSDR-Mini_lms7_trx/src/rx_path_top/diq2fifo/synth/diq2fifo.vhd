@@ -89,8 +89,30 @@ inst0_lms7002_ddin : entity work.lms7002_ddin
 		data_out_l	=> inst0_diq_out_l 
         );
 		  
-DIQ_h <= inst0_diq_out_h;
-DIQ_l <= inst0_diq_out_l;      
+		  
+dc_removal: entity work.top
+    port map (
+        clk       => clk,
+        rst_n     => reset_n,
+      
+        -- inputs
+        in0 => '1' & inst0_diq_out_h(11 downto 0) & inst0_diq_out_l(11 downto 0), -- '1' is "valid"
+
+        -- outputs
+        out0 => dc_removal_out
+    );
+	
+-- Note about '1' stuff: These are the 'IQ_SEL' which dont matter because there is valid IQ pair every clock cycle (this only true for LimeSDR-Mini)
+--DIQ_h <= '1' & dc_removal_out(23 downto 12);
+--DIQ_l <= '1' & dc_removal_out(11 downto 0);    
+mux0_diq_h <= '1' & dc_removal_out(23 downto 12) when test_ptrn_en = '0' else inst2_data_h; 
+mux0_diq_l <= '1' & dc_removal_out(11 downto 0) when test_ptrn_en = '0' else inst2_data_l;   
+
+--mux0_diq_h <=   '1' & inst0_diq_out_h(11 downto 0) when test_ptrn_en = '0' else inst2_data_h; 
+--mux0_diq_l <=   '1' & inst0_diq_out_l(11 downto 0) when test_ptrn_en = '0' else inst2_data_l; 
+
+--mux0_diq_h <=   inst0_diq_out_h when test_ptrn_en = '0' else inst2_data_h; 
+--mux0_diq_l <=   inst0_diq_out_l when test_ptrn_en = '0' else inst2_data_l; 
         
 inst1_rxiq : entity work.rxiq
 	generic map( 
@@ -126,23 +148,6 @@ port map(
 	data_l		  	=> inst2_data_l
 
 );
-
-dc_removal: entity work.top
-    port map (
-        clk       => clk,
-        rst_n     => reset_n,
-      
-        -- inputs
-        in0 => inst2_data_h(11 downto 0) & inst2_data_l(11 downto 0) & '1', -- & '1' is "valid"
-
-        -- outputs
-        out0 => dc_removal_out
-    );
-	
-
--- Note: dc_removal_out(24) is "valid", which is ignored here
-mux0_diq_h <= 	'1' & dc_removal_out(23 downto 12) when test_ptrn_en = '0' else inst2_data_h;
-mux0_diq_l <= 	'1' & dc_removal_out(11 downto 0) when test_ptrn_en = '0' else inst2_data_l;	
 
 
 process(clk, reset_n)
