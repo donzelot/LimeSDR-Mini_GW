@@ -11,61 +11,61 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_1.all;
-    use work.MovingAverage_1.all;
-    use work.ShiftRegister_2.all;
-    use work.DCRemoval_0.all;
+    use work.ShiftRegister_7.all;
+    use work.DCRemoval_1.all;
     use work.Windower_0.all;
-    use work.ShiftRegister_15.all;
-    use work.DownCounter_14.all;
-    use work.StageR2SDF_12.all;
+    use work.ShiftRegister_20.all;
+    use work.DownCounter_18.all;
+    use work.StageR2SDF_13.all;
     use work.ShiftRegister_3.all;
     use work.DownCounter_2.all;
     use work.StageR2SDF_0.all;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
-    use work.StageR2SDF_1.all;
-    use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_5.all;
-    use work.StageR2SDF_3.all;
-    use work.ShiftRegister_7.all;
-    use work.DownCounter_6.all;
-    use work.StageR2SDF_4.all;
-    use work.ShiftRegister_8.all;
-    use work.DownCounter_7.all;
-    use work.StageR2SDF_5.all;
-    use work.ShiftRegister_9.all;
     use work.DownCounter_8.all;
-    use work.StageR2SDF_6.all;
-    use work.ShiftRegister_10.all;
-    use work.DownCounter_9.all;
-    use work.StageR2SDF_7.all;
+    use work.StageR2SDF_3.all;
     use work.ShiftRegister_11.all;
-    use work.DownCounter_10.all;
-    use work.StageR2SDF_8.all;
+    use work.DownCounter_9.all;
+    use work.StageR2SDF_4.all;
     use work.ShiftRegister_12.all;
-    use work.DownCounter_11.all;
-    use work.StageR2SDF_9.all;
+    use work.DownCounter_10.all;
+    use work.StageR2SDF_5.all;
     use work.ShiftRegister_13.all;
-    use work.DownCounter_12.all;
-    use work.StageR2SDF_10.all;
+    use work.DownCounter_11.all;
+    use work.StageR2SDF_6.all;
     use work.ShiftRegister_14.all;
+    use work.DownCounter_12.all;
+    use work.StageR2SDF_7.all;
+    use work.ShiftRegister_15.all;
+    use work.DownCounter_13.all;
+    use work.StageR2SDF_8.all;
+    use work.ShiftRegister_16.all;
+    use work.DownCounter_14.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_17.all;
+    use work.DownCounter_15.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_18.all;
+    use work.DownCounter_16.all;
     use work.StageR2SDF_11.all;
+    use work.ShiftRegister_19.all;
+    use work.StageR2SDF_12.all;
     use work.R2SDF_0.all;
     use work.FFTPower_0.all;
     use work.RAM_0.all;
-    use work.DownCounter_16.all;
+    use work.DownCounter_20.all;
 
 -- Performs bitreversal, fftshift and average pooling by using 2 BRAM blocks.
 -- TODO: this core should be unsigned...
@@ -76,9 +76,9 @@ package BitreversalFFTshiftAVGPool_0 is
         ram: RAM_0.RAM_0_self_t_list_t(0 to 1);
         out_valid: boolean;
         control: integer;
-        \out\: DataValid_19.self_t;
-        final_counter: DownCounter_5.self_t;
-        start_counter: DownCounter_16.self_t;
+        \out\: DataValid_25.self_t;
+        final_counter: DownCounter_9.self_t;
+        start_counter: DownCounter_20.self_t;
     end record;
     type BitreversalFFTshiftAVGPool_0_self_t_list_t is array (natural range <>) of BitreversalFFTshiftAVGPool_0.self_t;
 
@@ -89,15 +89,15 @@ package BitreversalFFTshiftAVGPool_0 is
         FFT_SIZE: integer;
         LUT: Typedefs.integer_list_t(0 to 8191);
         ram: RAM_0.RAM_0_self_t_const_list_t_const(0 to 1);
-        \out\: DataValid_19.self_t_const;
-        final_counter: DownCounter_5.self_t_const;
-        start_counter: DownCounter_16.self_t_const;
+        \out\: DataValid_25.self_t_const;
+        final_counter: DownCounter_9.self_t_const;
+        start_counter: DownCounter_20.self_t_const;
     end record;
     type BitreversalFFTshiftAVGPool_0_self_t_const_list_t_const is array (natural range <>) of BitreversalFFTshiftAVGPool_0.self_t_const;
 
     procedure work_ram(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; data: sfixed(-5 downto -40); write_ram: integer; read_ram: integer);
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_18.self_t; ret_0:out DataValid_19.self_t);
-    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_0.RAM_0_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_19.self_t; final_counter: DownCounter_5.self_t; start_counter: DownCounter_16.self_t) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_24.self_t; ret_0:out DataValid_25.self_t);
+    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_0.RAM_0_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_25.self_t; final_counter: DownCounter_9.self_t; start_counter: DownCounter_20.self_t) return self_t;
 end package;
 
 package body BitreversalFFTshiftAVGPool_0 is
@@ -132,7 +132,7 @@ package body BitreversalFFTshiftAVGPool_0 is
         end if;
     end procedure;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_18.self_t; ret_0:out DataValid_19.self_t) is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_24.self_t; ret_0:out DataValid_25.self_t) is
 
         variable read: sfixed(-5 downto -40);
         variable next_counter: integer;
@@ -166,15 +166,15 @@ package body BitreversalFFTshiftAVGPool_0 is
             self_next.time_axis_counter := next_counter;
 
         end if;
-        self_next.\out\.data := resize(scalb(read, -self_const.ACCUMULATION_BITS), -11, -46, fixed_wrap, fixed_truncate);
-        DownCounter_16.tick(self.start_counter, self_next.start_counter, self_const.start_counter);
-        DownCounter_16.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_4);
+        self_next.\out\.data := resize(scalb(read, -self_const.ACCUMULATION_BITS), -12, -47, fixed_wrap, fixed_truncate);
+        DownCounter_20.tick(self.start_counter, self_next.start_counter, self_const.start_counter);
+        DownCounter_20.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_4);
         self_next.\out\.valid := pyha_ret_4 and self.out_valid;
         ret_0 := self.\out\;
         return;
     end procedure;
 
-    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_0.RAM_0_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_19.self_t; final_counter: DownCounter_5.self_t; start_counter: DownCounter_16.self_t) return self_t is
+    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_0.RAM_0_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_25.self_t; final_counter: DownCounter_9.self_t; start_counter: DownCounter_20.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin

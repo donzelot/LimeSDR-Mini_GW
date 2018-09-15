@@ -11,29 +11,29 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
+    use work.DataValid_27.all;
 
 
-package DataValid_20 is
+package DataValid_26 is
     type self_t is record
-        data: sfixed(-11 downto -42);
+        data: sfixed(-12 downto -43);
         valid: boolean;
     end record;
-    type DataValid_20_self_t_list_t is array (natural range <>) of DataValid_20.self_t;
+    type DataValid_26_self_t_list_t is array (natural range <>) of DataValid_26.self_t;
 
     type self_t_const is record
         DUMMY: integer;
     end record;
-    type DataValid_20_self_t_const_list_t_const is array (natural range <>) of DataValid_20.self_t_const;
+    type DataValid_26_self_t_const_list_t_const is array (natural range <>) of DataValid_26.self_t_const;
 
 
-    function DataValid(data: sfixed(-11 downto -42); valid: boolean) return self_t;
+    function DataValid(data: sfixed(-12 downto -43); valid: boolean) return self_t;
 end package;
 
-package body DataValid_20 is
+package body DataValid_26 is
 
 
-    function DataValid(data: sfixed(-11 downto -42); valid: boolean) return self_t is
+    function DataValid(data: sfixed(-12 downto -43); valid: boolean) return self_t is
         -- constructor
         variable self: self_t;
     begin

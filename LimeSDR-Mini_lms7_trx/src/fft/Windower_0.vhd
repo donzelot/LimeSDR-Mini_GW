@@ -11,19 +11,19 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_1.all;
-    use work.MovingAverage_1.all;
-    use work.ShiftRegister_2.all;
-    use work.DCRemoval_0.all;
+    use work.ShiftRegister_7.all;
+    use work.DCRemoval_1.all;
 
 -- Windowing function determines the frequency response of the FFT bins.
 package Windower_0 is

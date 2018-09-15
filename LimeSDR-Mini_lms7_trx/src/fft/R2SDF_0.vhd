@@ -11,76 +11,76 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_1.all;
-    use work.MovingAverage_1.all;
-    use work.ShiftRegister_2.all;
-    use work.DCRemoval_0.all;
+    use work.ShiftRegister_7.all;
+    use work.DCRemoval_1.all;
     use work.Windower_0.all;
-    use work.ShiftRegister_15.all;
-    use work.DownCounter_14.all;
-    use work.StageR2SDF_12.all;
+    use work.ShiftRegister_20.all;
+    use work.DownCounter_18.all;
+    use work.StageR2SDF_13.all;
     use work.ShiftRegister_3.all;
     use work.DownCounter_2.all;
     use work.StageR2SDF_0.all;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
-    use work.StageR2SDF_1.all;
-    use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_5.all;
-    use work.StageR2SDF_3.all;
-    use work.ShiftRegister_7.all;
-    use work.DownCounter_6.all;
-    use work.StageR2SDF_4.all;
-    use work.ShiftRegister_8.all;
-    use work.DownCounter_7.all;
-    use work.StageR2SDF_5.all;
-    use work.ShiftRegister_9.all;
     use work.DownCounter_8.all;
-    use work.StageR2SDF_6.all;
-    use work.ShiftRegister_10.all;
-    use work.DownCounter_9.all;
-    use work.StageR2SDF_7.all;
+    use work.StageR2SDF_3.all;
     use work.ShiftRegister_11.all;
-    use work.DownCounter_10.all;
-    use work.StageR2SDF_8.all;
+    use work.DownCounter_9.all;
+    use work.StageR2SDF_4.all;
     use work.ShiftRegister_12.all;
-    use work.DownCounter_11.all;
-    use work.StageR2SDF_9.all;
+    use work.DownCounter_10.all;
+    use work.StageR2SDF_5.all;
     use work.ShiftRegister_13.all;
-    use work.DownCounter_12.all;
-    use work.StageR2SDF_10.all;
+    use work.DownCounter_11.all;
+    use work.StageR2SDF_6.all;
     use work.ShiftRegister_14.all;
+    use work.DownCounter_12.all;
+    use work.StageR2SDF_7.all;
+    use work.ShiftRegister_15.all;
+    use work.DownCounter_13.all;
+    use work.StageR2SDF_8.all;
+    use work.ShiftRegister_16.all;
+    use work.DownCounter_14.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_17.all;
+    use work.DownCounter_15.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_18.all;
+    use work.DownCounter_16.all;
     use work.StageR2SDF_11.all;
+    use work.ShiftRegister_19.all;
+    use work.StageR2SDF_12.all;
 
 
 package R2SDF_0 is
     type self_t is record
         stages: StageR2SDF_0.StageR2SDF_0_self_t_list_t(0 to 12);
         stages_0: StageR2SDF_0.self_t;
-        stages_1: StageR2SDF_1.self_t;
-        stages_2: StageR2SDF_2.self_t;
-        stages_3: StageR2SDF_3.self_t;
-        stages_4: StageR2SDF_4.self_t;
-        stages_5: StageR2SDF_5.self_t;
-        stages_6: StageR2SDF_6.self_t;
-        stages_7: StageR2SDF_7.self_t;
-        stages_8: StageR2SDF_8.self_t;
-        stages_9: StageR2SDF_9.self_t;
-        stages_10: StageR2SDF_10.self_t;
-        stages_11: StageR2SDF_11.self_t;
-        stages_12: StageR2SDF_12.self_t;
-        \out\: DataValid_17.self_t;
+        stages_1: StageR2SDF_2.self_t;
+        stages_2: StageR2SDF_3.self_t;
+        stages_3: StageR2SDF_4.self_t;
+        stages_4: StageR2SDF_5.self_t;
+        stages_5: StageR2SDF_6.self_t;
+        stages_6: StageR2SDF_7.self_t;
+        stages_7: StageR2SDF_8.self_t;
+        stages_8: StageR2SDF_9.self_t;
+        stages_9: StageR2SDF_10.self_t;
+        stages_10: StageR2SDF_11.self_t;
+        stages_11: StageR2SDF_12.self_t;
+        stages_12: StageR2SDF_13.self_t;
+        \out\: DataValid_23.self_t;
     end record;
     type R2SDF_0_self_t_list_t is array (natural range <>) of R2SDF_0.self_t;
 
@@ -91,31 +91,31 @@ package R2SDF_0 is
         POST_GAIN_CONTROL: integer;
         stages: StageR2SDF_0.StageR2SDF_0_self_t_const_list_t_const(0 to 12);
         stages_0: StageR2SDF_0.self_t_const;
-        stages_1: StageR2SDF_1.self_t_const;
-        stages_2: StageR2SDF_2.self_t_const;
-        stages_3: StageR2SDF_3.self_t_const;
-        stages_4: StageR2SDF_4.self_t_const;
-        stages_5: StageR2SDF_5.self_t_const;
-        stages_6: StageR2SDF_6.self_t_const;
-        stages_7: StageR2SDF_7.self_t_const;
-        stages_8: StageR2SDF_8.self_t_const;
-        stages_9: StageR2SDF_9.self_t_const;
-        stages_10: StageR2SDF_10.self_t_const;
-        stages_11: StageR2SDF_11.self_t_const;
-        stages_12: StageR2SDF_12.self_t_const;
-        \out\: DataValid_17.self_t_const;
+        stages_1: StageR2SDF_2.self_t_const;
+        stages_2: StageR2SDF_3.self_t_const;
+        stages_3: StageR2SDF_4.self_t_const;
+        stages_4: StageR2SDF_5.self_t_const;
+        stages_5: StageR2SDF_6.self_t_const;
+        stages_6: StageR2SDF_7.self_t_const;
+        stages_7: StageR2SDF_8.self_t_const;
+        stages_8: StageR2SDF_9.self_t_const;
+        stages_9: StageR2SDF_10.self_t_const;
+        stages_10: StageR2SDF_11.self_t_const;
+        stages_11: StageR2SDF_12.self_t_const;
+        stages_12: StageR2SDF_13.self_t_const;
+        \out\: DataValid_23.self_t_const;
     end record;
     type R2SDF_0_self_t_const_list_t_const is array (natural range <>) of R2SDF_0.self_t_const;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_17.self_t);
-    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_1.self_t;stages_2: StageR2SDF_2.self_t;stages_3: StageR2SDF_3.self_t;stages_4: StageR2SDF_4.self_t;stages_5: StageR2SDF_5.self_t;stages_6: StageR2SDF_6.self_t;stages_7: StageR2SDF_7.self_t;stages_8: StageR2SDF_8.self_t;stages_9: StageR2SDF_9.self_t;stages_10: StageR2SDF_10.self_t;stages_11: StageR2SDF_11.self_t;stages_12: StageR2SDF_12.self_t; \out\: DataValid_17.self_t) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_23.self_t);
+    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_2.self_t;stages_2: StageR2SDF_3.self_t;stages_3: StageR2SDF_4.self_t;stages_4: StageR2SDF_5.self_t;stages_5: StageR2SDF_6.self_t;stages_6: StageR2SDF_7.self_t;stages_7: StageR2SDF_8.self_t;stages_8: StageR2SDF_9.self_t;stages_9: StageR2SDF_10.self_t;stages_10: StageR2SDF_11.self_t;stages_11: StageR2SDF_12.self_t;stages_12: StageR2SDF_13.self_t; \out\: DataValid_23.self_t) return self_t;
 end package;
 
 package body R2SDF_0 is
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_17.self_t) is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_23.self_t) is
 
         variable var: DataValid_0.self_t;
-        variable stage: StageR2SDF_12.self_t;
+        variable stage: StageR2SDF_13.self_t;
         variable pyha_ret_0: DataValid_0.self_t;
         variable pyha_ret_1: DataValid_0.self_t;
         variable pyha_ret_2: DataValid_0.self_t;
@@ -145,40 +145,40 @@ package body R2SDF_0 is
                     StageR2SDF_0.main(self.stages_0, self_next.stages_0, self_const.stages_0, var, pyha_ret_0);
                     var := pyha_ret_0;
                 elsif \_i_\ = 1 then
-                    StageR2SDF_1.main(self.stages_1, self_next.stages_1, self_const.stages_1, var, pyha_ret_1);
+                    StageR2SDF_2.main(self.stages_1, self_next.stages_1, self_const.stages_1, var, pyha_ret_1);
                     var := pyha_ret_1;
                 elsif \_i_\ = 2 then
-                    StageR2SDF_2.main(self.stages_2, self_next.stages_2, self_const.stages_2, var, pyha_ret_2);
+                    StageR2SDF_3.main(self.stages_2, self_next.stages_2, self_const.stages_2, var, pyha_ret_2);
                     var := pyha_ret_2;
                 elsif \_i_\ = 3 then
-                    StageR2SDF_3.main(self.stages_3, self_next.stages_3, self_const.stages_3, var, pyha_ret_3);
+                    StageR2SDF_4.main(self.stages_3, self_next.stages_3, self_const.stages_3, var, pyha_ret_3);
                     var := pyha_ret_3;
                 elsif \_i_\ = 4 then
-                    StageR2SDF_4.main(self.stages_4, self_next.stages_4, self_const.stages_4, var, pyha_ret_4);
+                    StageR2SDF_5.main(self.stages_4, self_next.stages_4, self_const.stages_4, var, pyha_ret_4);
                     var := pyha_ret_4;
                 elsif \_i_\ = 5 then
-                    StageR2SDF_5.main(self.stages_5, self_next.stages_5, self_const.stages_5, var, pyha_ret_5);
+                    StageR2SDF_6.main(self.stages_5, self_next.stages_5, self_const.stages_5, var, pyha_ret_5);
                     var := pyha_ret_5;
                 elsif \_i_\ = 6 then
-                    StageR2SDF_6.main(self.stages_6, self_next.stages_6, self_const.stages_6, var, pyha_ret_6);
+                    StageR2SDF_7.main(self.stages_6, self_next.stages_6, self_const.stages_6, var, pyha_ret_6);
                     var := pyha_ret_6;
                 elsif \_i_\ = 7 then
-                    StageR2SDF_7.main(self.stages_7, self_next.stages_7, self_const.stages_7, var, pyha_ret_7);
+                    StageR2SDF_8.main(self.stages_7, self_next.stages_7, self_const.stages_7, var, pyha_ret_7);
                     var := pyha_ret_7;
                 elsif \_i_\ = 8 then
-                    StageR2SDF_8.main(self.stages_8, self_next.stages_8, self_const.stages_8, var, pyha_ret_8);
+                    StageR2SDF_9.main(self.stages_8, self_next.stages_8, self_const.stages_8, var, pyha_ret_8);
                     var := pyha_ret_8;
                 elsif \_i_\ = 9 then
-                    StageR2SDF_9.main(self.stages_9, self_next.stages_9, self_const.stages_9, var, pyha_ret_9);
+                    StageR2SDF_10.main(self.stages_9, self_next.stages_9, self_const.stages_9, var, pyha_ret_9);
                     var := pyha_ret_9;
                 elsif \_i_\ = 10 then
-                    StageR2SDF_10.main(self.stages_10, self_next.stages_10, self_const.stages_10, var, pyha_ret_10);
+                    StageR2SDF_11.main(self.stages_10, self_next.stages_10, self_const.stages_10, var, pyha_ret_10);
                     var := pyha_ret_10;
                 elsif \_i_\ = 11 then
-                    StageR2SDF_11.main(self.stages_11, self_next.stages_11, self_const.stages_11, var, pyha_ret_11);
+                    StageR2SDF_12.main(self.stages_11, self_next.stages_11, self_const.stages_11, var, pyha_ret_11);
                     var := pyha_ret_11;
                 elsif \_i_\ = 12 then
-                    StageR2SDF_12.main(self.stages_12, self_next.stages_12, self_const.stages_12, var, pyha_ret_12);
+                    StageR2SDF_13.main(self.stages_12, self_next.stages_12, self_const.stages_12, var, pyha_ret_12);
                     var := pyha_ret_12;
                 end if;
             end if;
@@ -202,7 +202,7 @@ package body R2SDF_0 is
         return;
     end procedure;
 
-    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_1.self_t;stages_2: StageR2SDF_2.self_t;stages_3: StageR2SDF_3.self_t;stages_4: StageR2SDF_4.self_t;stages_5: StageR2SDF_5.self_t;stages_6: StageR2SDF_6.self_t;stages_7: StageR2SDF_7.self_t;stages_8: StageR2SDF_8.self_t;stages_9: StageR2SDF_9.self_t;stages_10: StageR2SDF_10.self_t;stages_11: StageR2SDF_11.self_t;stages_12: StageR2SDF_12.self_t; \out\: DataValid_17.self_t) return self_t is
+    function R2SDF(stages_0: StageR2SDF_0.self_t;stages_1: StageR2SDF_2.self_t;stages_2: StageR2SDF_3.self_t;stages_3: StageR2SDF_4.self_t;stages_4: StageR2SDF_5.self_t;stages_5: StageR2SDF_6.self_t;stages_6: StageR2SDF_7.self_t;stages_7: StageR2SDF_8.self_t;stages_8: StageR2SDF_9.self_t;stages_9: StageR2SDF_10.self_t;stages_10: StageR2SDF_11.self_t;stages_11: StageR2SDF_12.self_t;stages_12: StageR2SDF_13.self_t; \out\: DataValid_23.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin

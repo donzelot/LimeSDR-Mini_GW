@@ -11,54 +11,40 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_1.all;
-    use work.MovingAverage_1.all;
-    use work.ShiftRegister_2.all;
-    use work.DCRemoval_0.all;
-    use work.Windower_0.all;
-    use work.ShiftRegister_15.all;
-    use work.DownCounter_14.all;
-    use work.StageR2SDF_12.all;
-    use work.ShiftRegister_3.all;
-    use work.DownCounter_2.all;
-    use work.StageR2SDF_0.all;
-    use work.ShiftRegister_4.all;
-    use work.DownCounter_3.all;
-    use work.StageR2SDF_1.all;
-    use work.DownCounter_4.all;
-    use work.StageR2SDF_2.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_5.all;
-    use work.StageR2SDF_3.all;
     use work.ShiftRegister_7.all;
+    use work.DCRemoval_1.all;
+    use work.Windower_0.all;
+    use work.ShiftRegister_20.all;
 
 
-package DownCounter_6 is
+package DownCounter_18 is
     type self_t is record
-        counter: sfixed(9 downto 0);
+        counter: sfixed(2 downto 0);
     end record;
-    type DownCounter_6_self_t_list_t is array (natural range <>) of DownCounter_6.self_t;
+    type DownCounter_18_self_t_list_t is array (natural range <>) of DownCounter_18.self_t;
 
     type self_t_const is record
-        START_VALUE: sfixed(9 downto 0);
+        START_VALUE: sfixed(2 downto 0);
     end record;
-    type DownCounter_6_self_t_const_list_t_const is array (natural range <>) of DownCounter_6.self_t_const;
+    type DownCounter_18_self_t_const_list_t_const is array (natural range <>) of DownCounter_18.self_t_const;
 
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
     procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
-    function DownCounter(counter: sfixed(9 downto 0)) return self_t;
+    function DownCounter(counter: sfixed(2 downto 0)) return self_t;
 end package;
 
-package body DownCounter_6 is
+package body DownCounter_18 is
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
 
@@ -74,11 +60,11 @@ package body DownCounter_6 is
     begin
         is_over(self, self_next, self_const, pyha_ret_0);
         if not pyha_ret_0 then
-            self_next.counter := resize(self.counter - 1, 9, 0, fixed_wrap, fixed_truncate);
+            self_next.counter := resize(self.counter - 1, 2, 0, fixed_wrap, fixed_truncate);
         end if;
     end procedure;
 
-    function DownCounter(counter: sfixed(9 downto 0)) return self_t is
+    function DownCounter(counter: sfixed(2 downto 0)) return self_t is
         -- constructor
         variable self: self_t;
     begin

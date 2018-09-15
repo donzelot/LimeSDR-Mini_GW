@@ -11,47 +11,44 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_1.all;
-    use work.MovingAverage_1.all;
-    use work.ShiftRegister_2.all;
-    use work.DCRemoval_0.all;
+    use work.ShiftRegister_7.all;
+    use work.DCRemoval_1.all;
     use work.Windower_0.all;
-    use work.ShiftRegister_15.all;
-    use work.DownCounter_14.all;
-    use work.StageR2SDF_12.all;
+    use work.ShiftRegister_20.all;
+    use work.DownCounter_18.all;
+    use work.StageR2SDF_13.all;
     use work.ShiftRegister_3.all;
     use work.DownCounter_2.all;
     use work.StageR2SDF_0.all;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
-    use work.StageR2SDF_1.all;
-    use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_5.all;
-    use work.StageR2SDF_3.all;
-    use work.ShiftRegister_7.all;
-    use work.DownCounter_6.all;
-    use work.StageR2SDF_4.all;
-    use work.ShiftRegister_8.all;
-    use work.DownCounter_7.all;
-    use work.StageR2SDF_5.all;
-    use work.ShiftRegister_9.all;
     use work.DownCounter_8.all;
+    use work.StageR2SDF_3.all;
+    use work.ShiftRegister_11.all;
+    use work.DownCounter_9.all;
+    use work.StageR2SDF_4.all;
+    use work.ShiftRegister_12.all;
+    use work.DownCounter_10.all;
+    use work.StageR2SDF_5.all;
+    use work.ShiftRegister_13.all;
+    use work.DownCounter_11.all;
 
 
 package StageR2SDF_6 is
     type self_t is record
-        shr: ShiftRegister_9.self_t;
+        shr: ShiftRegister_13.self_t;
         twiddle: complex_t(1 downto -14);
         stage1_out: complex_t(1 downto -34);
         stage2_out: complex_t(1 downto -48);
@@ -59,7 +56,7 @@ package StageR2SDF_6 is
         mode_delay: boolean;
         control: integer;
         \out\: DataValid_0.self_t;
-        start_counter: DownCounter_8.self_t;
+        start_counter: DownCounter_11.self_t;
     end record;
     type StageR2SDF_6_self_t_list_t is array (natural range <>) of StageR2SDF_6.self_t;
 
@@ -72,17 +69,17 @@ package StageR2SDF_6 is
         LOCAL_FFT_SIZE: integer;
         INPUT_STRIDE: integer;
         CONTROL_MASK: integer;
-        TWIDDLES: Typedefs.complex_t1downto_14_list_t(0 to 63);
+        TWIDDLES: Typedefs.complex_t1downto_14_list_t(0 to 127);
         IS_TRIVIAL_MULTIPLIER: boolean;
-        shr: ShiftRegister_9.self_t_const;
+        shr: ShiftRegister_13.self_t_const;
         \out\: DataValid_0.self_t_const;
-        start_counter: DownCounter_8.self_t_const;
+        start_counter: DownCounter_11.self_t_const;
     end record;
     type StageR2SDF_6_self_t_const_list_t_const is array (natural range <>) of StageR2SDF_6.self_t_const;
 
     procedure butterfly(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; in_up: complex_t(1 downto -34); in_down: complex_t(1 downto -34); ret_0:out complex_t(1 downto -34); ret_1:out complex_t(1 downto -34));
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_0.self_t);
-    function StageR2SDF(shr: ShiftRegister_9.self_t; twiddle: complex_t(1 downto -14); stage1_out: complex_t(1 downto -34); stage2_out: complex_t(1 downto -48); output_index: integer; mode_delay: boolean; control: integer; \out\: DataValid_0.self_t; start_counter: DownCounter_8.self_t) return self_t;
+    function StageR2SDF(shr: ShiftRegister_13.self_t; twiddle: complex_t(1 downto -14); stage1_out: complex_t(1 downto -34); stage2_out: complex_t(1 downto -48); output_index: integer; mode_delay: boolean; control: integer; \out\: DataValid_0.self_t; start_counter: DownCounter_11.self_t) return self_t;
 end package;
 
 package body StageR2SDF_6 is
@@ -125,15 +122,15 @@ package body StageR2SDF_6 is
         mode := not (self.control and self_const.INPUT_STRIDE);
         self_next.mode_delay := mode;
         if mode then
-            ShiftRegister_9.push_next(self.shr, self_next.shr, self_const.shr, inp.data);
-            ShiftRegister_9.peek(self.shr, self_next.shr, self_const.shr, pyha_ret_0);
+            ShiftRegister_13.push_next(self.shr, self_next.shr, self_const.shr, inp.data);
+            ShiftRegister_13.peek(self.shr, self_next.shr, self_const.shr, pyha_ret_0);
             self_next.stage1_out := resize(pyha_ret_0, 0, -17, fixed_wrap, fixed_truncate);
         else
-            ShiftRegister_9.peek(self.shr, self_next.shr, self_const.shr, pyha_ret_1);
+            ShiftRegister_13.peek(self.shr, self_next.shr, self_const.shr, pyha_ret_1);
             butterfly(self, self_next, self_const, pyha_ret_1, inp.data, pyha_ret_2, pyha_ret_3);
             up := resize(pyha_ret_2, 0, -17, fixed_wrap, fixed_truncate);
             down := resize(pyha_ret_3, 0, -17, fixed_wrap, fixed_truncate);
-            ShiftRegister_9.push_next(self.shr, self_next.shr, self_const.shr, down);
+            ShiftRegister_13.push_next(self.shr, self_next.shr, self_const.shr, down);
             self_next.stage1_out := resize(up, 0, -17, fixed_wrap, fixed_truncate);
 
             -- Stage 2: complex multiply
@@ -151,14 +148,14 @@ package body StageR2SDF_6 is
             self_next.\out\.data := resize(self.stage2_out, 0, -17, fixed_wrap, fixed_round);
 
         end if;
-        DownCounter_8.tick(self.start_counter, self_next.start_counter, self_const.start_counter);
-        DownCounter_8.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_4);
+        DownCounter_11.tick(self.start_counter, self_next.start_counter, self_const.start_counter);
+        DownCounter_11.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_4);
         self_next.\out\.valid := pyha_ret_4;
         ret_0 := self.\out\;
         return;
     end procedure;
 
-    function StageR2SDF(shr: ShiftRegister_9.self_t; twiddle: complex_t(1 downto -14); stage1_out: complex_t(1 downto -34); stage2_out: complex_t(1 downto -48); output_index: integer; mode_delay: boolean; control: integer; \out\: DataValid_0.self_t; start_counter: DownCounter_8.self_t) return self_t is
+    function StageR2SDF(shr: ShiftRegister_13.self_t; twiddle: complex_t(1 downto -14); stage1_out: complex_t(1 downto -34); stage2_out: complex_t(1 downto -48); output_index: integer; mode_delay: boolean; control: integer; \out\: DataValid_0.self_t; start_counter: DownCounter_11.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin

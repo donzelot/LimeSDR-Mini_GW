@@ -55,61 +55,49 @@ library work;
     use work.DownCounter_14.all;
     use work.StageR2SDF_9.all;
     use work.ShiftRegister_17.all;
-    use work.DownCounter_15.all;
-    use work.StageR2SDF_10.all;
-    use work.ShiftRegister_18.all;
-    use work.DownCounter_16.all;
-    use work.StageR2SDF_11.all;
-    use work.ShiftRegister_19.all;
-    use work.StageR2SDF_12.all;
-    use work.R2SDF_0.all;
-    use work.FFTPower_0.all;
-    use work.RAM_0.all;
-    use work.DownCounter_20.all;
-    use work.BitreversalFFTshiftAVGPool_0.all;
-    use work.Spectrogram_0.all;
 
 
-package SpectrogramLimeSDR_0 is
+package DownCounter_15 is
     type self_t is record
-        spect: Spectrogram_0.self_t;
-        \out\: DataValid_26.self_t;
+        counter: sfixed(4 downto 0);
     end record;
-    type SpectrogramLimeSDR_0_self_t_list_t is array (natural range <>) of SpectrogramLimeSDR_0.self_t;
+    type DownCounter_15_self_t_list_t is array (natural range <>) of DownCounter_15.self_t;
 
     type self_t_const is record
-        spect: Spectrogram_0.self_t_const;
-        \out\: DataValid_26.self_t_const;
+        START_VALUE: sfixed(4 downto 0);
     end record;
-    type SpectrogramLimeSDR_0_self_t_const_list_t_const is array (natural range <>) of SpectrogramLimeSDR_0.self_t_const;
+    type DownCounter_15_self_t_const_list_t_const is array (natural range <>) of DownCounter_15.self_t_const;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_27.self_t; ret_0:out DataValid_26.self_t);
-    function SpectrogramLimeSDR(spect: Spectrogram_0.self_t; \out\: DataValid_26.self_t) return self_t;
+    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
+    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
+    function DownCounter(counter: sfixed(4 downto 0)) return self_t;
 end package;
 
-package body SpectrogramLimeSDR_0 is
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_27.self_t; ret_0:out DataValid_26.self_t) is
+package body DownCounter_15 is
+    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
-        variable spect: DataValid_25.self_t;
-        variable pyha_ret_0: DataValid_25.self_t;
+
     begin
-
-        Spectrogram_0.main(self.spect, self_next.spect, self_const.spect, inp, pyha_ret_0);
-        spect := pyha_ret_0;
-
-        self_next.\out\.data := resize(spect.data, -12, -43, fixed_wrap, fixed_round);
-        self_next.\out\.valid := spect.valid;
-
-        ret_0 := self.\out\;
+        -- test if counter is negative -> must be over
+        ret_0 := sign_bit(self.counter - 1);
         return;
     end procedure;
 
-    function SpectrogramLimeSDR(spect: Spectrogram_0.self_t; \out\: DataValid_26.self_t) return self_t is
+    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const) is
+
+        variable pyha_ret_0: boolean;
+    begin
+        is_over(self, self_next, self_const, pyha_ret_0);
+        if not pyha_ret_0 then
+            self_next.counter := resize(self.counter - 1, 4, 0, fixed_wrap, fixed_truncate);
+        end if;
+    end procedure;
+
+    function DownCounter(counter: sfixed(4 downto 0)) return self_t is
         -- constructor
         variable self: self_t;
     begin
-        self.spect := spect;
-        self.\out\ := \out\;
+        self.counter := counter;
         return self;
     end function;
 end package body;

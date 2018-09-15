@@ -11,25 +11,48 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_1.all;
-    use work.MovingAverage_1.all;
-    use work.ShiftRegister_2.all;
-    use work.DCRemoval_0.all;
+    use work.ShiftRegister_7.all;
+    use work.DCRemoval_1.all;
     use work.Windower_0.all;
+    use work.ShiftRegister_20.all;
+    use work.DownCounter_18.all;
+    use work.StageR2SDF_13.all;
+    use work.ShiftRegister_3.all;
+    use work.DownCounter_2.all;
+    use work.StageR2SDF_0.all;
+    use work.ShiftRegister_4.all;
+    use work.DownCounter_3.all;
+    use work.StageR2SDF_2.all;
+    use work.DownCounter_8.all;
+    use work.StageR2SDF_3.all;
+    use work.ShiftRegister_11.all;
+    use work.DownCounter_9.all;
+    use work.StageR2SDF_4.all;
+    use work.ShiftRegister_12.all;
+    use work.DownCounter_10.all;
+    use work.StageR2SDF_5.all;
+    use work.ShiftRegister_13.all;
+    use work.DownCounter_11.all;
+    use work.StageR2SDF_6.all;
+    use work.ShiftRegister_14.all;
+    use work.DownCounter_12.all;
+    use work.StageR2SDF_7.all;
 
 
 package ShiftRegister_15 is
     type self_t is record
-        data: Typedefs.complex_t1downto_34_list_t(0 to 0);
+        data: Typedefs.complex_t1downto_34_list_t(0 to 31);
         to_push: complex_t(1 downto -34);
     end record;
     type ShiftRegister_15_self_t_list_t is array (natural range <>) of ShiftRegister_15.self_t;
@@ -41,7 +64,7 @@ package ShiftRegister_15 is
 
     procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34));
     procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34));
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 0); to_push: complex_t(1 downto -34)) return self_t;
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 31); to_push: complex_t(1 downto -34)) return self_t;
 end package;
 
 package body ShiftRegister_15 is
@@ -62,7 +85,7 @@ package body ShiftRegister_15 is
         self_next.data := self.data(1 to self.data'high) & item;
     end procedure;
 
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 0); to_push: complex_t(1 downto -34)) return self_t is
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 31); to_push: complex_t(1 downto -34)) return self_t is
         -- constructor
         variable self: self_t;
     begin

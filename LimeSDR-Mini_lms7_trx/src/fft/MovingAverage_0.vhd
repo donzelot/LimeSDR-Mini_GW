@@ -11,14 +11,16 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
 
 -- :param window_len: Size of the moving average window, must be power of 2 and >= 2
 -- :param dtype: internal storage type, Sfix/Complex
@@ -40,14 +42,14 @@ package MovingAverage_0 is
     end record;
     type MovingAverage_0_self_t_const_list_t_const is array (natural range <>) of MovingAverage_0.self_t_const;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_21.self_t; ret_0:out DataValid_0.self_t);
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_0.self_t);
     function MovingAverage(shr: ShiftRegister_0.self_t; acc: complex_t(21 downto -34); \out\: DataValid_0.self_t; start_counter: DownCounter_0.self_t) return self_t;
 end package;
 
 package body MovingAverage_0 is
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_21.self_t; ret_0:out DataValid_0.self_t) is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_0.self_t) is
 
-        variable pyha_ret_0: complex_t(1 downto -22);
+        variable pyha_ret_0: complex_t(1 downto -34);
         variable pyha_ret_1: boolean;
     begin
         if not inp.valid then

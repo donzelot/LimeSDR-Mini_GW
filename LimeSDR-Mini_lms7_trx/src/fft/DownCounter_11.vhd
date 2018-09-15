@@ -11,66 +11,54 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_21.all;
-    use work.DataValid_20.all;
-    use work.DataValid_19.all;
+    use work.DataValid_27.all;
+    use work.DataValid_26.all;
+    use work.DataValid_25.all;
     use work.DataValid_0.all;
-    use work.DataValid_17.all;
-    use work.DataValid_18.all;
-    use work.ShiftRegister_0.all;
+    use work.DataValid_23.all;
+    use work.DataValid_24.all;
+    use work.ShiftRegister_5.all;
     use work.DownCounter_0.all;
+    use work.MovingAverage_2.all;
+    use work.ShiftRegister_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_1.all;
-    use work.MovingAverage_1.all;
-    use work.ShiftRegister_2.all;
-    use work.DCRemoval_0.all;
+    use work.ShiftRegister_7.all;
+    use work.DCRemoval_1.all;
     use work.Windower_0.all;
-    use work.ShiftRegister_15.all;
-    use work.DownCounter_14.all;
-    use work.StageR2SDF_12.all;
+    use work.ShiftRegister_20.all;
+    use work.DownCounter_18.all;
+    use work.StageR2SDF_13.all;
     use work.ShiftRegister_3.all;
     use work.DownCounter_2.all;
     use work.StageR2SDF_0.all;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
-    use work.StageR2SDF_1.all;
-    use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_5.all;
-    use work.StageR2SDF_3.all;
-    use work.ShiftRegister_7.all;
-    use work.DownCounter_6.all;
-    use work.StageR2SDF_4.all;
-    use work.ShiftRegister_8.all;
-    use work.DownCounter_7.all;
-    use work.StageR2SDF_5.all;
-    use work.ShiftRegister_9.all;
     use work.DownCounter_8.all;
-    use work.StageR2SDF_6.all;
-    use work.ShiftRegister_10.all;
-    use work.DownCounter_9.all;
-    use work.StageR2SDF_7.all;
+    use work.StageR2SDF_3.all;
     use work.ShiftRegister_11.all;
-    use work.DownCounter_10.all;
-    use work.StageR2SDF_8.all;
+    use work.DownCounter_9.all;
+    use work.StageR2SDF_4.all;
     use work.ShiftRegister_12.all;
+    use work.DownCounter_10.all;
+    use work.StageR2SDF_5.all;
+    use work.ShiftRegister_13.all;
 
 
 package DownCounter_11 is
     type self_t is record
-        counter: sfixed(4 downto 0);
+        counter: sfixed(8 downto 0);
     end record;
     type DownCounter_11_self_t_list_t is array (natural range <>) of DownCounter_11.self_t;
 
     type self_t_const is record
-        START_VALUE: sfixed(4 downto 0);
+        START_VALUE: sfixed(8 downto 0);
     end record;
     type DownCounter_11_self_t_const_list_t_const is array (natural range <>) of DownCounter_11.self_t_const;
 
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
     procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
-    function DownCounter(counter: sfixed(4 downto 0)) return self_t;
+    function DownCounter(counter: sfixed(8 downto 0)) return self_t;
 end package;
 
 package body DownCounter_11 is
@@ -89,11 +77,11 @@ package body DownCounter_11 is
     begin
         is_over(self, self_next, self_const, pyha_ret_0);
         if not pyha_ret_0 then
-            self_next.counter := resize(self.counter - 1, 4, 0, fixed_wrap, fixed_truncate);
+            self_next.counter := resize(self.counter - 1, 8, 0, fixed_wrap, fixed_truncate);
         end if;
     end procedure;
 
-    function DownCounter(counter: sfixed(4 downto 0)) return self_t is
+    function DownCounter(counter: sfixed(8 downto 0)) return self_t is
         -- constructor
         variable self: self_t;
     begin
