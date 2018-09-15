@@ -54,49 +54,50 @@ library work;
     use work.ShiftRegister_11.all;
     use work.DownCounter_10.all;
     use work.StageR2SDF_8.all;
+    use work.ShiftRegister_12.all;
 
 
-package ShiftRegister_12 is
+package DownCounter_11 is
     type self_t is record
-        data: Typedefs.complex_t1downto_34_list_t(0 to 7);
-        to_push: complex_t(1 downto -34);
+        counter: sfixed(4 downto 0);
     end record;
-    type ShiftRegister_12_self_t_list_t is array (natural range <>) of ShiftRegister_12.self_t;
+    type DownCounter_11_self_t_list_t is array (natural range <>) of DownCounter_11.self_t;
 
     type self_t_const is record
-        DUMMY: integer;
+        START_VALUE: sfixed(4 downto 0);
     end record;
-    type ShiftRegister_12_self_t_const_list_t_const is array (natural range <>) of ShiftRegister_12.self_t_const;
+    type DownCounter_11_self_t_const_list_t_const is array (natural range <>) of DownCounter_11.self_t_const;
 
-    procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34));
-    procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34));
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 7); to_push: complex_t(1 downto -34)) return self_t;
+    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
+    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
+    function DownCounter(counter: sfixed(4 downto 0)) return self_t;
 end package;
 
-package body ShiftRegister_12 is
-    procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34)) is
+package body DownCounter_11 is
+    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
 
     begin
-        ret_0 := self.data(0);
+        -- test if counter is negative -> must be over
+        ret_0 := sign_bit(self.counter - 1);
         return;
     end procedure;
 
-    procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34)) is
-    -- Actual push happens on the next clock cycle!
+    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const) is
 
+        variable pyha_ret_0: boolean;
     begin
-        -- CONVERSION PREPROCESSOR replace next line with:
-        -- self.data = self.data[1:] + [item]
-        self_next.data := self.data(1 to self.data'high) & item;
+        is_over(self, self_next, self_const, pyha_ret_0);
+        if not pyha_ret_0 then
+            self_next.counter := resize(self.counter - 1, 4, 0, fixed_wrap, fixed_truncate);
+        end if;
     end procedure;
 
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 7); to_push: complex_t(1 downto -34)) return self_t is
+    function DownCounter(counter: sfixed(4 downto 0)) return self_t is
         -- constructor
         variable self: self_t;
     begin
-        self.data := data;
-        self.to_push := to_push;
+        self.counter := counter;
         return self;
     end function;
 end package body;

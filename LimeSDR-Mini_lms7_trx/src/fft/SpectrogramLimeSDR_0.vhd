@@ -54,49 +54,62 @@ library work;
     use work.ShiftRegister_11.all;
     use work.DownCounter_10.all;
     use work.StageR2SDF_8.all;
+    use work.ShiftRegister_12.all;
+    use work.DownCounter_11.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_13.all;
+    use work.DownCounter_12.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_14.all;
+    use work.StageR2SDF_11.all;
+    use work.R2SDF_0.all;
+    use work.FFTPower_1.all;
+    use work.RAM_2.all;
+    use work.DownCounter_16.all;
+    use work.BitreversalFFTshiftAVGPool_1.all;
+    use work.Spectrogram_1.all;
 
 
-package ShiftRegister_12 is
+package SpectrogramLimeSDR_0 is
     type self_t is record
-        data: Typedefs.complex_t1downto_34_list_t(0 to 7);
-        to_push: complex_t(1 downto -34);
+        spect: Spectrogram_1.self_t;
+        \out\: DataValid_40.self_t;
     end record;
-    type ShiftRegister_12_self_t_list_t is array (natural range <>) of ShiftRegister_12.self_t;
+    type SpectrogramLimeSDR_0_self_t_list_t is array (natural range <>) of SpectrogramLimeSDR_0.self_t;
 
     type self_t_const is record
-        DUMMY: integer;
+        spect: Spectrogram_1.self_t_const;
+        \out\: DataValid_40.self_t_const;
     end record;
-    type ShiftRegister_12_self_t_const_list_t_const is array (natural range <>) of ShiftRegister_12.self_t_const;
+    type SpectrogramLimeSDR_0_self_t_const_list_t_const is array (natural range <>) of SpectrogramLimeSDR_0.self_t_const;
 
-    procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34));
-    procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34));
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 7); to_push: complex_t(1 downto -34)) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_41.self_t; ret_0:out DataValid_40.self_t);
+    function SpectrogramLimeSDR(spect: Spectrogram_1.self_t; \out\: DataValid_40.self_t) return self_t;
 end package;
 
-package body ShiftRegister_12 is
-    procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34)) is
+package body SpectrogramLimeSDR_0 is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_41.self_t; ret_0:out DataValid_40.self_t) is
 
-
+        variable spect: DataValid_39.self_t;
+        variable pyha_ret_0: DataValid_39.self_t;
     begin
-        ret_0 := self.data(0);
+
+        Spectrogram_1.main(self.spect, self_next.spect, self_const.spect, inp, pyha_ret_0);
+        spect := pyha_ret_0;
+
+        self_next.\out\.data := resize(spect.data, -12, -43, fixed_saturate, fixed_round);
+        self_next.\out\.valid := spect.valid;
+
+        ret_0 := self.\out\;
         return;
     end procedure;
 
-    procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34)) is
-    -- Actual push happens on the next clock cycle!
-
-    begin
-        -- CONVERSION PREPROCESSOR replace next line with:
-        -- self.data = self.data[1:] + [item]
-        self_next.data := self.data(1 to self.data'high) & item;
-    end procedure;
-
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 7); to_push: complex_t(1 downto -34)) return self_t is
+    function SpectrogramLimeSDR(spect: Spectrogram_1.self_t; \out\: DataValid_40.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin
-        self.data := data;
-        self.to_push := to_push;
+        self.spect := spect;
+        self.\out\ := \out\;
         return self;
     end function;
 end package body;

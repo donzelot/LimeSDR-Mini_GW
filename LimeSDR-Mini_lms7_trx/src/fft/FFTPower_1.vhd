@@ -54,49 +54,56 @@ library work;
     use work.ShiftRegister_11.all;
     use work.DownCounter_10.all;
     use work.StageR2SDF_8.all;
+    use work.ShiftRegister_12.all;
+    use work.DownCounter_11.all;
+    use work.StageR2SDF_9.all;
+    use work.ShiftRegister_13.all;
+    use work.DownCounter_12.all;
+    use work.StageR2SDF_10.all;
+    use work.ShiftRegister_14.all;
+    use work.StageR2SDF_11.all;
+    use work.R2SDF_0.all;
 
-
-package ShiftRegister_12 is
+-- Turns FFT result into power ~equalish to : abs(fft_result)
+-- Note that this core consumes Complex samples but outputs Sfix samples.
+-- TODO: Should output unsigned
+package FFTPower_1 is
     type self_t is record
-        data: Typedefs.complex_t1downto_34_list_t(0 to 7);
-        to_push: complex_t(1 downto -34);
+        \out\: DataValid_38.self_t;
     end record;
-    type ShiftRegister_12_self_t_list_t is array (natural range <>) of ShiftRegister_12.self_t;
+    type FFTPower_1_self_t_list_t is array (natural range <>) of FFTPower_1.self_t;
 
     type self_t_const is record
-        DUMMY: integer;
+        \out\: DataValid_38.self_t_const;
     end record;
-    type ShiftRegister_12_self_t_const_list_t_const is array (natural range <>) of ShiftRegister_12.self_t_const;
+    type FFTPower_1_self_t_const_list_t_const is array (natural range <>) of FFTPower_1.self_t_const;
 
-    procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34));
-    procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34));
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 7); to_push: complex_t(1 downto -34)) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_17.self_t; ret_0:out DataValid_38.self_t);
+    function FFTPower(\out\: DataValid_38.self_t) return self_t;
 end package;
 
-package body ShiftRegister_12 is
-    procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34)) is
+package body FFTPower_1 is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_17.self_t; ret_0:out DataValid_38.self_t) is
 
-
+        variable conjugate: complex_t(-7 downto -42);
     begin
-        ret_0 := self.data(0);
+        if not inp.valid then
+            ret_0 := DataValid(self.\out\.data, valid=>False);
+            return;
+
+        end if;
+        conjugate := resize(resize(Complex(get_real(inp.data), -get_imag(inp.data)), size_res=>inp.data, overflow_style=>fixed_wrap, round_style=>fixed_truncate), -4, -21, fixed_wrap, fixed_truncate);
+        self_next.\out\.data := resize(get_real((conjugate * inp.data)), -7, -42, fixed_wrap, fixed_truncate);
+        self_next.\out\.valid := inp.valid;
+        ret_0 := self.\out\;
         return;
     end procedure;
 
-    procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34)) is
-    -- Actual push happens on the next clock cycle!
-
-    begin
-        -- CONVERSION PREPROCESSOR replace next line with:
-        -- self.data = self.data[1:] + [item]
-        self_next.data := self.data(1 to self.data'high) & item;
-    end procedure;
-
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 7); to_push: complex_t(1 downto -34)) return self_t is
+    function FFTPower(\out\: DataValid_38.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin
-        self.data := data;
-        self.to_push := to_push;
+        self.\out\ := \out\;
         return self;
     end function;
 end package body;

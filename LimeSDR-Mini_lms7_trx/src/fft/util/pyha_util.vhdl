@@ -13,6 +13,7 @@ package PyhaUtil is
 
   function left_index(x: sfixed) return integer;
   function right_index(x: sfixed) return integer;
+  function sign_bit(x: sfixed) return boolean;
   function \>>\(x: sfixed; n: integer) return sfixed;
   function Sfix(a:real; left_index, right_index:integer;
     constant overflow_style : fixed_overflow_style_type := fixed_wrap;
@@ -62,6 +63,11 @@ package PyhaUtil is
   function "xor"(a, b:integer) return integer;
   function "not" (a : integer) return boolean;
 
+
+  function to_integer(a:boolean;
+      constant overflow_style : fixed_overflow_style_type := fixed_wrap;
+    constant round_style    : fixed_round_style_type    := fixed_truncate) return integer;
+
   -- function bits_to_int(x: boolean_list_t) return integer;
   -- function "??"(a:integer) return boolean; -- not supported for quartus
 
@@ -84,6 +90,11 @@ package body PyhaUtil is
   function right_index(x: sfixed) return integer is
   begin
     return x'right;
+  end function;
+
+  function sign_bit(x: sfixed) return boolean is
+  begin
+    return bool(x(x'left));
   end function;
 
   -- shift that wont lose precision
@@ -151,6 +162,17 @@ package body PyhaUtil is
     return to_ufixed(a, left_index, right_index);
   end function;
 
+
+  function to_integer(a:boolean;
+      constant overflow_style : fixed_overflow_style_type := fixed_wrap;
+    constant round_style    : fixed_round_style_type    := fixed_truncate) return integer is
+  begin
+    if a = True then
+        return 1;
+    else
+        return 0;
+    end if;
+  end function;
 
 
   function bool(x: std_logic) return boolean is
