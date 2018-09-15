@@ -14,23 +14,23 @@ library work;
 
 
 
-package DataValid_39 is
+package DataValid_21 is
     type self_t is record
         data: complex_t(1 downto -22);
         valid: boolean;
     end record;
-    type DataValid_39_self_t_list_t is array (natural range <>) of DataValid_39.self_t;
+    type DataValid_21_self_t_list_t is array (natural range <>) of DataValid_21.self_t;
 
     type self_t_const is record
         DUMMY: integer;
     end record;
-    type DataValid_39_self_t_const_list_t_const is array (natural range <>) of DataValid_39.self_t_const;
+    type DataValid_21_self_t_const_list_t_const is array (natural range <>) of DataValid_21.self_t_const;
 
 
     function DataValid(data: complex_t(1 downto -22); valid: boolean) return self_t;
 end package;
 
-package body DataValid_39 is
+package body DataValid_21 is
 
 
     function DataValid(data: complex_t(1 downto -22); valid: boolean) return self_t is

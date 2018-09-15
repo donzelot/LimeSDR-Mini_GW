@@ -11,9 +11,9 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_39.all;
-    use work.DataValid_38.all;
-    use work.DataValid_37.all;
+    use work.DataValid_21.all;
+    use work.DataValid_20.all;
+    use work.DataValid_19.all;
 
 
 package DataValid_0 is

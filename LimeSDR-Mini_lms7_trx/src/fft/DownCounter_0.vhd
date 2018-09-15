@@ -11,13 +11,13 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_39.all;
-    use work.DataValid_38.all;
-    use work.DataValid_37.all;
+    use work.DataValid_21.all;
+    use work.DataValid_20.all;
+    use work.DataValid_19.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_36.all;
-    use work.ShiftRegister_16.all;
+    use work.DataValid_18.all;
+    use work.ShiftRegister_0.all;
 
 
 package DownCounter_0 is

@@ -11,19 +11,19 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_39.all;
-    use work.DataValid_38.all;
-    use work.DataValid_37.all;
+    use work.DataValid_21.all;
+    use work.DataValid_20.all;
+    use work.DataValid_19.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_36.all;
-    use work.ShiftRegister_16.all;
-    use work.DownCounter_0.all;
-    use work.MovingAverage_2.all;
+    use work.DataValid_18.all;
     use work.ShiftRegister_0.all;
+    use work.DownCounter_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_18.all;
-    use work.DCRemoval_1.all;
+    use work.ShiftRegister_1.all;
+    use work.MovingAverage_1.all;
+    use work.ShiftRegister_2.all;
+    use work.DCRemoval_0.all;
     use work.Windower_0.all;
     use work.ShiftRegister_15.all;
     use work.DownCounter_14.all;
@@ -65,13 +65,13 @@ library work;
     use work.R2SDF_0.all;
     use work.FFTPower_0.all;
     use work.RAM_0.all;
-    use work.DownCounter_31.all;
+    use work.DownCounter_16.all;
     use work.BitreversalFFTshiftAVGPool_0.all;
 
 
 package Spectrogram_0 is
     type self_t is record
-        dc_removal: DCRemoval_1.self_t;
+        dc_removal: DCRemoval_0.self_t;
         windower: Windower_0.self_t;
         fft: R2SDF_0.self_t;
         power: FFTPower_0.self_t;
@@ -83,7 +83,7 @@ package Spectrogram_0 is
         AVG_FREQ_AXIS: integer;
         AVG_TIME_AXIS: integer;
         FFT_SIZE: integer;
-        dc_removal: DCRemoval_1.self_t_const;
+        dc_removal: DCRemoval_0.self_t_const;
         windower: Windower_0.self_t_const;
         fft: R2SDF_0.self_t_const;
         power: FFTPower_0.self_t_const;
@@ -91,25 +91,25 @@ package Spectrogram_0 is
     end record;
     type Spectrogram_0_self_t_const_list_t_const is array (natural range <>) of Spectrogram_0.self_t_const;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_39.self_t; ret_0:out DataValid_37.self_t);
-    function Spectrogram(dc_removal: DCRemoval_1.self_t; windower: Windower_0.self_t; fft: R2SDF_0.self_t; power: FFTPower_0.self_t; dec: BitreversalFFTshiftAVGPool_0.self_t) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_21.self_t; ret_0:out DataValid_19.self_t);
+    function Spectrogram(dc_removal: DCRemoval_0.self_t; windower: Windower_0.self_t; fft: R2SDF_0.self_t; power: FFTPower_0.self_t; dec: BitreversalFFTshiftAVGPool_0.self_t) return self_t;
 end package;
 
 package body Spectrogram_0 is
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_39.self_t; ret_0:out DataValid_37.self_t) is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_21.self_t; ret_0:out DataValid_19.self_t) is
 
         variable dc_out: DataValid_0.self_t;
         variable window_out: DataValid_0.self_t;
         variable fft_out: DataValid_17.self_t;
-        variable power_out: DataValid_36.self_t;
-        variable dec_out: DataValid_37.self_t;
+        variable power_out: DataValid_18.self_t;
+        variable dec_out: DataValid_19.self_t;
         variable pyha_ret_0: DataValid_0.self_t;
         variable pyha_ret_1: DataValid_0.self_t;
         variable pyha_ret_2: DataValid_17.self_t;
-        variable pyha_ret_3: DataValid_36.self_t;
-        variable pyha_ret_4: DataValid_37.self_t;
+        variable pyha_ret_3: DataValid_18.self_t;
+        variable pyha_ret_4: DataValid_19.self_t;
     begin
-        DCRemoval_1.main(self.dc_removal, self_next.dc_removal, self_const.dc_removal, inp, pyha_ret_0);
+        DCRemoval_0.main(self.dc_removal, self_next.dc_removal, self_const.dc_removal, inp, pyha_ret_0);
         dc_out := pyha_ret_0;
         Windower_0.main(self.windower, self_next.windower, self_const.windower, dc_out, pyha_ret_1);
         window_out := pyha_ret_1;
@@ -123,7 +123,7 @@ package body Spectrogram_0 is
         return;
     end procedure;
 
-    function Spectrogram(dc_removal: DCRemoval_1.self_t; windower: Windower_0.self_t; fft: R2SDF_0.self_t; power: FFTPower_0.self_t; dec: BitreversalFFTshiftAVGPool_0.self_t) return self_t is
+    function Spectrogram(dc_removal: DCRemoval_0.self_t; windower: Windower_0.self_t; fft: R2SDF_0.self_t; power: FFTPower_0.self_t; dec: BitreversalFFTshiftAVGPool_0.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin

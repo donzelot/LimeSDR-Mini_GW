@@ -11,19 +11,19 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_39.all;
-    use work.DataValid_38.all;
-    use work.DataValid_37.all;
+    use work.DataValid_21.all;
+    use work.DataValid_20.all;
+    use work.DataValid_19.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_36.all;
-    use work.ShiftRegister_16.all;
-    use work.DownCounter_0.all;
-    use work.MovingAverage_2.all;
+    use work.DataValid_18.all;
     use work.ShiftRegister_0.all;
+    use work.DownCounter_0.all;
     use work.MovingAverage_0.all;
-    use work.ShiftRegister_18.all;
-    use work.DCRemoval_1.all;
+    use work.ShiftRegister_1.all;
+    use work.MovingAverage_1.all;
+    use work.ShiftRegister_2.all;
+    use work.DCRemoval_0.all;
     use work.Windower_0.all;
     use work.ShiftRegister_15.all;
     use work.DownCounter_14.all;
@@ -67,23 +67,23 @@ library work;
     use work.RAM_0.all;
 
 
-package DownCounter_31 is
+package DownCounter_16 is
     type self_t is record
         counter: sfixed(14 downto 0);
     end record;
-    type DownCounter_31_self_t_list_t is array (natural range <>) of DownCounter_31.self_t;
+    type DownCounter_16_self_t_list_t is array (natural range <>) of DownCounter_16.self_t;
 
     type self_t_const is record
         START_VALUE: sfixed(14 downto 0);
     end record;
-    type DownCounter_31_self_t_const_list_t_const is array (natural range <>) of DownCounter_31.self_t_const;
+    type DownCounter_16_self_t_const_list_t_const is array (natural range <>) of DownCounter_16.self_t_const;
 
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
     procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
     function DownCounter(counter: sfixed(14 downto 0)) return self_t;
 end package;
 
-package body DownCounter_31 is
+package body DownCounter_16 is
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
 
