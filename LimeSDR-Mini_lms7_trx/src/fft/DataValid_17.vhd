@@ -11,15 +11,15 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
 
 
 package DataValid_17 is
     type self_t is record
-        data: complex_t(-7 downto -42);
+        data: complex_t(-5 downto -40);
         valid: boolean;
     end record;
     type DataValid_17_self_t_list_t is array (natural range <>) of DataValid_17.self_t;
@@ -30,13 +30,13 @@ package DataValid_17 is
     type DataValid_17_self_t_const_list_t_const is array (natural range <>) of DataValid_17.self_t_const;
 
 
-    function DataValid(data: complex_t(-7 downto -42); valid: boolean) return self_t;
+    function DataValid(data: complex_t(-5 downto -40); valid: boolean) return self_t;
 end package;
 
 package body DataValid_17 is
 
 
-    function DataValid(data: complex_t(-7 downto -42); valid: boolean) return self_t is
+    function DataValid(data: complex_t(-5 downto -40); valid: boolean) return self_t is
         -- constructor
         variable self: self_t;
     begin

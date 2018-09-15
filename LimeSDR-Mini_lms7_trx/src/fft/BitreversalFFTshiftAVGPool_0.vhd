@@ -11,12 +11,12 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_38.all;
+    use work.DataValid_36.all;
     use work.ShiftRegister_16.all;
     use work.DownCounter_0.all;
     use work.MovingAverage_2.all;
@@ -34,9 +34,9 @@ library work;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
     use work.StageR2SDF_1.all;
-    use work.ShiftRegister_5.all;
     use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
+    use work.ShiftRegister_6.all;
     use work.DownCounter_5.all;
     use work.StageR2SDF_3.all;
     use work.ShiftRegister_7.all;
@@ -63,24 +63,24 @@ library work;
     use work.ShiftRegister_14.all;
     use work.StageR2SDF_11.all;
     use work.R2SDF_0.all;
-    use work.FFTPower_1.all;
-    use work.RAM_2.all;
-    use work.DownCounter_16.all;
+    use work.FFTPower_0.all;
+    use work.RAM_0.all;
+    use work.DownCounter_31.all;
 
 -- Performs bitreversal, fftshift and average pooling by using 2 BRAM blocks.
 -- TODO: this core should be unsigned...
-package BitreversalFFTshiftAVGPool_1 is
+package BitreversalFFTshiftAVGPool_0 is
     type self_t is record
         time_axis_counter: integer;
         state: boolean;
-        ram: RAM_2.RAM_2_self_t_list_t(0 to 1);
+        ram: RAM_0.RAM_0_self_t_list_t(0 to 1);
         out_valid: boolean;
         control: integer;
-        \out\: DataValid_39.self_t;
+        \out\: DataValid_37.self_t;
         final_counter: DownCounter_5.self_t;
-        start_counter: DownCounter_16.self_t;
+        start_counter: DownCounter_31.self_t;
     end record;
-    type BitreversalFFTshiftAVGPool_1_self_t_list_t is array (natural range <>) of BitreversalFFTshiftAVGPool_1.self_t;
+    type BitreversalFFTshiftAVGPool_0_self_t_list_t is array (natural range <>) of BitreversalFFTshiftAVGPool_0.self_t;
 
     type self_t_const is record
         AVG_FREQ_AXIS: integer;
@@ -88,56 +88,56 @@ package BitreversalFFTshiftAVGPool_1 is
         ACCUMULATION_BITS: integer;
         FFT_SIZE: integer;
         LUT: Typedefs.integer_list_t(0 to 8191);
-        ram: RAM_2.RAM_2_self_t_const_list_t_const(0 to 1);
-        \out\: DataValid_39.self_t_const;
+        ram: RAM_0.RAM_0_self_t_const_list_t_const(0 to 1);
+        \out\: DataValid_37.self_t_const;
         final_counter: DownCounter_5.self_t_const;
-        start_counter: DownCounter_16.self_t_const;
+        start_counter: DownCounter_31.self_t_const;
     end record;
-    type BitreversalFFTshiftAVGPool_1_self_t_const_list_t_const is array (natural range <>) of BitreversalFFTshiftAVGPool_1.self_t_const;
+    type BitreversalFFTshiftAVGPool_0_self_t_const_list_t_const is array (natural range <>) of BitreversalFFTshiftAVGPool_0.self_t_const;
 
-    procedure work_ram(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; data: sfixed(-7 downto -42); write_ram: integer; read_ram: integer);
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_38.self_t; ret_0:out DataValid_39.self_t);
-    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_2.RAM_2_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_39.self_t; final_counter: DownCounter_5.self_t; start_counter: DownCounter_16.self_t) return self_t;
+    procedure work_ram(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; data: sfixed(-5 downto -40); write_ram: integer; read_ram: integer);
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_36.self_t; ret_0:out DataValid_37.self_t);
+    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_0.RAM_0_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_37.self_t; final_counter: DownCounter_5.self_t; start_counter: DownCounter_31.self_t) return self_t;
 end package;
 
-package body BitreversalFFTshiftAVGPool_1 is
-    procedure work_ram(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; data: sfixed(-7 downto -42); write_ram: integer; read_ram: integer) is
+package body BitreversalFFTshiftAVGPool_0 is
+    procedure work_ram(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; data: sfixed(-5 downto -40); write_ram: integer; read_ram: integer) is
 
         variable write_index: integer;
         variable write_index_future: integer;
-        variable read: sfixed(-7 downto -42);
-        variable new_value: sfixed(-7 downto -42);
-        variable \_\: sfixed(-7 downto -42);
-        variable pyha_ret_0: sfixed(-7 downto -42);
-        variable pyha_ret_1: sfixed(-7 downto -42);
+        variable read: sfixed(-5 downto -40);
+        variable new_value: sfixed(-5 downto -40);
+        variable \_\: sfixed(-5 downto -40);
+        variable pyha_ret_0: sfixed(-5 downto -40);
+        variable pyha_ret_1: sfixed(-5 downto -40);
     begin
         -- READ-MODIFY-WRITE
         write_index := self_const.LUT(self.control);
         write_index_future := self_const.LUT((self.control + 1) mod self_const.FFT_SIZE);
-        RAM_2.delayed_read(self.ram(write_ram), self_next.ram(write_ram), self_const.ram(write_ram), write_index_future, pyha_ret_0);
-        read := resize(pyha_ret_0, -7, -42, fixed_wrap, fixed_truncate);
-        new_value := resize(resize(read + data, size_res=>data, overflow_style=>fixed_wrap, round_style=>fixed_truncate), -7, -42, fixed_wrap, fixed_truncate);
-        RAM_2.delayed_write(self.ram(write_ram), self_next.ram(write_ram), self_const.ram(write_ram), write_index, new_value);
+        RAM_0.delayed_read(self.ram(write_ram), self_next.ram(write_ram), self_const.ram(write_ram), write_index_future, pyha_ret_0);
+        read := resize(pyha_ret_0, -5, -40, fixed_saturate, fixed_truncate);
+        new_value := resize(resize(read + data, size_res=>data, overflow_style=>fixed_saturate, round_style=>fixed_truncate), -5, -40, fixed_saturate, fixed_truncate);
+        RAM_0.delayed_write(self.ram(write_ram), self_next.ram(write_ram), self_const.ram(write_ram), write_index, new_value);
 
         -- output stage
         self_next.out_valid := False;
         if self.control < self_const.FFT_SIZE / self_const.AVG_FREQ_AXIS and self.time_axis_counter = self_const.AVG_TIME_AXIS then
-            RAM_2.delayed_read(self.ram(read_ram), self_next.ram(read_ram), self_const.ram(read_ram), self.control, pyha_ret_1);
-            \_\ := resize(pyha_ret_1, -7, -42, fixed_wrap, fixed_truncate);
+            RAM_0.delayed_read(self.ram(read_ram), self_next.ram(read_ram), self_const.ram(read_ram), self.control, pyha_ret_1);
+            \_\ := resize(pyha_ret_1, -5, -40, fixed_saturate, fixed_truncate);
             self_next.out_valid := True;
 
             -- clear memory
-            RAM_2.delayed_write(self.ram(read_ram), self_next.ram(read_ram), self_const.ram(read_ram), self.control, Sfix(0.0, size_res=>data, overflow_style=>fixed_wrap, round_style=>fixed_truncate));
+            RAM_0.delayed_write(self.ram(read_ram), self_next.ram(read_ram), self_const.ram(read_ram), self.control, Sfix(0.0, size_res=>data, overflow_style=>fixed_wrap, round_style=>fixed_truncate));
 
         end if;
     end procedure;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_38.self_t; ret_0:out DataValid_39.self_t) is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_36.self_t; ret_0:out DataValid_37.self_t) is
 
-        variable read: sfixed(-7 downto -42);
+        variable read: sfixed(-5 downto -40);
         variable next_counter: integer;
-        variable pyha_ret_2: sfixed(-7 downto -42);
-        variable pyha_ret_3: sfixed(-7 downto -42);
+        variable pyha_ret_2: sfixed(-5 downto -40);
+        variable pyha_ret_3: sfixed(-5 downto -40);
         variable pyha_ret_4: boolean;
     begin
         if not inp.valid then
@@ -148,12 +148,12 @@ package body BitreversalFFTshiftAVGPool_1 is
         self_next.control := (self.control + 1) mod self_const.FFT_SIZE;
         if self.state then
             work_ram(self, self_next, self_const, inp.data, 0, 1);
-            RAM_2.get_readregister(self.ram(1), self_next.ram(1), self_const.ram(1), pyha_ret_2);
-            read := resize(pyha_ret_2, -7, -42, fixed_wrap, fixed_truncate);
+            RAM_0.get_readregister(self.ram(1), self_next.ram(1), self_const.ram(1), pyha_ret_2);
+            read := resize(pyha_ret_2, -5, -40, fixed_wrap, fixed_truncate);
         else
             work_ram(self, self_next, self_const, inp.data, 1, 0);
-            RAM_2.get_readregister(self.ram(0), self_next.ram(0), self_const.ram(0), pyha_ret_3);
-            read := resize(pyha_ret_3, -7, -42, fixed_wrap, fixed_truncate);
+            RAM_0.get_readregister(self.ram(0), self_next.ram(0), self_const.ram(0), pyha_ret_3);
+            read := resize(pyha_ret_3, -5, -40, fixed_wrap, fixed_truncate);
 
         end if;
         if self.control >= self_const.FFT_SIZE - 1 then
@@ -166,15 +166,15 @@ package body BitreversalFFTshiftAVGPool_1 is
             self_next.time_axis_counter := next_counter;
 
         end if;
-        self_next.\out\.data := resize(scalb(read, -self_const.ACCUMULATION_BITS), -12, -47, fixed_wrap, fixed_truncate);
-        DownCounter_16.tick(self.start_counter, self_next.start_counter, self_const.start_counter);
-        DownCounter_16.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_4);
+        self_next.\out\.data := resize(scalb(read, -self_const.ACCUMULATION_BITS), -10, -45, fixed_wrap, fixed_truncate);
+        DownCounter_31.tick(self.start_counter, self_next.start_counter, self_const.start_counter);
+        DownCounter_31.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_4);
         self_next.\out\.valid := pyha_ret_4 and self.out_valid;
         ret_0 := self.\out\;
         return;
     end procedure;
 
-    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_2.RAM_2_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_39.self_t; final_counter: DownCounter_5.self_t; start_counter: DownCounter_16.self_t) return self_t is
+    function BitreversalFFTshiftAVGPool(time_axis_counter: integer; state: boolean; ram: RAM_0.RAM_0_self_t_list_t(0 to 1); out_valid: boolean; control: integer; \out\: DataValid_37.self_t; final_counter: DownCounter_5.self_t; start_counter: DownCounter_31.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin

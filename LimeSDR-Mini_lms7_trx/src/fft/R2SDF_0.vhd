@@ -11,12 +11,12 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_38.all;
+    use work.DataValid_36.all;
     use work.ShiftRegister_16.all;
     use work.DownCounter_0.all;
     use work.MovingAverage_2.all;
@@ -34,9 +34,9 @@ library work;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
     use work.StageR2SDF_1.all;
-    use work.ShiftRegister_5.all;
     use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
+    use work.ShiftRegister_6.all;
     use work.DownCounter_5.all;
     use work.StageR2SDF_3.all;
     use work.ShiftRegister_7.all;
@@ -192,9 +192,9 @@ package body R2SDF_0 is
 
         end if;
         if self_const.POST_GAIN_CONTROL /= 0 then
-            self_next.\out\.data := resize(scalb(var.data, -self_const.POST_GAIN_CONTROL), -4, -21, fixed_wrap, fixed_truncate);
+            self_next.\out\.data := resize(scalb(var.data, -self_const.POST_GAIN_CONTROL), -3, -20, fixed_wrap, fixed_truncate);
         else
-            self_next.\out\.data := resize(var.data, -4, -21, fixed_wrap, fixed_truncate);
+            self_next.\out\.data := resize(var.data, -3, -20, fixed_wrap, fixed_truncate);
 
         end if;
         self_next.\out\.valid := var.valid;

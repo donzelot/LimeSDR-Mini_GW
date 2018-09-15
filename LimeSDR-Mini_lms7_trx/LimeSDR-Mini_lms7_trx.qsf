@@ -106,7 +106,7 @@ set_location_assignment PIN_C11 -to FT_RXFn
 set_location_assignment PIN_E12 -to FT_WRn
 set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE signal_tap/debug.stp
-set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
+set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
 set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
@@ -405,7 +405,7 @@ set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_2.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_1.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/SpectrogramLimeSDR_0.vhd
-set_global_assignment -name VHDL_FILE src/fft/Spectrogram_1.vhd
+set_global_assignment -name VHDL_FILE src/fft/Spectrogram_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_18.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_16.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_15.vhd
@@ -417,16 +417,16 @@ set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_10.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_9.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_8.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_7.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_5.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_6.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_4.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_3.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_0.vhd
-set_global_assignment -name VHDL_FILE src/fft/RAM_2.vhd
+set_global_assignment -name VHDL_FILE src/fft/RAM_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/R2SDF_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/MovingAverage_2.vhd
 set_global_assignment -name VHDL_FILE src/fft/MovingAverage_0.vhd
-set_global_assignment -name VHDL_FILE src/fft/FFTPower_1.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_16.vhd
+set_global_assignment -name VHDL_FILE src/fft/FFTPower_0.vhd
+set_global_assignment -name VHDL_FILE src/fft/DownCounter_31.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_14.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_12.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_11.vhd
@@ -441,13 +441,13 @@ set_global_assignment -name VHDL_FILE src/fft/DownCounter_3.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_2.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/DCRemoval_1.vhd
-set_global_assignment -name VHDL_FILE src/fft/DataValid_41.vhd
-set_global_assignment -name VHDL_FILE src/fft/DataValid_40.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_39.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_38.vhd
+set_global_assignment -name VHDL_FILE src/fft/DataValid_37.vhd
+set_global_assignment -name VHDL_FILE src/fft/DataValid_36.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_17.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_0.vhd
-set_global_assignment -name VHDL_FILE src/fft/BitreversalFFTshiftAVGPool_1.vhd
+set_global_assignment -name VHDL_FILE src/fft/BitreversalFFTshiftAVGPool_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/util/typedefs.vhdl
 set_global_assignment -name VHDL_FILE src/fft/util/pyha_util.vhdl
 set_global_assignment -name VHDL_FILE src/fft/util/fixed_pkg_c.vhdl

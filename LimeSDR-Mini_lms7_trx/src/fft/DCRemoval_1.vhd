@@ -11,12 +11,12 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_38.all;
+    use work.DataValid_36.all;
     use work.ShiftRegister_16.all;
     use work.DownCounter_0.all;
     use work.MovingAverage_2.all;
@@ -45,12 +45,12 @@ package DCRemoval_1 is
     end record;
     type DCRemoval_1_self_t_const_list_t_const is array (natural range <>) of DCRemoval_1.self_t_const;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_41.self_t; ret_0:out DataValid_0.self_t);
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_39.self_t; ret_0:out DataValid_0.self_t);
     function DCRemoval(averages_0: MovingAverage_2.self_t;averages_1: MovingAverage_0.self_t; delayed_input: ShiftRegister_18.self_t; \out\: DataValid_0.self_t) return self_t;
 end package;
 
 package body DCRemoval_1 is
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_41.self_t; ret_0:out DataValid_0.self_t) is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_39.self_t; ret_0:out DataValid_0.self_t) is
 
         variable avg_out: DataValid_0.self_t;
         variable pyha_ret_0: DataValid_0.self_t;

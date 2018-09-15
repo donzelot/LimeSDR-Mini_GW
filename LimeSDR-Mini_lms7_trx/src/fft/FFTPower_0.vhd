@@ -11,12 +11,12 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_38.all;
+    use work.DataValid_36.all;
     use work.ShiftRegister_16.all;
     use work.DownCounter_0.all;
     use work.MovingAverage_2.all;
@@ -34,9 +34,9 @@ library work;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
     use work.StageR2SDF_1.all;
-    use work.ShiftRegister_5.all;
     use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
+    use work.ShiftRegister_6.all;
     use work.DownCounter_5.all;
     use work.StageR2SDF_3.all;
     use work.ShiftRegister_7.all;
@@ -63,51 +63,48 @@ library work;
     use work.ShiftRegister_14.all;
     use work.StageR2SDF_11.all;
     use work.R2SDF_0.all;
-    use work.FFTPower_1.all;
-    use work.RAM_2.all;
 
-
-package DownCounter_16 is
+-- Turns FFT result into power ~equalish to : abs(fft_result)
+-- Note that this core consumes Complex samples but outputs Sfix samples.
+-- TODO: Should output unsigned
+-- TODO: rename to MultConjugate?
+package FFTPower_0 is
     type self_t is record
-        counter: sfixed(14 downto 0);
+        \out\: DataValid_36.self_t;
     end record;
-    type DownCounter_16_self_t_list_t is array (natural range <>) of DownCounter_16.self_t;
+    type FFTPower_0_self_t_list_t is array (natural range <>) of FFTPower_0.self_t;
 
     type self_t_const is record
-        START_VALUE: sfixed(14 downto 0);
+        \out\: DataValid_36.self_t_const;
     end record;
-    type DownCounter_16_self_t_const_list_t_const is array (natural range <>) of DownCounter_16.self_t_const;
+    type FFTPower_0_self_t_const_list_t_const is array (natural range <>) of FFTPower_0.self_t_const;
 
-    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
-    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
-    function DownCounter(counter: sfixed(14 downto 0)) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_17.self_t; ret_0:out DataValid_36.self_t);
+    function FFTPower(\out\: DataValid_36.self_t) return self_t;
 end package;
 
-package body DownCounter_16 is
-    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
+package body FFTPower_0 is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_17.self_t; ret_0:out DataValid_36.self_t) is
 
 
     begin
-        -- test if counter is negative -> must be over
-        ret_0 := sign_bit(self.counter - 1);
+        if not inp.valid then
+            ret_0 := DataValid(self.\out\.data, valid=>False);
+            return;
+
+            -- (a + bi)(a - bi) = a**2 + b**2
+        end if;
+        self_next.\out\.data := resize((get_real(inp.data) * get_real(inp.data)) + (get_imag(inp.data) * get_imag(inp.data)), -5, -40, fixed_wrap, fixed_truncate);
+        self_next.\out\.valid := inp.valid;
+        ret_0 := self.\out\;
         return;
     end procedure;
 
-    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const) is
-
-        variable pyha_ret_0: boolean;
-    begin
-        is_over(self, self_next, self_const, pyha_ret_0);
-        if not pyha_ret_0 then
-            self_next.counter := resize(self.counter - 1, 14, 0, fixed_wrap, fixed_truncate);
-        end if;
-    end procedure;
-
-    function DownCounter(counter: sfixed(14 downto 0)) return self_t is
+    function FFTPower(\out\: DataValid_36.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin
-        self.counter := counter;
+        self.\out\ := \out\;
         return self;
     end function;
 end package body;

@@ -11,12 +11,12 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_38.all;
+    use work.DataValid_36.all;
     use work.ShiftRegister_16.all;
     use work.DownCounter_0.all;
     use work.MovingAverage_2.all;
@@ -27,7 +27,7 @@ library work;
 package MovingAverage_0 is
     type self_t is record
         shr: ShiftRegister_0.self_t;
-        acc: complex_t(19 downto -34);
+        acc: complex_t(21 downto -34);
         \out\: DataValid_0.self_t;
         start_counter: DownCounter_0.self_t;
     end record;
@@ -43,7 +43,7 @@ package MovingAverage_0 is
     type MovingAverage_0_self_t_const_list_t_const is array (natural range <>) of MovingAverage_0.self_t_const;
 
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_0.self_t; ret_0:out DataValid_0.self_t);
-    function MovingAverage(shr: ShiftRegister_0.self_t; acc: complex_t(19 downto -34); \out\: DataValid_0.self_t; start_counter: DownCounter_0.self_t) return self_t;
+    function MovingAverage(shr: ShiftRegister_0.self_t; acc: complex_t(21 downto -34); \out\: DataValid_0.self_t; start_counter: DownCounter_0.self_t) return self_t;
 end package;
 
 package body MovingAverage_0 is
@@ -61,7 +61,7 @@ package body MovingAverage_0 is
         ShiftRegister_0.push_next(self.shr, self_next.shr, self_const.shr, inp.data);
         -- add new element to shift register
         ShiftRegister_0.peek(self.shr, self_next.shr, self_const.shr, pyha_ret_0);
-        self_next.acc := resize(self.acc + inp.data - pyha_ret_0, 9, -17, fixed_wrap, fixed_truncate);
+        self_next.acc := resize(self.acc + inp.data - pyha_ret_0, 10, -17, fixed_wrap, fixed_truncate);
 
         self_next.\out\.data := resize(scalb(self.acc, -self_const.BIT_GROWTH), 0, -17, fixed_wrap, fixed_round);
         DownCounter_0.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_1);
@@ -70,7 +70,7 @@ package body MovingAverage_0 is
         return;
     end procedure;
 
-    function MovingAverage(shr: ShiftRegister_0.self_t; acc: complex_t(19 downto -34); \out\: DataValid_0.self_t; start_counter: DownCounter_0.self_t) return self_t is
+    function MovingAverage(shr: ShiftRegister_0.self_t; acc: complex_t(21 downto -34); \out\: DataValid_0.self_t; start_counter: DownCounter_0.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin

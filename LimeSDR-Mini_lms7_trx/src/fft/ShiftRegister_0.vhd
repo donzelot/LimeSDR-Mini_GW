@@ -11,12 +11,12 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_38.all;
+    use work.DataValid_36.all;
     use work.ShiftRegister_16.all;
     use work.DownCounter_0.all;
     use work.MovingAverage_2.all;
@@ -24,7 +24,7 @@ library work;
 
 package ShiftRegister_0 is
     type self_t is record
-        data: Typedefs.complex_t1downto_34_list_t(0 to 511);
+        data: Typedefs.complex_t1downto_34_list_t(0 to 1023);
         to_push: complex_t(1 downto -34);
     end record;
     type ShiftRegister_0_self_t_list_t is array (natural range <>) of ShiftRegister_0.self_t;
@@ -36,7 +36,7 @@ package ShiftRegister_0 is
 
     procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34));
     procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34));
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 511); to_push: complex_t(1 downto -34)) return self_t;
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 1023); to_push: complex_t(1 downto -34)) return self_t;
 end package;
 
 package body ShiftRegister_0 is
@@ -57,7 +57,7 @@ package body ShiftRegister_0 is
         self_next.data := self.data(1 to self.data'high) & item;
     end procedure;
 
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 511); to_push: complex_t(1 downto -34)) return self_t is
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 1023); to_push: complex_t(1 downto -34)) return self_t is
         -- constructor
         variable self: self_t;
     begin

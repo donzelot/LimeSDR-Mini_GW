@@ -11,12 +11,12 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
-    use work.DataValid_41.all;
-    use work.DataValid_40.all;
     use work.DataValid_39.all;
+    use work.DataValid_38.all;
+    use work.DataValid_37.all;
     use work.DataValid_0.all;
     use work.DataValid_17.all;
-    use work.DataValid_38.all;
+    use work.DataValid_36.all;
     use work.ShiftRegister_16.all;
     use work.DownCounter_0.all;
     use work.MovingAverage_2.all;
@@ -34,9 +34,9 @@ library work;
     use work.ShiftRegister_4.all;
     use work.DownCounter_3.all;
     use work.StageR2SDF_1.all;
-    use work.ShiftRegister_5.all;
     use work.DownCounter_4.all;
     use work.StageR2SDF_2.all;
+    use work.ShiftRegister_6.all;
     use work.DownCounter_5.all;
     use work.StageR2SDF_3.all;
     use work.ShiftRegister_7.all;
@@ -63,47 +63,51 @@ library work;
     use work.ShiftRegister_14.all;
     use work.StageR2SDF_11.all;
     use work.R2SDF_0.all;
+    use work.FFTPower_0.all;
+    use work.RAM_0.all;
 
--- Turns FFT result into power ~equalish to : abs(fft_result)
--- Note that this core consumes Complex samples but outputs Sfix samples.
--- TODO: Should output unsigned
-package FFTPower_1 is
+
+package DownCounter_31 is
     type self_t is record
-        \out\: DataValid_38.self_t;
+        counter: sfixed(14 downto 0);
     end record;
-    type FFTPower_1_self_t_list_t is array (natural range <>) of FFTPower_1.self_t;
+    type DownCounter_31_self_t_list_t is array (natural range <>) of DownCounter_31.self_t;
 
     type self_t_const is record
-        \out\: DataValid_38.self_t_const;
+        START_VALUE: sfixed(14 downto 0);
     end record;
-    type FFTPower_1_self_t_const_list_t_const is array (natural range <>) of FFTPower_1.self_t_const;
+    type DownCounter_31_self_t_const_list_t_const is array (natural range <>) of DownCounter_31.self_t_const;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_17.self_t; ret_0:out DataValid_38.self_t);
-    function FFTPower(\out\: DataValid_38.self_t) return self_t;
+    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
+    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
+    function DownCounter(counter: sfixed(14 downto 0)) return self_t;
 end package;
 
-package body FFTPower_1 is
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; inp: DataValid_17.self_t; ret_0:out DataValid_38.self_t) is
+package body DownCounter_31 is
+    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
-        variable conjugate: complex_t(-7 downto -42);
+
     begin
-        if not inp.valid then
-            ret_0 := DataValid(self.\out\.data, valid=>False);
-            return;
-
-        end if;
-        conjugate := resize(resize(Complex(get_real(inp.data), -get_imag(inp.data)), size_res=>inp.data, overflow_style=>fixed_wrap, round_style=>fixed_truncate), -4, -21, fixed_wrap, fixed_truncate);
-        self_next.\out\.data := resize(get_real((conjugate * inp.data)), -7, -42, fixed_wrap, fixed_truncate);
-        self_next.\out\.valid := inp.valid;
-        ret_0 := self.\out\;
+        -- test if counter is negative -> must be over
+        ret_0 := sign_bit(self.counter - 1);
         return;
     end procedure;
 
-    function FFTPower(\out\: DataValid_38.self_t) return self_t is
+    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const) is
+
+        variable pyha_ret_0: boolean;
+    begin
+        is_over(self, self_next, self_const, pyha_ret_0);
+        if not pyha_ret_0 then
+            self_next.counter := resize(self.counter - 1, 14, 0, fixed_wrap, fixed_truncate);
+        end if;
+    end procedure;
+
+    function DownCounter(counter: sfixed(14 downto 0)) return self_t is
         -- constructor
         variable self: self_t;
     begin
-        self.\out\ := \out\;
+        self.counter := counter;
         return self;
     end function;
 end package body;

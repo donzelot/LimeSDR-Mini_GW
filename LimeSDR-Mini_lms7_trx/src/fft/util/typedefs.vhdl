@@ -15,7 +15,7 @@ package Typedefs is
     type complex_t1downto_22_list_t is array (natural range <>) of complex_t(1 downto -22);
     type complex_t1downto_34_list_t is array (natural range <>) of complex_t(1 downto -34);
     type sfixed0downto_7_list_t is array (natural range <>) of sfixed(0 downto -7);
-    type complex_t1downto_16_list_t is array (natural range <>) of complex_t(1 downto -16);
-    type sfixed_7downto_42_list_t is array (natural range <>) of sfixed(-7 downto -42);
+    type complex_t1downto_14_list_t is array (natural range <>) of complex_t(1 downto -14);
+    type sfixed_5downto_40_list_t is array (natural range <>) of sfixed(-5 downto -40);
     type integer_list_t is array (natural range <>) of integer;
 end package;
