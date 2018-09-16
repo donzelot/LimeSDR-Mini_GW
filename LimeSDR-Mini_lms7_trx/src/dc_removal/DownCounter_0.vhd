@@ -14,7 +14,7 @@ library work;
     use work.DataValid_8.all;
     use work.DataValid_3.all;
     use work.DataValid_0.all;
-    use work.ShiftRegister_3.all;
+    use work.ShiftRegister_12.all;
 
 
 package DownCounter_0 is
