@@ -11,6 +11,7 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
+    use work.DataValid_8.all;
     use work.DataValid_3.all;
 
 
@@ -34,7 +35,7 @@ package body DataValid_0 is
 
 
     function DataValid(data: complex_t(1 downto -34); valid: boolean) return self_t is
-        -- limited constructor
+        -- constructor
         variable self: self_t;
     begin
         self.data := data;

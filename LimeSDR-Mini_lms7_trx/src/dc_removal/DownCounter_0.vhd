@@ -11,9 +11,10 @@ library work;
     use work.PyhaUtil.all;
     use work.Typedefs.all;
     use work.all;
+    use work.DataValid_8.all;
     use work.DataValid_3.all;
     use work.DataValid_0.all;
-    use work.ShiftRegister_0.all;
+    use work.ShiftRegister_3.all;
 
 
 package DownCounter_0 is
@@ -53,7 +54,7 @@ package body DownCounter_0 is
     end procedure;
 
     function DownCounter(counter: sfixed(1 downto 0)) return self_t is
-        -- limited constructor
+        -- constructor
         variable self: self_t;
     begin
         self.counter := counter;

@@ -22,7 +22,7 @@ entity  top is
         in0: in std_logic_vector(24 downto 0);
 
         -- outputs
-        out0: out std_logic_vector(24 downto 0)
+        out0: out std_logic_vector(32 downto 0)
     );
 end entity;
 
@@ -47,7 +47,7 @@ architecture arch of top is
             self.dc_removal.delayed_input.to_push := Complex(0.0, 0.0, 0, -11);
             self.dc_removal.\out\.data := Complex(0.0, 0.0, 0, -17);
             self.dc_removal.\out\.valid := False;
-            self.\out\.data := Complex(0.0, 0.0, 0, -11);
+            self.\out\.data := Complex(0.0, 0.0, 0, -15);
             self.\out\.valid := False;
           return self;
     end function;
@@ -71,7 +71,7 @@ begin
     process(clk, rst_n)
         variable self_next: DCRemovalLimeSDR_0.self_t;
         -- input variables
-        variable var_in0: DataValid_3.self_t;
+        variable var_in0: DataValid_8.self_t;
 
         --output variables
         variable var_out0: DataValid_3.self_t;
@@ -87,8 +87,8 @@ begin
         DCRemovalLimeSDR_0.main(self, self_next, self_const, var_in0, ret_0=>var_out0);
 
         --convert normal types to slv
-        out0(23 downto 0) <= to_slv(var_out0.data);
-        out0(24 downto 24) <= bool_to_logic(var_out0.valid);
+        out0(31 downto 0) <= to_slv(var_out0.data);
+        out0(32 downto 32) <= bool_to_logic(var_out0.valid);
 
 
         if (rst_n = '0') then
