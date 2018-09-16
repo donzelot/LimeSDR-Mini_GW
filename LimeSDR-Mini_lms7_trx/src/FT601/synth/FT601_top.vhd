@@ -84,7 +84,7 @@ signal EP03_wr					: std_logic;
 signal EP03_wdata				: std_logic_vector(31 downto 0);
 
 --EP83 fifo signals
-signal EP83_fifo_rdusedw	: std_logic_vector(12 downto 0);
+signal EP83_fifo_rdusedw	: std_logic_vector(11 downto 0);
 signal EP83_fifo_q			: std_logic_vector(31 downto 0);
 signal EP83_fifo_rdreq		: std_logic;
 
@@ -133,7 +133,7 @@ component FT601_arb is
 	generic(	
 			EP82_fifo_rwidth	: integer := 9;
 			EP82_wsize       	: integer := 64;  --packet size in bytes, has to be multiple of 4 bytes
-			EP83_fifo_rwidth	: integer := 11;
+			EP83_fifo_rwidth	: integer := 12;
 			EP83_wsize       	: integer := 2048 --packet size in bytes, has to be multiple of 4 bytes
 	);
   port (
@@ -253,55 +253,56 @@ port map(
       rdusedw       	=> EP82_fifo_rdusedw           
         );
 
---stream PC->FPGA		  
---EP03_fifo : fifo_inst		
---generic map(
---		dev_family		=> "Cyclone IV",
---		wrwidth			=> 32,						--32 bits ftdi side, 
---		wrusedw_witdth	=> 10, 						--10=512 words (2048kB)
---		rdwidth			=> EP03_rwidth,
---		rdusedw_width	=> 10,				
---		show_ahead     => "OFF"
---)
---port map(
---      reset_n       	=> reset_n, 
---      wrclk         	=> clk,
---      wrreq         	=> EP03_wr,
---      data          	=> EP03_wdata,
---      wrfull        	=> open,
---		wrempty		  	=> EP03_wrempty,
---      wrusedw       	=> open,
---      rdclk 	     	=> EP03_rdclk,
---      rdreq         	=> EP03_rd,
---      q             	=> EP03_rdata,
---      rdempty       	=> EP03_rempty,
---      rdusedw       	=> open             
---        );	
-	
+
 -- stream FPGA->PC
-EP83_fifo : fifo_inst		
+EP83_fifo : fifo_inst
 generic map(
 		dev_family		=> "Cyclone IV",
-		wrwidth			=> EP83_wwidth,
+		wrwidth			=> 32,
 		wrusedw_witdth	=> 12, 			--11=1024 words x EP83_wwidth (8192KB)
-		rdwidth			=> 32,			--32 bits ftdi side, 
-		rdusedw_width	=> 13,				
+		rdwidth			=> 32,			--32 bits ftdi side,
+		rdusedw_width	=> 12,
 		show_ahead		=> "ON"
 )
 port map(
-      reset_n       	=> EP83_aclrn, 
+      reset_n       	=> EP83_aclrn,
       wrclk				=> EP83_wclk,
-      wrreq				=> EP83_wr,
-      data          	=> EP83_wdata,
-      wrfull        	=> EP83_wfull,
+      wrreq        	=> EP83_wr,
+      data           => EP83_wdata(63 downto 32),
+      wrfull        	=> open,
 		wrempty		  	=> open,
-      wrusedw       	=> EP83_wrusedw,
+      wrusedw       	=> open,
       rdclk 	     	=> clk,
       rdreq         	=> EP83_fifo_rdreq,
       q             	=> EP83_fifo_q,
       rdempty       	=> open,
-      rdusedw       	=> EP83_fifo_rdusedw           
+      rdusedw       	=> EP83_fifo_rdusedw
 		);
+		  
+---- stream FPGA->PC
+--EP83_fifo : fifo_inst		
+--generic map(
+--		dev_family		=> "Cyclone IV",
+--		wrwidth			=> EP83_wwidth,
+--		wrusedw_witdth	=> 12, 			--11=1024 words x EP83_wwidth (8192KB)
+--		rdwidth			=> 32,			--32 bits ftdi side, 
+--		rdusedw_width	=> 13,				
+--		show_ahead		=> "ON"
+--)
+--port map(
+--      reset_n       	=> EP83_aclrn, 
+--      wrclk				=> EP83_wclk,
+--      wrreq				=> EP83_wr,
+--      data          	=> EP83_wdata,
+--      wrfull        	=> EP83_wfull,
+--		wrempty		  	=> open,
+--      wrusedw       	=> EP83_wrusedw,
+--      rdclk 	     	=> clk,
+--      rdreq         	=> EP83_fifo_rdreq,
+--      q             	=> EP83_fifo_q,
+--      rdempty       	=> open,
+--      rdusedw       	=> EP83_fifo_rdusedw           
+--		);
 		 
 -- ----------------------------------------------------------------------------
 -- FTDI arbiter
@@ -310,7 +311,7 @@ port map(
 	generic map(	
 			EP82_fifo_rwidth	=> EP82_wrusedw_width,
 			EP82_wsize       	=> EP82_wsize,
-			EP83_fifo_rwidth	=> 13,
+			EP83_fifo_rwidth	=> 12,
 			EP83_wsize       	=> EP83_wsize
 	)
   port map(
