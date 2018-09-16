@@ -14,11 +14,11 @@ library work;
     use work.DataValid_8.all;
     use work.DataValid_3.all;
     use work.DataValid_0.all;
-    use work.ShiftRegister_12.all;
+    use work.ShiftRegister_15.all;
     use work.DownCounter_0.all;
-    use work.MovingAverage_8.all;
-    use work.ShiftRegister_13.all;
-    use work.MovingAverage_9.all;
+    use work.MovingAverage_10.all;
+    use work.ShiftRegister_16.all;
+    use work.MovingAverage_11.all;
 
 
 package ShiftRegister_5 is
