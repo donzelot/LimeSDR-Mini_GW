@@ -26,25 +26,31 @@ library work;
     use work.DCRemoval_12.all;
     use work.Windower_13.all;
     use work.ShiftRegister_14.all;
+    use work.DownCounter_15.all;
+    use work.StageR2SDF_16.all;
+    use work.ShiftRegister_17.all;
+    use work.DownCounter_18.all;
+    use work.StageR2SDF_19.all;
+    use work.ShiftRegister_20.all;
 
 
-package DownCounter_15 is
+package DownCounter_21 is
     type self_t is record
-        counter: sfixed(2 downto 0);
+        counter: sfixed(12 downto 0);
     end record;
-    type DownCounter_15_self_t_list_t is array (natural range <>) of DownCounter_15.self_t;
+    type DownCounter_21_self_t_list_t is array (natural range <>) of DownCounter_21.self_t;
 
     type self_t_const is record
-        START_VALUE: sfixed(2 downto 0);
+        START_VALUE: sfixed(12 downto 0);
     end record;
-    type DownCounter_15_self_t_const_list_t_const is array (natural range <>) of DownCounter_15.self_t_const;
+    type DownCounter_21_self_t_const_list_t_const is array (natural range <>) of DownCounter_21.self_t_const;
 
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
     procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
-    function DownCounter(counter: sfixed(2 downto 0)) return self_t;
+    function DownCounter(counter: sfixed(12 downto 0)) return self_t;
 end package;
 
-package body DownCounter_15 is
+package body DownCounter_21 is
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
 
@@ -60,11 +66,11 @@ package body DownCounter_15 is
     begin
         is_over(self, self_next, self_const, pyha_ret_0);
         if not pyha_ret_0 then
-            self_next.counter := resize(self.counter - 1, 2, 0, fixed_wrap, fixed_truncate);
+            self_next.counter := resize(self.counter - 1, 12, 0, fixed_wrap, fixed_truncate);
         end if;
     end procedure;
 
-    function DownCounter(counter: sfixed(2 downto 0)) return self_t is
+    function DownCounter(counter: sfixed(12 downto 0)) return self_t is
         -- constructor
         variable self: self_t;
     begin

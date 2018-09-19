@@ -29,25 +29,61 @@ library work;
     use work.DownCounter_15.all;
     use work.StageR2SDF_16.all;
     use work.ShiftRegister_17.all;
+    use work.DownCounter_18.all;
+    use work.StageR2SDF_19.all;
+    use work.ShiftRegister_20.all;
+    use work.DownCounter_21.all;
+    use work.StageR2SDF_22.all;
+    use work.DownCounter_23.all;
+    use work.StageR2SDF_24.all;
+    use work.ShiftRegister_25.all;
+    use work.DownCounter_26.all;
+    use work.StageR2SDF_27.all;
+    use work.ShiftRegister_28.all;
+    use work.DownCounter_29.all;
+    use work.StageR2SDF_30.all;
+    use work.ShiftRegister_31.all;
+    use work.DownCounter_32.all;
+    use work.StageR2SDF_33.all;
+    use work.ShiftRegister_34.all;
+    use work.DownCounter_35.all;
+    use work.StageR2SDF_36.all;
+    use work.ShiftRegister_37.all;
+    use work.DownCounter_38.all;
+    use work.StageR2SDF_39.all;
+    use work.ShiftRegister_40.all;
+    use work.DownCounter_41.all;
+    use work.StageR2SDF_42.all;
+    use work.ShiftRegister_43.all;
+    use work.DownCounter_44.all;
+    use work.StageR2SDF_45.all;
+    use work.ShiftRegister_46.all;
+    use work.DownCounter_47.all;
+    use work.StageR2SDF_48.all;
+    use work.ShiftRegister_49.all;
+    use work.StageR2SDF_50.all;
+    use work.R2SDF_51.all;
+    use work.FFTPower_52.all;
+    use work.RAM_53.all;
 
 
-package DownCounter_18 is
+package DownCounter_54 is
     type self_t is record
-        counter: sfixed(13 downto 0);
+        counter: sfixed(14 downto 0);
     end record;
-    type DownCounter_18_self_t_list_t is array (natural range <>) of DownCounter_18.self_t;
+    type DownCounter_54_self_t_list_t is array (natural range <>) of DownCounter_54.self_t;
 
     type self_t_const is record
-        START_VALUE: sfixed(13 downto 0);
+        START_VALUE: sfixed(14 downto 0);
     end record;
-    type DownCounter_18_self_t_const_list_t_const is array (natural range <>) of DownCounter_18.self_t_const;
+    type DownCounter_54_self_t_const_list_t_const is array (natural range <>) of DownCounter_54.self_t_const;
 
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
     procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
-    function DownCounter(counter: sfixed(13 downto 0)) return self_t;
+    function DownCounter(counter: sfixed(14 downto 0)) return self_t;
 end package;
 
-package body DownCounter_18 is
+package body DownCounter_54 is
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
 
@@ -63,11 +99,11 @@ package body DownCounter_18 is
     begin
         is_over(self, self_next, self_const, pyha_ret_0);
         if not pyha_ret_0 then
-            self_next.counter := resize(self.counter - 1, 13, 0, fixed_wrap, fixed_truncate);
+            self_next.counter := resize(self.counter - 1, 14, 0, fixed_wrap, fixed_truncate);
         end if;
     end procedure;
 
-    function DownCounter(counter: sfixed(13 downto 0)) return self_t is
+    function DownCounter(counter: sfixed(14 downto 0)) return self_t is
         -- constructor
         variable self: self_t;
     begin
