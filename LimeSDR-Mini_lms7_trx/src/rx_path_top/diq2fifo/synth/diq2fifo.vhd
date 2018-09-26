@@ -94,7 +94,7 @@ inst0_lms7002_ddin : entity work.lms7002_ddin
 		   
 		   
 ----fifo_wdata <= 	std_logic_vector(to_signed(counter, 32)) & "00000000000000000000000000000000";
-fifo_wdata <= 	inst0_diq_out_h(11 downto 0) & inst0_diq_out_l(11 downto 0) & "0000000000000000000000000000000000000000";
+fifo_wdata <= 	inst0_diq_out_l(11 downto 0) & inst0_diq_out_h(11 downto 0) & "0000000000000000000000000000000000000000";
 					
 fifo_wrreq <= not inst0_diq_out_h(12);
 
