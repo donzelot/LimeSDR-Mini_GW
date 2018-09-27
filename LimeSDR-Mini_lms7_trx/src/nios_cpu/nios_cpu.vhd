@@ -74,13 +74,12 @@ architecture arch of nios_cpu is
 			fpga_spi_ext_SCLK                       : out   std_logic;                                       -- SCLK
 			fpga_spi_ext_SS_n                       : out   std_logic_vector(1 downto 0);                    -- SS_n 
 			switch_external_connection_export       : in    std_logic_vector(7 downto 0) := (others => 'X'); -- export
-			uart_external_connection_rxd            : in    std_logic                    := 'X';             -- rxd
-			uart_external_connection_txd            : out   std_logic;                                       -- txd
 			i2c_scl_export                          : inout std_logic                    := 'X';             -- export
 			i2c_sda_export                          : inout std_logic                    := 'X';             -- export
 			flash_spi_MISO                          : in    std_logic                     := 'X';             -- MISO
 			flash_spi_MOSI                          : out   std_logic;                                        -- MOSI
 			flash_spi_SCLK                          : out   std_logic;                                        -- SCLK
+			rst_reset_n                             : in    std_logic                     := '1';              -- reset_n
 			flash_spi_SS_n                          : out   std_logic                                         -- SS_n 
 
 		);
@@ -109,13 +108,12 @@ begin
 			fpga_spi_ext_SCLK                   => fpga_spi_SCLK_int,
 			fpga_spi_ext_SS_n                   => fpga_spi_SS_n,
 			switch_external_connection_export       => switch,
-			uart_external_connection_rxd            => uart_rxd,
-			uart_external_connection_txd            => uart_txd,
 			i2c_scl_export                          => i2c_scl,
 			i2c_sda_export                          => i2c_sda,
 			flash_spi_MISO                          => flash_spi_MISO,
 			flash_spi_MOSI                          => flash_spi_MOSI,
 			flash_spi_SCLK                          => flash_spi_SCLK,
+			rst_reset_n										 => '1',
 			flash_spi_SS_n                          => flash_spi_SS_n
 		);
 		

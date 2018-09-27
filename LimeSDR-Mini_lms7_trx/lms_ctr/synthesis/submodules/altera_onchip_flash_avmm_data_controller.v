@@ -1,13 +1,13 @@
-// (C) 2001-2016 Altera Corporation. All rights reserved.
-// Your use of Altera Corporation's design tools, logic functions and other 
+// (C) 2001-2018 Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions and other 
 // software and tools, and its AMPP partner logic functions, and any output 
-// files any of the foregoing (including device programming or simulation 
+// files from any of the foregoing (including device programming or simulation 
 // files), and any associated documentation or information are expressly subject 
-// to the terms and conditions of the Altera Program License Subscription 
-// Agreement, Altera MegaCore Function License Agreement, or other applicable 
+// to the terms and conditions of the Intel Program License Subscription 
+// Agreement, Intel FPGA IP License Agreement, or other applicable 
 // license agreement, including, without limitation, that your use is for the 
-// sole purpose of programming logic devices manufactured by Altera and sold by 
-// Altera or its authorized distributors.  Please refer to the applicable 
+// sole purpose of programming logic devices manufactured by Intel and sold by 
+// Intel or its authorized distributors.  Please refer to the applicable 
 // agreement for further details.
 
 
@@ -104,8 +104,10 @@ module altera_onchip_flash_avmm_data_controller (
     parameter SECTOR4_MAP = 1;
     parameter SECTOR5_MAP = 1;
     parameter ADDR_RANGE1_END_ADDR = 1;
+    parameter ADDR_RANGE2_END_ADDR = 1;
     parameter ADDR_RANGE1_OFFSET = 1;
     parameter ADDR_RANGE2_OFFSET = 1;
+    parameter ADDR_RANGE3_OFFSET = 1;
 
     localparam [1:0]    ERASE_ST_IDLE = 0,
                         ERASE_ST_PENDING = 1,
@@ -138,13 +140,15 @@ module altera_onchip_flash_avmm_data_controller (
                         READ_STATE_DUMMY = 3,
                         READ_STATE_READY = 4,
                         READ_STATE_FINAL = 5,
-                        READ_STATE_CLEAR = 6;
+                        READ_STATE_CLEAR = 6,
+                        READ_STATE_PULSE_SE = 7;
 
     localparam [0:0]    READ_SETUP = 0,
                         READ_RECV_DATA = 1;
 
-    localparam [0:0]    READ_VALID_IDLE = 0,
-                        READ_VALID_READING = 1;
+    localparam [1:0]    READ_VALID_IDLE = 0,
+                        READ_VALID_READING = 1,
+                        READ_VALID_PRE_READING = 2;
 
     // To/From System
     input clock;
@@ -175,7 +179,7 @@ module altera_onchip_flash_avmm_data_controller (
     input [AVMM_DATA_BURSTCOUNT_WIDTH-1:0] avmm_burstcount;
     output avmm_waitrequest;
     output avmm_readdatavalid;
-    output [DATA_WIDTH-1:0] avmm_readdata;
+    output reg [DATA_WIDTH-1:0] avmm_readdata;
         
     // To/From Avalon_MM csr slave interface
     input [31:0] csr_control;
@@ -191,12 +195,13 @@ module altera_onchip_flash_avmm_data_controller (
     reg [2:0] write_state;
     reg [2:0] read_state;
     reg avmm_read_state;
-    reg avmm_read_valid_state;
+    reg [1:0] avmm_read_valid_state;
     reg avmm_readdatavalid_reg;
     reg avmm_readdata_ready;
     reg [2:0] flash_sector_addr;
     reg [FLASH_ADDR_WIDTH-1:0] flash_page_addr;
     reg [FLASH_ADDR_WIDTH-1:0] flash_seq_read_ardin;
+    reg [FLASH_ADDR_WIDTH-1:0] flash_addr_wire_neg_reg;
     reg [FLASH_ADDR_ALIGNMENT_BITS-1:0] flash_ardin_align_reg;
     reg [FLASH_ADDR_ALIGNMENT_BITS-1:0] flash_ardin_align_backup_reg;
     reg [AVMM_DATA_BURSTCOUNT_WIDTH-1:0] avmm_burstcount_input_reg;
@@ -277,12 +282,22 @@ module altera_onchip_flash_avmm_data_controller (
             assign is_busy = is_erase_busy || is_write_busy || is_read_busy;
             assign flash_drdin = flash_drdin_neg_reg;
             assign write_wait_w = (write_wait || write_wait_neg);
-            assign flash_addr_wire = 
-                (valid_csr_erase && valid_csr_sector_erase_addr) ? { flash_sector_addr, 1'b0, {(19){1'b1}} } : flash_page_addr;
             assign is_erase_addr_writable =
                 (valid_csr_erase && valid_csr_sector_erase_addr) ? is_sector_writable : is_addr_writable;
             assign csr_write_protection_mode = csr_control[27:23];
             assign is_valid_write_burst_count = (avmm_burstcount == 1);
+            always @ (negedge clock) begin
+                if (~reset_n_w) begin
+                    flash_addr_wire_neg_reg <= 0;
+                end
+                else if (valid_csr_erase && valid_csr_sector_erase_addr) begin
+                    flash_addr_wire_neg_reg <=  { flash_sector_addr, 1'b0, {(19){1'b1}}};
+                end
+                else begin
+                    flash_addr_wire_neg_reg <= flash_page_addr;
+                end
+            end
+            
         end
         else begin
             assign is_erase_busy = 1'b0;
@@ -291,7 +306,14 @@ module altera_onchip_flash_avmm_data_controller (
             assign is_busy = is_read_busy;
             assign flash_drdin = 1'b1;
             assign write_wait_w = 1'b0;
-            assign flash_addr_wire = flash_page_addr;
+             always @ (negedge clock) begin
+                if (~reset_n_w) begin
+                    flash_addr_wire_neg_reg <= 0;
+                end
+                else begin
+                    flash_addr_wire_neg_reg <= flash_page_addr;
+                end
+            end
         end
     endgenerate    
     
@@ -301,7 +323,7 @@ module altera_onchip_flash_avmm_data_controller (
     assign csr_erase_state = csr_control[31:30];
     assign valid_csr_sector_erase_addr = (csr_sector_erase_addr != {(3){1'b1}});
     assign valid_csr_erase = (csr_erase_state == ERASE_ST_PENDING);
-    assign valid_command = (valid_csr_erase == 1) || (avmm_write == 1) || (avmm_read == 1);
+    assign valid_command = (valid_csr_erase == 1) || (avmm_write == 1);
 
     assign cur_read_addr = avmm_addr;
     assign read_wait_w = (read_wait || read_wait_neg);
@@ -312,7 +334,7 @@ module altera_onchip_flash_avmm_data_controller (
             assign flash_read_addr = (is_read_busy) ? flash_seq_read_ardin : avmm_addr;
             assign cur_e_addr = csr_sector_erase_addr;
             assign cur_a_addr = (valid_csr_erase) ? csr_page_erase_addr : flash_read_addr;
-            assign flash_arclk_arshft_en_w = (~is_erase_busy && ~is_write_busy && ~is_read_busy && valid_command) || (is_read_busy && read_state == READ_STATE_READY);
+            assign flash_arclk_arshft_en_w = (~is_erase_busy && ~is_write_busy && ~is_read_busy && valid_command) || (is_read_busy && (read_state == READ_STATE_FINAL || read_state == READ_STATE_ADDR));
             assign flash_se_w = (read_state == READ_STATE_SETUP);
             assign avmm_waitrequest = ~reset_n || ((~is_write_busy && avmm_write) || write_wait_w || (~is_read_busy && avmm_read) || (avmm_read && read_wait_w));
             assign next_flash_read_ardin = {flash_seq_read_ardin[FLASH_ADDR_WIDTH-1:FLASH_ADDR_ALIGNMENT_BITS], {(FLASH_ADDR_ALIGNMENT_BITS){1'b0}}} + FLASH_SEQ_READ_DATA_COUNT[22:0];
@@ -335,10 +357,17 @@ module altera_onchip_flash_avmm_data_controller (
     assign flash_nprogram = ~(write_state == WRITE_STATE_WAIT_BUSY || write_state == WRITE_STATE_WAIT_DONE);
     assign flash_xe_ye = ((~is_busy && avmm_read) || is_read_busy);
     assign flash_se = flash_se_neg_reg;
-    assign flash_ardin = flash_addr_wire;
+    assign flash_ardin = flash_addr_wire_neg_reg;
 
-    assign avmm_readdatavalid = avmm_readdatavalid_reg;
-    assign avmm_readdata = (csr_status_r_pass) ? flash_drdout : 32'hffffffff;
+    assign avmm_readdatavalid = avmm_readdatavalid_reg;    
+    always @(posedge clock) begin
+        if (~reset_n_w | ~csr_status_r_pass) begin
+            avmm_readdata <= 32'hffffffff;
+         end
+         else begin
+            avmm_readdata <= flash_drdout;
+         end
+    end
 
     // avoid async reset removal issue 
     assign reset_n_w = reset_n_reg2;
@@ -469,7 +498,7 @@ module altera_onchip_flash_avmm_data_controller (
             flash_page_addr <= flash_page_addr_wire;
         end
     end
-    
+
     generate // generate always block based on read and write mode. Write and erase operation is unnecessary in read only mode.
         if (READ_AND_WRITE_MODE == 1) begin
             // -------------------------------------------------------------------
@@ -834,12 +863,15 @@ module altera_onchip_flash_avmm_data_controller (
                             end
                         
                             read_wait <= 0;
-                            read_state <= READ_STATE_SETUP;
+                            read_state <= READ_STATE_PULSE_SE;
+                        end
+                        READ_STATE_PULSE_SE: begin
+                             read_wait <= 1;
+              		     read_state <= READ_STATE_SETUP;
                         end
 
                         // incrementing read
                         READ_STATE_SETUP: begin
-                            read_wait <= 1;
                             if (next_flash_read_ardin > MAX_VALID_ADDR) begin
                                 flash_seq_read_ardin <= MIN_VALID_ADDR[FLASH_ADDR_WIDTH-1:0];
                             end
@@ -885,7 +917,7 @@ module altera_onchip_flash_avmm_data_controller (
                                 enable_drclk_neg_pos_reg <= 1;
                             end
                             else begin
-                                read_state <= READ_STATE_SETUP;
+                                read_state <= READ_STATE_PULSE_SE;
                             end
                         end
 
@@ -937,6 +969,7 @@ module altera_onchip_flash_avmm_data_controller (
                         end
 
                         READ_STATE_ADDR: begin
+                              read_wait <= 0;
                             if (is_addr_within_valid_range) begin
                                 csr_status_r_pass <= 1;
                             end
@@ -944,8 +977,12 @@ module altera_onchip_flash_avmm_data_controller (
                                 csr_status_r_pass <= 0;
                             end
                         
-                            read_state <= READ_STATE_READ;
+                            read_state <= READ_STATE_PULSE_SE;
                             read_ctrl_count <= FLASH_READ_CYCLE_MAX_INDEX[2:0] + 3'd1;
+                        end
+                        READ_STATE_PULSE_SE: begin
+                             read_wait <= 1;
+              		     read_state <= READ_STATE_READ;
                         end
                         
                         // wrapping read
@@ -954,9 +991,6 @@ module altera_onchip_flash_avmm_data_controller (
                             // read control signal
                             if (read_ctrl_count > 0) begin
                                 read_ctrl_count <= read_ctrl_count - 3'd1;
-                            end
-                            if (read_ctrl_count == 4) begin
-                                read_wait <= 0;
                             end
                             if (read_ctrl_count == 2) begin
                                 avmm_readdata_ready <= 1;
@@ -1025,13 +1059,15 @@ module altera_onchip_flash_avmm_data_controller (
                         READ_VALID_IDLE: begin
                             if (avmm_readdata_ready) begin
                                 data_count <= FLASH_READ_CYCLE_MAX_INDEX[2:0];
-                                avmm_read_valid_state <= READ_VALID_READING;
-                                avmm_readdatavalid_reg <= 1;
+                                avmm_read_valid_state <= READ_VALID_PRE_READING;
                                 avmm_burstcount_reg <= avmm_burstcount_input_reg - {{(AVMM_DATA_BURSTCOUNT_WIDTH-1){1'b0}}, 1'b1};
                                 flash_ardin_align_backup_reg <= flash_ardin_align_reg;
                             end
                         end
-                        
+                        READ_VALID_PRE_READING: begin
+                            avmm_readdatavalid_reg <= 1;
+                            avmm_read_valid_state <= READ_VALID_READING;
+                        end
                         READ_VALID_READING: begin
 
                             if (avmm_burstcount_reg == 0) begin
@@ -1052,7 +1088,7 @@ module altera_onchip_flash_avmm_data_controller (
                                 else begin
                                     flash_ardin_align_backup_reg <= 0;
                                     data_count <= FLASH_READ_CYCLE_MAX_INDEX[2:0];
-                                    avmm_readdatavalid_reg <= 1;
+                                    avmm_read_valid_state <= READ_VALID_PRE_READING;
                                     avmm_burstcount_reg <= avmm_burstcount_reg - {{(AVMM_DATA_BURSTCOUNT_WIDTH-1){1'b0}}, 1'b1};
                                 end
                             end
@@ -1087,9 +1123,12 @@ module altera_onchip_flash_avmm_data_controller (
                             data_count <= 0;
                             if (avmm_readdata_ready) begin
                                 data_count <= avmm_burstcount_input_reg - 3'd1;
-                                avmm_read_valid_state <= READ_VALID_READING;
-                                avmm_readdatavalid_reg <= 1;
+                                avmm_read_valid_state <= READ_VALID_PRE_READING;
                             end
+                        end
+                        READ_VALID_PRE_READING: begin
+                            avmm_readdatavalid_reg <= 1;
+                            avmm_read_valid_state <= READ_VALID_READING;
                         end
                         
                         READ_VALID_READING: begin
@@ -1146,8 +1185,10 @@ module altera_onchip_flash_avmm_data_controller (
 
     altera_onchip_flash_convert_address # (
         .ADDR_RANGE1_END_ADDR(ADDR_RANGE1_END_ADDR),
+        .ADDR_RANGE2_END_ADDR(ADDR_RANGE2_END_ADDR),
         .ADDR_RANGE1_OFFSET(ADDR_RANGE1_OFFSET),
-        .ADDR_RANGE2_OFFSET(ADDR_RANGE2_OFFSET)
+        .ADDR_RANGE2_OFFSET(ADDR_RANGE2_OFFSET),
+        .ADDR_RANGE3_OFFSET(ADDR_RANGE3_OFFSET)
     ) address_convertor (
         .address(cur_a_addr),
         .flash_addr(flash_page_addr_wire)

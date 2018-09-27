@@ -12,6 +12,10 @@
 			exfifo_of_wr_export                     : out   std_logic;                                        -- export
 			exfifo_of_wrfull_export                 : in    std_logic                     := 'X';             -- export
 			exfifo_rst_export                       : out   std_logic;                                        -- export
+			flash_spi_MISO                          : in    std_logic                     := 'X';             -- MISO
+			flash_spi_MOSI                          : out   std_logic;                                        -- MOSI
+			flash_spi_SCLK                          : out   std_logic;                                        -- SCLK
+			flash_spi_SS_n                          : out   std_logic;                                        -- SS_n
 			fpga_spi_ext_MISO                       : in    std_logic                     := 'X';             -- MISO
 			fpga_spi_ext_MOSI                       : out   std_logic;                                        -- MOSI
 			fpga_spi_ext_SCLK                       : out   std_logic;                                        -- SCLK
@@ -21,12 +25,7 @@
 			leds_external_connection_export         : out   std_logic_vector(7 downto 0);                     -- export
 			lms_ctr_gpio_external_connection_export : out   std_logic_vector(3 downto 0);                     -- export
 			switch_external_connection_export       : in    std_logic_vector(7 downto 0)  := (others => 'X'); -- export
-			uart_external_connection_rxd            : in    std_logic                     := 'X';             -- rxd
-			uart_external_connection_txd            : out   std_logic;                                        -- txd
-			flash_spi_MISO                          : in    std_logic                     := 'X';             -- MISO
-			flash_spi_MOSI                          : out   std_logic;                                        -- MOSI
-			flash_spi_SCLK                          : out   std_logic;                                        -- SCLK
-			flash_spi_SS_n                          : out   std_logic                                         -- SS_n
+			rst_reset_n                             : in    std_logic                     := 'X'              -- reset_n
 		);
 	end component lms_ctr;
 
@@ -44,6 +43,10 @@
 			exfifo_of_wr_export                     => CONNECTED_TO_exfifo_of_wr_export,                     --                     exfifo_of_wr.export
 			exfifo_of_wrfull_export                 => CONNECTED_TO_exfifo_of_wrfull_export,                 --                 exfifo_of_wrfull.export
 			exfifo_rst_export                       => CONNECTED_TO_exfifo_rst_export,                       --                       exfifo_rst.export
+			flash_spi_MISO                          => CONNECTED_TO_flash_spi_MISO,                          --                        flash_spi.MISO
+			flash_spi_MOSI                          => CONNECTED_TO_flash_spi_MOSI,                          --                                 .MOSI
+			flash_spi_SCLK                          => CONNECTED_TO_flash_spi_SCLK,                          --                                 .SCLK
+			flash_spi_SS_n                          => CONNECTED_TO_flash_spi_SS_n,                          --                                 .SS_n
 			fpga_spi_ext_MISO                       => CONNECTED_TO_fpga_spi_ext_MISO,                       --                     fpga_spi_ext.MISO
 			fpga_spi_ext_MOSI                       => CONNECTED_TO_fpga_spi_ext_MOSI,                       --                                 .MOSI
 			fpga_spi_ext_SCLK                       => CONNECTED_TO_fpga_spi_ext_SCLK,                       --                                 .SCLK
@@ -53,11 +56,6 @@
 			leds_external_connection_export         => CONNECTED_TO_leds_external_connection_export,         --         leds_external_connection.export
 			lms_ctr_gpio_external_connection_export => CONNECTED_TO_lms_ctr_gpio_external_connection_export, -- lms_ctr_gpio_external_connection.export
 			switch_external_connection_export       => CONNECTED_TO_switch_external_connection_export,       --       switch_external_connection.export
-			uart_external_connection_rxd            => CONNECTED_TO_uart_external_connection_rxd,            --         uart_external_connection.rxd
-			uart_external_connection_txd            => CONNECTED_TO_uart_external_connection_txd,            --                                 .txd
-			flash_spi_MISO                          => CONNECTED_TO_flash_spi_MISO,                          --                        flash_spi.MISO
-			flash_spi_MOSI                          => CONNECTED_TO_flash_spi_MOSI,                          --                                 .MOSI
-			flash_spi_SCLK                          => CONNECTED_TO_flash_spi_SCLK,                          --                                 .SCLK
-			flash_spi_SS_n                          => CONNECTED_TO_flash_spi_SS_n                           --                                 .SS_n
+			rst_reset_n                             => CONNECTED_TO_rst_reset_n                              --                              rst.reset_n
 		);
 
