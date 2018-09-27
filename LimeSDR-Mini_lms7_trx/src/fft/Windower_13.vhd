@@ -38,19 +38,19 @@ package Windower_13 is
         window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191);
         output: DataValid_3.self_t;
         index_counter: integer;
-        coef: sfixed(0 downto -7);
+        coef: sfixed(0 downto -8);
     end record;
     type Windower_13_self_t_list_t is array (natural range <>) of Windower_13.self_t;
 
     type self_t_const is record
         WINDOW_LENGTH: integer;
-        WINDOW: Typedefs.sfixed0downto_7_list_t(0 to 8191);
+        WINDOW: Typedefs.sfixed0downto_8_list_t(0 to 8191);
         output: DataValid_3.self_t_const;
     end record;
     type Windower_13_self_t_const_list_t_const is array (natural range <>) of Windower_13.self_t_const;
 
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_3.self_t);
-    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -7)) return self_t;
+    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -8)) return self_t;
 end package;
 
 package body Windower_13 is
@@ -67,7 +67,7 @@ package body Windower_13 is
 
         end if;
         self_next.index_counter := (self.index_counter + 1) mod self_const.WINDOW_LENGTH;
-        self_next.coef := resize(self_const.WINDOW(self.index_counter), 0, -7, fixed_saturate, fixed_round);
+        self_next.coef := resize(self_const.WINDOW(self.index_counter), 0, -8, fixed_saturate, fixed_round);
 
         self_next.output.data := resize(input.data * self.coef, 0, -17, fixed_wrap, fixed_round);
         self_next.output.valid := input.valid;
@@ -75,7 +75,7 @@ package body Windower_13 is
         return;
     end procedure;
 
-    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -7)) return self_t is
+    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -8)) return self_t is
         -- constructor
         variable self: self_t;
     begin

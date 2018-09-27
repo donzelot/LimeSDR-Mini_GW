@@ -37,7 +37,7 @@ package MovingAverage_8 is
     type MovingAverage_8_self_t_list_t is array (natural range <>) of MovingAverage_8.self_t;
 
     type self_t_const is record
-        WINDOW_LENGTH: integer;
+        WINDOW_LEN: integer;
         BIT_GROWTH: integer;
         shr: ShiftRegister_6.self_t_const;
         output: DataValid_3.self_t_const;
