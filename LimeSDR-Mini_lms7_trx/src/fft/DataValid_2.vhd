@@ -17,7 +17,7 @@ library work;
 
 package DataValid_2 is
     type self_t is record
-        data: sfixed(-12 downto -47);
+        data: sfixed(-10 downto -45);
         valid: boolean;
     end record;
     type DataValid_2_self_t_list_t is array (natural range <>) of DataValid_2.self_t;
@@ -28,13 +28,13 @@ package DataValid_2 is
     type DataValid_2_self_t_const_list_t_const is array (natural range <>) of DataValid_2.self_t_const;
 
 
-    function DataValid(data: sfixed(-12 downto -47); valid: boolean) return self_t;
+    function DataValid(data: sfixed(-10 downto -45); valid: boolean) return self_t;
 end package;
 
 package body DataValid_2 is
 
 
-    function DataValid(data: sfixed(-12 downto -47); valid: boolean) return self_t is
+    function DataValid(data: sfixed(-10 downto -45); valid: boolean) return self_t is
         -- constructor
         variable self: self_t;
     begin

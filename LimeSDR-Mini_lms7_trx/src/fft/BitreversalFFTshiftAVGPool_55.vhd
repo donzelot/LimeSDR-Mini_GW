@@ -178,7 +178,7 @@ package body BitreversalFFTshiftAVGPool_55 is
             self_next.time_axis_counter := next_counter;
 
         end if;
-        self_next.output.data := resize(scalb(read, -self_const.ACCUMULATION_BITS), -12, -47, fixed_wrap, fixed_truncate);
+        self_next.output.data := resize(scalb(read, -self_const.ACCUMULATION_BITS), -10, -45, fixed_wrap, fixed_truncate);
         DownCounter_54.tick(self.start_counter, self_next.start_counter, self_const.start_counter);
         DownCounter_54.is_over(self.start_counter, self_next.start_counter, self_const.start_counter, pyha_ret_4);
         self_next.output.valid := pyha_ret_4 and self.out_valid;
