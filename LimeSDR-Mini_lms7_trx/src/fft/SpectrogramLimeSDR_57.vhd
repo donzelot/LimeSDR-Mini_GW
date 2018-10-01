@@ -100,7 +100,7 @@ package body SpectrogramLimeSDR_57 is
         Spectrogram_56.main(self.spect, self_next.spect, self_const.spect, input, pyha_ret_0);
         spect := pyha_ret_0;
 
-        self_next.output.data := resize(spect.data, -10, -41, fixed_wrap, fixed_truncate);
+        self_next.output.data := resize(spect.data, -9, -40, fixed_wrap, fixed_truncate);
         self_next.output.valid := spect.valid;
         ret_0 := self.output;
         return;
