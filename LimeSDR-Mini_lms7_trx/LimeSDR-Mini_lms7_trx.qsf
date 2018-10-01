@@ -389,6 +389,11 @@ set_global_assignment -name ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP ON
 set_global_assignment -name MUX_RESTRUCTURE OFF
 set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
+set_global_assignment -name VHDL_FILE src/fft/util/typedefs.vhdl
+set_global_assignment -name VHDL_FILE src/fft/util/pyha_util.vhdl
+set_global_assignment -name VHDL_FILE src/fft/util/fixed_pkg_c.vhdl
+set_global_assignment -name VHDL_FILE src/fft/util/fixed_float_types_c.vhdl
+set_global_assignment -name VHDL_FILE src/fft/util/complex.vhdl
 set_global_assignment -name VHDL_FILE src/fft/Windower_13.vhd
 set_global_assignment -name VHDL_FILE src/fft/top.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_50.vhd
@@ -448,11 +453,6 @@ set_global_assignment -name VHDL_FILE src/fft/DataValid_2.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_1.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_0.vhd
 set_global_assignment -name VHDL_FILE src/fft/BitreversalFFTshiftAVGPool_55.vhd
-set_global_assignment -name VHDL_FILE src/fft/util/typedefs.vhdl
-set_global_assignment -name VHDL_FILE src/fft/util/pyha_util.vhdl
-set_global_assignment -name VHDL_FILE src/fft/util/fixed_pkg_c.vhdl
-set_global_assignment -name VHDL_FILE src/fft/util/fixed_float_types_c.vhdl
-set_global_assignment -name VHDL_FILE src/fft/util/complex.vhdl
 set_global_assignment -name VHDL_FILE src/rx_path_top/smpl_cmp/synth/smpl_cmp.vhd
 set_global_assignment -name VHDL_FILE src/dyn_ps/synth/pll_ps_top.vhd
 set_global_assignment -name VHDL_FILE src/dyn_ps/synth/pll_ps_fsm.vhd
