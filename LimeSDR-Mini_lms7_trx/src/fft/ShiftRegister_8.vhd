@@ -16,35 +16,29 @@ library work;
     use work.DataValid_2.all;
     use work.DataValid_3.all;
     use work.DataValid_4.all;
-    use work.DataValid_5.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_7.all;
-    use work.MovingAverage_8.all;
-    use work.ShiftRegister_9.all;
-    use work.MovingAverage_10.all;
-    use work.ShiftRegister_11.all;
-    use work.DCRemoval_12.all;
-    use work.Windower_13.all;
+    use work.ShiftRegister_5.all;
+    use work.DownCounter_6.all;
+    use work.MovingAverage_7.all;
 
 
-package ShiftRegister_14 is
+package ShiftRegister_8 is
     type self_t is record
-        data: Typedefs.complex_t1downto_34_list_t(0 to 0);
+        data: Typedefs.complex_t1downto_34_list_t(0 to 1023);
         to_push: complex_t(1 downto -34);
     end record;
-    type ShiftRegister_14_self_t_list_t is array (natural range <>) of ShiftRegister_14.self_t;
+    type ShiftRegister_8_self_t_list_t is array (natural range <>) of ShiftRegister_8.self_t;
 
     type self_t_const is record
         DUMMY: integer;
     end record;
-    type ShiftRegister_14_self_t_const_list_t_const is array (natural range <>) of ShiftRegister_14.self_t_const;
+    type ShiftRegister_8_self_t_const_list_t_const is array (natural range <>) of ShiftRegister_8.self_t_const;
 
     procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34));
     procedure push_next(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; item: complex_t(1 downto -34));
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 0); to_push: complex_t(1 downto -34)) return self_t;
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 1023); to_push: complex_t(1 downto -34)) return self_t;
 end package;
 
-package body ShiftRegister_14 is
+package body ShiftRegister_8 is
     procedure peek(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out complex_t(1 downto -34)) is
 
 
@@ -62,7 +56,7 @@ package body ShiftRegister_14 is
         self_next.data := self.data(1 to self.data'high) & item;
     end procedure;
 
-    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 0); to_push: complex_t(1 downto -34)) return self_t is
+    function ShiftRegister(data: Typedefs.complex_t1downto_34_list_t(0 to 1023); to_push: complex_t(1 downto -34)) return self_t is
         -- constructor
         variable self: self_t;
     begin

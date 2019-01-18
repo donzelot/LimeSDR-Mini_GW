@@ -16,24 +16,24 @@ library work;
     use work.DataValid_2.all;
     use work.DataValid_3.all;
     use work.DataValid_4.all;
-    use work.DataValid_5.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_7.all;
-    use work.MovingAverage_8.all;
-    use work.ShiftRegister_9.all;
-    use work.MovingAverage_10.all;
-    use work.ShiftRegister_11.all;
-    use work.DCRemoval_12.all;
-    use work.Windower_13.all;
-    use work.ShiftRegister_14.all;
-    use work.DownCounter_15.all;
-    use work.StageR2SDF_16.all;
-    use work.ShiftRegister_17.all;
-    use work.DownCounter_18.all;
-    use work.StageR2SDF_19.all;
-    use work.ShiftRegister_20.all;
-    use work.DownCounter_21.all;
-    use work.StageR2SDF_22.all;
+    use work.ShiftRegister_5.all;
+    use work.DownCounter_6.all;
+    use work.MovingAverage_7.all;
+    use work.ShiftRegister_8.all;
+    use work.MovingAverage_9.all;
+    use work.ShiftRegister_10.all;
+    use work.DCRemoval_11.all;
+    use work.Windower_12.all;
+    use work.ShiftRegister_13.all;
+    use work.DownCounter_14.all;
+    use work.StageR2SDF_15.all;
+    use work.ShiftRegister_16.all;
+    use work.DownCounter_17.all;
+    use work.StageR2SDF_18.all;
+    use work.ShiftRegister_19.all;
+    use work.DownCounter_20.all;
+    use work.StageR2SDF_21.all;
+    use work.ShiftRegister_22.all;
     use work.DownCounter_23.all;
     use work.StageR2SDF_24.all;
     use work.ShiftRegister_25.all;
@@ -49,19 +49,7 @@ library work;
     use work.DownCounter_35.all;
     use work.StageR2SDF_36.all;
     use work.ShiftRegister_37.all;
-    use work.DownCounter_38.all;
-    use work.StageR2SDF_39.all;
-    use work.ShiftRegister_40.all;
-    use work.DownCounter_41.all;
-    use work.StageR2SDF_42.all;
-    use work.ShiftRegister_43.all;
-    use work.DownCounter_44.all;
-    use work.StageR2SDF_45.all;
-    use work.ShiftRegister_46.all;
-    use work.DownCounter_47.all;
-    use work.StageR2SDF_48.all;
-    use work.ShiftRegister_49.all;
-    use work.StageR2SDF_50.all;
+    use work.StageR2SDF_38.all;
 
 -- FFT core
 -- --------
@@ -74,55 +62,47 @@ library work;
 -- inverse (bool): True to perform inverse transform.
 -- input_ordering (str): 'natural' or 'bitreversed'.
 -- Output order is inverse of this - Natural(in) -> Bitreversed(out) or Bitreversed(in) -> Natural(out).
-package R2SDF_51 is
+package R2SDF_39 is
     type self_t is record
-        stages: StageR2SDF_19.StageR2SDF_19_self_t_list_t(0 to 12);
-        stages_0: StageR2SDF_19.self_t;
-        stages_1: StageR2SDF_22.self_t;
+        stages: StageR2SDF_18.StageR2SDF_18_self_t_list_t(0 to 8);
+        stages_0: StageR2SDF_18.self_t;
+        stages_1: StageR2SDF_21.self_t;
         stages_2: StageR2SDF_24.self_t;
         stages_3: StageR2SDF_27.self_t;
         stages_4: StageR2SDF_30.self_t;
         stages_5: StageR2SDF_33.self_t;
         stages_6: StageR2SDF_36.self_t;
-        stages_7: StageR2SDF_39.self_t;
-        stages_8: StageR2SDF_42.self_t;
-        stages_9: StageR2SDF_45.self_t;
-        stages_10: StageR2SDF_48.self_t;
-        stages_11: StageR2SDF_50.self_t;
-        stages_12: StageR2SDF_16.self_t;
-        output: DataValid_4.self_t;
+        stages_7: StageR2SDF_38.self_t;
+        stages_8: StageR2SDF_15.self_t;
+        output: DataValid_3.self_t;
     end record;
-    type R2SDF_51_self_t_list_t is array (natural range <>) of R2SDF_51.self_t;
+    type R2SDF_39_self_t_list_t is array (natural range <>) of R2SDF_39.self_t;
 
     type self_t_const is record
         INVERSE: boolean;
         FFT_SIZE: integer;
         N_STAGES: integer;
         POST_GAIN_CONTROL: integer;
-        stages: StageR2SDF_19.StageR2SDF_19_self_t_const_list_t_const(0 to 12);
-        stages_0: StageR2SDF_19.self_t_const;
-        stages_1: StageR2SDF_22.self_t_const;
+        stages: StageR2SDF_18.StageR2SDF_18_self_t_const_list_t_const(0 to 8);
+        stages_0: StageR2SDF_18.self_t_const;
+        stages_1: StageR2SDF_21.self_t_const;
         stages_2: StageR2SDF_24.self_t_const;
         stages_3: StageR2SDF_27.self_t_const;
         stages_4: StageR2SDF_30.self_t_const;
         stages_5: StageR2SDF_33.self_t_const;
         stages_6: StageR2SDF_36.self_t_const;
-        stages_7: StageR2SDF_39.self_t_const;
-        stages_8: StageR2SDF_42.self_t_const;
-        stages_9: StageR2SDF_45.self_t_const;
-        stages_10: StageR2SDF_48.self_t_const;
-        stages_11: StageR2SDF_50.self_t_const;
-        stages_12: StageR2SDF_16.self_t_const;
-        output: DataValid_4.self_t_const;
+        stages_7: StageR2SDF_38.self_t_const;
+        stages_8: StageR2SDF_15.self_t_const;
+        output: DataValid_3.self_t_const;
     end record;
-    type R2SDF_51_self_t_const_list_t_const is array (natural range <>) of R2SDF_51.self_t_const;
+    type R2SDF_39_self_t_const_list_t_const is array (natural range <>) of R2SDF_39.self_t_const;
 
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_4.self_t);
-    function R2SDF(stages_0: StageR2SDF_19.self_t;stages_1: StageR2SDF_22.self_t;stages_2: StageR2SDF_24.self_t;stages_3: StageR2SDF_27.self_t;stages_4: StageR2SDF_30.self_t;stages_5: StageR2SDF_33.self_t;stages_6: StageR2SDF_36.self_t;stages_7: StageR2SDF_39.self_t;stages_8: StageR2SDF_42.self_t;stages_9: StageR2SDF_45.self_t;stages_10: StageR2SDF_48.self_t;stages_11: StageR2SDF_50.self_t;stages_12: StageR2SDF_16.self_t; output: DataValid_4.self_t) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_3.self_t);
+    function R2SDF(stages_0: StageR2SDF_18.self_t;stages_1: StageR2SDF_21.self_t;stages_2: StageR2SDF_24.self_t;stages_3: StageR2SDF_27.self_t;stages_4: StageR2SDF_30.self_t;stages_5: StageR2SDF_33.self_t;stages_6: StageR2SDF_36.self_t;stages_7: StageR2SDF_38.self_t;stages_8: StageR2SDF_15.self_t; output: DataValid_3.self_t) return self_t;
 end package;
 
-package body R2SDF_51 is
-    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_4.self_t) is
+package body R2SDF_39 is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_3.self_t) is
     -- Args:
     -- input (DataValid): -1.0 ... 1.0 range, up to 18 bits
     -- Returns:
@@ -130,7 +110,7 @@ package body R2SDF_51 is
     -- Transforms over 1024 points start emphasizing smaller numbers e.g. 2048 would return a result with 18 bits
     -- but in -0.5 ... 0.5 range (one extra bit for smaller numbers) etc...
         variable var: DataValid_3.self_t;
-        variable stage: StageR2SDF_16.self_t;
+        variable stage: StageR2SDF_15.self_t;
         variable pyha_ret_0: DataValid_3.self_t;
         variable pyha_ret_1: DataValid_3.self_t;
         variable pyha_ret_2: DataValid_3.self_t;
@@ -140,10 +120,6 @@ package body R2SDF_51 is
         variable pyha_ret_6: DataValid_3.self_t;
         variable pyha_ret_7: DataValid_3.self_t;
         variable pyha_ret_8: DataValid_3.self_t;
-        variable pyha_ret_9: DataValid_3.self_t;
-        variable pyha_ret_10: DataValid_3.self_t;
-        variable pyha_ret_11: DataValid_3.self_t;
-        variable pyha_ret_12: DataValid_3.self_t;
     begin
         var := input;
         if self_const.INVERSE then
@@ -157,10 +133,10 @@ package body R2SDF_51 is
         for \_i_\ in self.stages'range loop
             if True then
                 if \_i_\ = 0 then
-                    StageR2SDF_19.main(self.stages_0, self_next.stages_0, self_const.stages_0, var, pyha_ret_0);
+                    StageR2SDF_18.main(self.stages_0, self_next.stages_0, self_const.stages_0, var, pyha_ret_0);
                     var := pyha_ret_0;
                 elsif \_i_\ = 1 then
-                    StageR2SDF_22.main(self.stages_1, self_next.stages_1, self_const.stages_1, var, pyha_ret_1);
+                    StageR2SDF_21.main(self.stages_1, self_next.stages_1, self_const.stages_1, var, pyha_ret_1);
                     var := pyha_ret_1;
                 elsif \_i_\ = 2 then
                     StageR2SDF_24.main(self.stages_2, self_next.stages_2, self_const.stages_2, var, pyha_ret_2);
@@ -178,23 +154,11 @@ package body R2SDF_51 is
                     StageR2SDF_36.main(self.stages_6, self_next.stages_6, self_const.stages_6, var, pyha_ret_6);
                     var := pyha_ret_6;
                 elsif \_i_\ = 7 then
-                    StageR2SDF_39.main(self.stages_7, self_next.stages_7, self_const.stages_7, var, pyha_ret_7);
+                    StageR2SDF_38.main(self.stages_7, self_next.stages_7, self_const.stages_7, var, pyha_ret_7);
                     var := pyha_ret_7;
                 elsif \_i_\ = 8 then
-                    StageR2SDF_42.main(self.stages_8, self_next.stages_8, self_const.stages_8, var, pyha_ret_8);
+                    StageR2SDF_15.main(self.stages_8, self_next.stages_8, self_const.stages_8, var, pyha_ret_8);
                     var := pyha_ret_8;
-                elsif \_i_\ = 9 then
-                    StageR2SDF_45.main(self.stages_9, self_next.stages_9, self_const.stages_9, var, pyha_ret_9);
-                    var := pyha_ret_9;
-                elsif \_i_\ = 10 then
-                    StageR2SDF_48.main(self.stages_10, self_next.stages_10, self_const.stages_10, var, pyha_ret_10);
-                    var := pyha_ret_10;
-                elsif \_i_\ = 11 then
-                    StageR2SDF_50.main(self.stages_11, self_next.stages_11, self_const.stages_11, var, pyha_ret_11);
-                    var := pyha_ret_11;
-                elsif \_i_\ = 12 then
-                    StageR2SDF_16.main(self.stages_12, self_next.stages_12, self_const.stages_12, var, pyha_ret_12);
-                    var := pyha_ret_12;
                 end if;
             end if;
 
@@ -208,9 +172,9 @@ package body R2SDF_51 is
             -- this part is active if transform is larger than 10 stages
         end if;
         if self_const.POST_GAIN_CONTROL /= 0 then
-            self_next.output.data := resize(scalb(var.data, -self_const.POST_GAIN_CONTROL), -3, -20, fixed_wrap, fixed_truncate);
+            self_next.output.data := resize(scalb(var.data, -self_const.POST_GAIN_CONTROL), 0, -17, fixed_wrap, fixed_truncate);
         else
-            self_next.output.data := resize(var.data, -3, -20, fixed_wrap, fixed_truncate);
+            self_next.output.data := resize(var.data, 0, -17, fixed_wrap, fixed_truncate);
 
         end if;
         self_next.output.valid := var.valid;
@@ -218,7 +182,7 @@ package body R2SDF_51 is
         return;
     end procedure;
 
-    function R2SDF(stages_0: StageR2SDF_19.self_t;stages_1: StageR2SDF_22.self_t;stages_2: StageR2SDF_24.self_t;stages_3: StageR2SDF_27.self_t;stages_4: StageR2SDF_30.self_t;stages_5: StageR2SDF_33.self_t;stages_6: StageR2SDF_36.self_t;stages_7: StageR2SDF_39.self_t;stages_8: StageR2SDF_42.self_t;stages_9: StageR2SDF_45.self_t;stages_10: StageR2SDF_48.self_t;stages_11: StageR2SDF_50.self_t;stages_12: StageR2SDF_16.self_t; output: DataValid_4.self_t) return self_t is
+    function R2SDF(stages_0: StageR2SDF_18.self_t;stages_1: StageR2SDF_21.self_t;stages_2: StageR2SDF_24.self_t;stages_3: StageR2SDF_27.self_t;stages_4: StageR2SDF_30.self_t;stages_5: StageR2SDF_33.self_t;stages_6: StageR2SDF_36.self_t;stages_7: StageR2SDF_38.self_t;stages_8: StageR2SDF_15.self_t; output: DataValid_3.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin
@@ -231,10 +195,6 @@ package body R2SDF_51 is
         self.stages_6 := stages_6;
         self.stages_7 := stages_7;
         self.stages_8 := stages_8;
-        self.stages_9 := stages_9;
-        self.stages_10 := stages_10;
-        self.stages_11 := stages_11;
-        self.stages_12 := stages_12;
         self.output := output;
         return self;
     end function;

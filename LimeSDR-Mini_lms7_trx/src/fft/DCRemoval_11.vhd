@@ -16,13 +16,12 @@ library work;
     use work.DataValid_2.all;
     use work.DataValid_3.all;
     use work.DataValid_4.all;
-    use work.DataValid_5.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_7.all;
-    use work.MovingAverage_8.all;
-    use work.ShiftRegister_9.all;
-    use work.MovingAverage_10.all;
-    use work.ShiftRegister_11.all;
+    use work.ShiftRegister_5.all;
+    use work.DownCounter_6.all;
+    use work.MovingAverage_7.all;
+    use work.ShiftRegister_8.all;
+    use work.MovingAverage_9.all;
+    use work.ShiftRegister_10.all;
 
 -- Linear-phase DC Removal Filter
 -- ------------------------------
@@ -33,31 +32,31 @@ library work;
 -- window_len: Averaging window size, must be power of two. Controls the filter sharpness and the BRAM usage.
 -- Optimal value is 2048. 1024 may be good enough.
 -- dtype: Sfix or Complex (applies to real and imag channels separately)
-package DCRemoval_12 is
+package DCRemoval_11 is
     type self_t is record
-        averages: MovingAverage_8.MovingAverage_8_self_t_list_t(0 to 1);
-        averages_0: MovingAverage_8.self_t;
-        averages_1: MovingAverage_10.self_t;
-        delayed_input: ShiftRegister_11.self_t;
+        averages: MovingAverage_7.MovingAverage_7_self_t_list_t(0 to 1);
+        averages_0: MovingAverage_7.self_t;
+        averages_1: MovingAverage_9.self_t;
+        delayed_input: ShiftRegister_10.self_t;
         output: DataValid_3.self_t;
     end record;
-    type DCRemoval_12_self_t_list_t is array (natural range <>) of DCRemoval_12.self_t;
+    type DCRemoval_11_self_t_list_t is array (natural range <>) of DCRemoval_11.self_t;
 
     type self_t_const is record
         WINDOW_LEN: integer;
-        averages: MovingAverage_8.MovingAverage_8_self_t_const_list_t_const(0 to 1);
-        averages_0: MovingAverage_8.self_t_const;
-        averages_1: MovingAverage_10.self_t_const;
-        delayed_input: ShiftRegister_11.self_t_const;
+        averages: MovingAverage_7.MovingAverage_7_self_t_const_list_t_const(0 to 1);
+        averages_0: MovingAverage_7.self_t_const;
+        averages_1: MovingAverage_9.self_t_const;
+        delayed_input: ShiftRegister_10.self_t_const;
         output: DataValid_3.self_t_const;
     end record;
-    type DCRemoval_12_self_t_const_list_t_const is array (natural range <>) of DCRemoval_12.self_t_const;
+    type DCRemoval_11_self_t_const_list_t_const is array (natural range <>) of DCRemoval_11.self_t_const;
 
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_0.self_t; ret_0:out DataValid_3.self_t);
-    function DCRemoval(averages_0: MovingAverage_8.self_t;averages_1: MovingAverage_10.self_t; delayed_input: ShiftRegister_11.self_t; output: DataValid_3.self_t) return self_t;
+    function DCRemoval(averages_0: MovingAverage_7.self_t;averages_1: MovingAverage_9.self_t; delayed_input: ShiftRegister_10.self_t; output: DataValid_3.self_t) return self_t;
 end package;
 
-package body DCRemoval_12 is
+package body DCRemoval_11 is
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_0.self_t; ret_0:out DataValid_3.self_t) is
     -- Args:
     -- input (DataValid): -1.0 ... 1.0 range, up to 18 bits
@@ -71,8 +70,8 @@ package body DCRemoval_12 is
         variable pyha_ret_2: complex_t(1 downto -22);
         variable pyha_ret_3: complex_t(1 downto -22);
     begin
-        MovingAverage_8.main(self.averages_0, self_next.averages_0, self_const.averages_0, input, pyha_ret_0);
-        MovingAverage_10.main(self.averages_1, self_next.averages_1, self_const.averages_1, pyha_ret_0, pyha_ret_1);
+        MovingAverage_7.main(self.averages_0, self_next.averages_0, self_const.averages_0, input, pyha_ret_0);
+        MovingAverage_9.main(self.averages_1, self_next.averages_1, self_const.averages_1, pyha_ret_0, pyha_ret_1);
         avg_out := pyha_ret_1;
 
         if not avg_out.valid then
@@ -81,16 +80,16 @@ package body DCRemoval_12 is
 
             -- delay input -> use averager[0] delay to save alot of RAM
         end if;
-        ShiftRegister_6.peek(self.averages_0.shr, self_next.averages_0.shr, self_const.averages_0.shr, pyha_ret_2);
-        ShiftRegister_11.push_next(self.delayed_input, self_next.delayed_input, self_const.delayed_input, pyha_ret_2);
-        ShiftRegister_11.peek(self.delayed_input, self_next.delayed_input, self_const.delayed_input, pyha_ret_3);
+        ShiftRegister_5.peek(self.averages_0.shr, self_next.averages_0.shr, self_const.averages_0.shr, pyha_ret_2);
+        ShiftRegister_10.push_next(self.delayed_input, self_next.delayed_input, self_const.delayed_input, pyha_ret_2);
+        ShiftRegister_10.peek(self.delayed_input, self_next.delayed_input, self_const.delayed_input, pyha_ret_3);
         self_next.output.data := resize(pyha_ret_3 - avg_out.data, 0, -17, fixed_wrap, fixed_truncate);
         self_next.output.valid := True;
         ret_0 := self.output;
         return;
     end procedure;
 
-    function DCRemoval(averages_0: MovingAverage_8.self_t;averages_1: MovingAverage_10.self_t; delayed_input: ShiftRegister_11.self_t; output: DataValid_3.self_t) return self_t is
+    function DCRemoval(averages_0: MovingAverage_7.self_t;averages_1: MovingAverage_9.self_t; delayed_input: ShiftRegister_10.self_t; output: DataValid_3.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin

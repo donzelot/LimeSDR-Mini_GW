@@ -46,49 +46,57 @@ library work;
     use work.DownCounter_32.all;
     use work.StageR2SDF_33.all;
     use work.ShiftRegister_34.all;
+    use work.DownCounter_35.all;
+    use work.StageR2SDF_36.all;
+    use work.ShiftRegister_37.all;
+    use work.StageR2SDF_38.all;
+    use work.R2SDF_39.all;
 
-
-package DownCounter_35 is
+-- FFTPower
+-- --------
+-- Multiplies complex input by its conjugate: (a + bi)(a - bi) = a**2 + b**2
+-- Results in a real number.
+package FFTPower_40 is
     type self_t is record
-        counter: sfixed(3 downto 0);
+        output: DataValid_4.self_t;
     end record;
-    type DownCounter_35_self_t_list_t is array (natural range <>) of DownCounter_35.self_t;
+    type FFTPower_40_self_t_list_t is array (natural range <>) of FFTPower_40.self_t;
 
     type self_t_const is record
-        START_VALUE: sfixed(3 downto 0);
+        output: DataValid_4.self_t_const;
     end record;
-    type DownCounter_35_self_t_const_list_t_const is array (natural range <>) of DownCounter_35.self_t_const;
+    type FFTPower_40_self_t_const_list_t_const is array (natural range <>) of FFTPower_40.self_t_const;
 
-    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
-    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
-    function DownCounter(counter: sfixed(3 downto 0)) return self_t;
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_4.self_t);
+    function FFTPower(output: DataValid_4.self_t) return self_t;
 end package;
 
-package body DownCounter_35 is
-    procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
-
+package body FFTPower_40 is
+    procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_4.self_t) is
+    -- Args:
+    -- input (DataValid): type not restricted
+    -- Returns:
+    -- DataValid: Lowest 36 bits from the result.
+    -- Example: Input is 18 bits with format 0:-17, then output is 36 bits 1:-34
 
     begin
-        -- test if counter is negative -> must be over
-        ret_0 := sign_bit(self.counter - 1);
+        if not input.valid then
+            ret_0 := DataValid(self.output.data, valid=>False);
+            return;
+
+            -- (a + bi)(a - bi) = a**2 + b**2
+        end if;
+        self_next.output.data := resize((get_real(input.data) * get_real(input.data)) + (get_imag(input.data) * get_imag(input.data)), 1, -34, fixed_wrap, fixed_truncate);
+        self_next.output.valid := input.valid;
+        ret_0 := self.output;
         return;
     end procedure;
 
-    procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const) is
-
-        variable pyha_ret_0: boolean;
-    begin
-        is_over(self, self_next, self_const, pyha_ret_0);
-        if not pyha_ret_0 then
-            self_next.counter := resize(self.counter - 1, 3, 0, fixed_wrap, fixed_truncate);
-        end if;
-    end procedure;
-
-    function DownCounter(counter: sfixed(3 downto 0)) return self_t is
+    function FFTPower(output: DataValid_4.self_t) return self_t is
         -- constructor
         variable self: self_t;
     begin
-        self.counter := counter;
+        self.output := output;
         return self;
     end function;
 end package body;

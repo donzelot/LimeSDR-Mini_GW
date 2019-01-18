@@ -16,27 +16,26 @@ library work;
     use work.DataValid_2.all;
     use work.DataValid_3.all;
     use work.DataValid_4.all;
-    use work.DataValid_5.all;
-    use work.ShiftRegister_6.all;
+    use work.ShiftRegister_5.all;
 
 
-package DownCounter_7 is
+package DownCounter_6 is
     type self_t is record
         counter: sfixed(1 downto 0);
     end record;
-    type DownCounter_7_self_t_list_t is array (natural range <>) of DownCounter_7.self_t;
+    type DownCounter_6_self_t_list_t is array (natural range <>) of DownCounter_6.self_t;
 
     type self_t_const is record
         START_VALUE: sfixed(1 downto 0);
     end record;
-    type DownCounter_7_self_t_const_list_t_const is array (natural range <>) of DownCounter_7.self_t_const;
+    type DownCounter_6_self_t_const_list_t_const is array (natural range <>) of DownCounter_6.self_t_const;
 
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean);
     procedure tick(self:in self_t; self_next:inout self_t; constant self_const: self_t_const);
     function DownCounter(counter: sfixed(1 downto 0)) return self_t;
 end package;
 
-package body DownCounter_7 is
+package body DownCounter_6 is
     procedure is_over(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; ret_0:out boolean) is
 
 

@@ -16,14 +16,13 @@ library work;
     use work.DataValid_2.all;
     use work.DataValid_3.all;
     use work.DataValid_4.all;
-    use work.DataValid_5.all;
-    use work.ShiftRegister_6.all;
-    use work.DownCounter_7.all;
-    use work.MovingAverage_8.all;
-    use work.ShiftRegister_9.all;
-    use work.MovingAverage_10.all;
-    use work.ShiftRegister_11.all;
-    use work.DCRemoval_12.all;
+    use work.ShiftRegister_5.all;
+    use work.DownCounter_6.all;
+    use work.MovingAverage_7.all;
+    use work.ShiftRegister_8.all;
+    use work.MovingAverage_9.all;
+    use work.ShiftRegister_10.all;
+    use work.DCRemoval_11.all;
 
 -- Window function
 -- ---------------
@@ -33,27 +32,27 @@ library work;
 -- window (str): Name of the windowing function (imported from Scipy).
 -- coefficient_bits: Coefficients are stored as constants in LUTS.
 -- You will probably want to use the 8-bit 'hamming' window if the 'window_length' gets large.
-package Windower_13 is
+package Windower_12 is
     type self_t is record
-        window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191);
+        window_pure: Typedefs.sfixed0downto_17_list_t(0 to 511);
         output: DataValid_3.self_t;
         index_counter: integer;
-        coef: sfixed(0 downto -8);
+        coef: sfixed(0 downto -10);
     end record;
-    type Windower_13_self_t_list_t is array (natural range <>) of Windower_13.self_t;
+    type Windower_12_self_t_list_t is array (natural range <>) of Windower_12.self_t;
 
     type self_t_const is record
         WINDOW_LENGTH: integer;
-        WINDOW: Typedefs.sfixed0downto_8_list_t(0 to 8191);
+        WINDOW: Typedefs.sfixed0downto_10_list_t(0 to 511);
         output: DataValid_3.self_t_const;
     end record;
-    type Windower_13_self_t_const_list_t_const is array (natural range <>) of Windower_13.self_t_const;
+    type Windower_12_self_t_const_list_t_const is array (natural range <>) of Windower_12.self_t_const;
 
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_3.self_t);
-    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -8)) return self_t;
+    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 511); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -10)) return self_t;
 end package;
 
-package body Windower_13 is
+package body Windower_12 is
     procedure main(self:in self_t; self_next:inout self_t; constant self_const: self_t_const; input: DataValid_3.self_t; ret_0:out DataValid_3.self_t) is
     -- Args:
     -- input (DataValid): -1.0 ... 1.0 range, up to 18 bits
@@ -67,7 +66,7 @@ package body Windower_13 is
 
         end if;
         self_next.index_counter := (self.index_counter + 1) mod self_const.WINDOW_LENGTH;
-        self_next.coef := resize(self_const.WINDOW(self.index_counter), 0, -8, fixed_saturate, fixed_round);
+        self_next.coef := resize(self_const.WINDOW(self.index_counter), 0, -10, fixed_saturate, fixed_round);
 
         self_next.output.data := resize(input.data * self.coef, 0, -17, fixed_wrap, fixed_round);
         self_next.output.valid := input.valid;
@@ -75,7 +74,7 @@ package body Windower_13 is
         return;
     end procedure;
 
-    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 8191); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -8)) return self_t is
+    function Windower(window_pure: Typedefs.sfixed0downto_17_list_t(0 to 511); output: DataValid_3.self_t; index_counter: integer; coef: sfixed(0 downto -10)) return self_t is
         -- constructor
         variable self: self_t;
     begin
