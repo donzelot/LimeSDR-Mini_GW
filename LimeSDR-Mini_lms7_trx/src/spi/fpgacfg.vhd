@@ -191,7 +191,7 @@ begin
 			elsif dout_reg_len = '1' then
 				case inst_reg(4 downto 0) is	-- mux read-only outputs
 					when "00001" => dout_reg <= x"0001";
-					when "00010" => dout_reg <= (15 downto 8 => '0') & COMPILE_REV_reg;
+					when "00010" => dout_reg <= "0000000000000000"; -- HACK: hardcode this to 0, 1.for detections 2. LimeUtil --update always restores vanilla contents
 					when "00011" => dout_reg <= (15 downto 8 => '0') & PWR_SRC & bom_ver_int & hw_ver_int;
 					when others  => dout_reg <= mem(to_integer(unsigned(inst_reg(4 downto 0))));
 				end case;
@@ -243,9 +243,9 @@ begin
 		if mreset = '0' then	
 			--Read only registers
 			mem(0)	<= "0000000000010001"; -- 00 frre, Board ID (uLimeSDR)
-			mem(1)	<= "0000000000000000"; -- 00 free, GW version
-			mem(2)	<= "0000000000000000"; -- 00 free, GW revision
-			mem(3)	<= "0000000000000000"; --  9 free, BOM_VER[6:4],HW_VER[3:0]
+			mem(1)	<= "0000000000000100"; -- 00 free, GW version
+			mem(2)	<= "0000000000000100"; -- 00 free, GW revision
+			mem(3)	<= "0000000000000100"; --  9 free, BOM_VER[6:4],HW_VER[3:0]
 			--FPGA direct clocking
 			mem(4)	<= "0000000000000000"; --  0 free, phase_reg_sel
 			mem(5)	<= "0000000000000000"; --  0 free, drct_clk_en, 
