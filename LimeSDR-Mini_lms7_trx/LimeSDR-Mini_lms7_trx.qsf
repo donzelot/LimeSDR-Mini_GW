@@ -59,7 +59,7 @@ set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name FLOW_ENABLE_POWER_ANALYZER ON
-set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE "50 %"
+set_global_assignment -name POWER_DEFAULT_INPUT_IO_TOGGLE_RATE 50%
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
 set_location_assignment PIN_D8 -to FPGA_LED_G
 set_location_assignment PIN_H6 -to LMK_CLK
@@ -240,7 +240,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to FPGA_LED_R
 set_global_assignment -name POST_FLOW_SCRIPT_FILE "quartus_sh:gen_prg_files.tcl"
 set_global_assignment -name AUTO_MERGE_PLLS OFF
 set_global_assignment -name AUTO_GLOBAL_REGISTER_CONTROLS OFF
-set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
+set_global_assignment -name OPTIMIZATION_MODE "AGGRESSIVE POWER"
 set_instance_assignment -name IO_STANDARD "2.5 V" -to altera_reserved_tms
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_TXNRX2
 set_instance_assignment -name IO_STANDARD "2.5 V" -to LMS_TXNRX1
@@ -329,7 +329,7 @@ set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to LMS_FCL
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
 set_global_assignment -name POWER_USE_PVA OFF
-set_global_assignment -name POWER_DEFAULT_TOGGLE_RATE "12.5 %"
+set_global_assignment -name POWER_DEFAULT_TOGGLE_RATE 12.5%
 set_location_assignment PIN_J10 -to TX_LB_SH
 set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to TX_LB_SH
 set_location_assignment PIN_K10 -to TX_LB_AT
@@ -378,7 +378,7 @@ set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to HW_VER[3]
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_1993
 set_instance_assignment -name GLOBAL_SIGNAL GLOBAL_CLOCK -to lmsrx_clk
 set_global_assignment -name SMART_RECOMPILE OFF
-set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE SPEED
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE AREA
 set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
@@ -389,65 +389,53 @@ set_global_assignment -name ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP ON
 set_global_assignment -name MUX_RESTRUCTURE OFF
 set_global_assignment -name ROUTER_CLOCKING_TOPOLOGY_ANALYSIS ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
-set_global_assignment -name VHDL_FILE src/fft/Windower_13.vhd
+set_global_assignment -name VHDL_FILE src/fft/Windower_12.vhd
 set_global_assignment -name VHDL_FILE src/fft/top.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_50.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_48.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_45.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_42.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_39.vhd
+set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_38.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_36.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_33.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_30.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_27.vhd
 set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_24.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_22.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_19.vhd
-set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_16.vhd
-set_global_assignment -name VHDL_FILE src/fft/SpectrogramLimeSDR_57.vhd
-set_global_assignment -name VHDL_FILE src/fft/Spectrogram_56.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_49.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_46.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_43.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_40.vhd
+set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_21.vhd
+set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_18.vhd
+set_global_assignment -name VHDL_FILE src/fft/StageR2SDF_15.vhd
+set_global_assignment -name VHDL_FILE src/fft/SpectrogramLimeSDR_45.vhd
+set_global_assignment -name VHDL_FILE src/fft/Spectrogram_44.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_37.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_34.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_31.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_28.vhd
 set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_25.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_20.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_17.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_14.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_11.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_9.vhd
-set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_6.vhd
-set_global_assignment -name VHDL_FILE src/fft/RAM_53.vhd
-set_global_assignment -name VHDL_FILE src/fft/R2SDF_51.vhd
-set_global_assignment -name VHDL_FILE src/fft/MovingAverage_10.vhd
-set_global_assignment -name VHDL_FILE src/fft/MovingAverage_8.vhd
-set_global_assignment -name VHDL_FILE src/fft/FFTPower_52.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_54.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_47.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_44.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_41.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_38.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_22.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_19.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_16.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_13.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_10.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_8.vhd
+set_global_assignment -name VHDL_FILE src/fft/ShiftRegister_5.vhd
+set_global_assignment -name VHDL_FILE src/fft/RAM_41.vhd
+set_global_assignment -name VHDL_FILE src/fft/R2SDF_39.vhd
+set_global_assignment -name VHDL_FILE src/fft/MovingAverage_9.vhd
+set_global_assignment -name VHDL_FILE src/fft/MovingAverage_7.vhd
+set_global_assignment -name VHDL_FILE src/fft/FFTPower_40.vhd
+set_global_assignment -name VHDL_FILE src/fft/DownCounter_42.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_35.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_32.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_29.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_26.vhd
 set_global_assignment -name VHDL_FILE src/fft/DownCounter_23.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_21.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_18.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_15.vhd
-set_global_assignment -name VHDL_FILE src/fft/DownCounter_7.vhd
-set_global_assignment -name VHDL_FILE src/fft/DCRemoval_12.vhd
-set_global_assignment -name VHDL_FILE src/fft/DataValid_5.vhd
+set_global_assignment -name VHDL_FILE src/fft/DownCounter_20.vhd
+set_global_assignment -name VHDL_FILE src/fft/DownCounter_17.vhd
+set_global_assignment -name VHDL_FILE src/fft/DownCounter_14.vhd
+set_global_assignment -name VHDL_FILE src/fft/DownCounter_6.vhd
+set_global_assignment -name VHDL_FILE src/fft/DCRemoval_11.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_4.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_3.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_2.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_1.vhd
 set_global_assignment -name VHDL_FILE src/fft/DataValid_0.vhd
-set_global_assignment -name VHDL_FILE src/fft/BitreversalFFTshiftAVGPool_55.vhd
+set_global_assignment -name VHDL_FILE src/fft/BitreversalFFTshiftAVGPool_43.vhd
 set_global_assignment -name VHDL_FILE src/fft/util/typedefs.vhdl
 set_global_assignment -name VHDL_FILE src/fft/util/pyha_util.vhdl
 set_global_assignment -name VHDL_FILE src/fft/util/fixed_pkg_c.vhdl
@@ -552,4 +540,6 @@ set_global_assignment -name VHDL_FILE src/rx_path_top/smpl_cnt/synth/smpl_cnt.vh
 set_global_assignment -name VHDL_FILE src/rx_path_top/rx_path/synth/rx_path_top.vhd
 set_global_assignment -name SDC_FILE Clock_groups.sdc
 set_global_assignment -name QIP_FILE fft_pll.qip
+set_global_assignment -name OPTIMIZE_POWER_DURING_SYNTHESIS "EXTRA EFFORT"
+set_global_assignment -name OPTIMIZE_POWER_DURING_FITTING "EXTRA EFFORT"
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
