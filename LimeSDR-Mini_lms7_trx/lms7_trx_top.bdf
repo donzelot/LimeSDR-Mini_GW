@@ -119,7 +119,7 @@ refer to the applicable agreement for further details.
 		(line (pt 181 12)(pt 185 8))
 	)
 	(text "VCC" (rect 200 7 217 16)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -656 976 -576 1152))
+	(annotation_block (location)(rect -536 904 -456 1080))
 )
 (pin
 	(input)
@@ -136,7 +136,7 @@ refer to the applicable agreement for further details.
 		(line (pt 181 12)(pt 185 8))
 	)
 	(text "VCC" (rect 200 7 217 16)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect -744 1200 -664 1232))
+	(annotation_block (location)(rect -544 1160 -464 1192))
 )
 (pin
 	(input)
@@ -650,7 +650,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect -544 784 -368 800)
+	(rect -968 768 -792 784)
 	(text "OUTPUT" (rect 1 0 34 9)(font "Arial" (font_size 6)))
 	(text "FPGA_GPIO[0]" (rect 90 0 153 10)(font "Arial" ))
 	(pt 0 8)
@@ -663,7 +663,7 @@ refer to the applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect -368 800 -312 816))
+	(annotation_block (location)(rect -792 784 -736 800))
 )
 (pin
 	(output)
@@ -684,7 +684,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect -368 1000 -192 1016)
+	(rect -960 680 -784 696)
 	(text "OUTPUT" (rect 1 0 34 9)(font "Arial" (font_size 6)))
 	(text "FPGA_GPIO[2]" (rect 90 0 153 10)(font "Arial" ))
 	(pt 0 8)
@@ -697,11 +697,11 @@ refer to the applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect -192 1016 -136 1032))
+	(annotation_block (location)(rect -784 696 -728 712))
 )
 (pin
 	(output)
-	(rect -280 1168 -104 1184)
+	(rect -976 728 -800 744)
 	(text "OUTPUT" (rect 1 0 34 9)(font "Arial" (font_size 6)))
 	(text "FPGA_GPIO[3]" (rect 90 0 153 10)(font "Arial" ))
 	(pt 0 8)
@@ -714,7 +714,7 @@ refer to the applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect -104 1184 -48 1200))
+	(annotation_block (location)(rect -800 744 -744 760))
 )
 (pin
 	(output)
@@ -3091,76 +3091,12 @@ refer to the applicable agreement for further details.
 	(pt -1008 808)
 )
 (connector
-	(pt -1008 808)
-	(pt -1008 920)
-)
-(connector
-	(pt -400 1008)
-	(pt -368 1008)
-)
-(connector
-	(pt -400 1008)
-	(pt -400 1040)
-)
-(connector
-	(pt -184 1040)
-	(pt -184 1088)
-)
-(connector
-	(pt -200 1088)
-	(pt -184 1088)
-	(bus)
-)
-(connector
-	(pt -184 1088)
-	(pt 40 1088)
-	(bus)
-)
-(connector
-	(text "LMS_DIQ2_D[0]" (rect -398 1024 -331 1035)(font "Intel Clear" ))
-	(pt -400 1040)
-	(pt -184 1040)
-)
-(connector
-	(pt -560 920)
-	(pt -560 792)
-)
-(connector
-	(pt -560 792)
-	(pt -544 792)
-)
-(connector
 	(pt -144 1104)
 	(pt 40 1104)
 )
 (connector
 	(pt -144 1104)
 	(pt -144 1112)
-)
-(connector
-	(pt -280 1176)
-	(pt -288 1176)
-)
-(connector
-	(pt -288 1176)
-	(pt -288 1112)
-)
-(connector
-	(pt -296 1112)
-	(pt -288 1112)
-)
-(connector
-	(pt -288 1112)
-	(pt -144 1112)
-)
-(connector
-	(pt -696 920)
-	(pt -680 920)
-)
-(connector
-	(text "RXCLK" (rect -604 904 -576 915)(font "Intel Clear" ))
-	(pt -680 920)
-	(pt -560 920)
 )
 (connector
 	(pt -2728 3152)
@@ -3340,14 +3276,42 @@ refer to the applicable agreement for further details.
 	(pt -1712 -744)
 	(pt -1640 -744)
 )
+(connector
+	(pt -568 920)
+	(pt -568 928)
+)
+(connector
+	(pt -696 920)
+	(pt -680 920)
+)
+(connector
+	(text "RXCLK" (rect -604 904 -576 915)(font "Intel Clear" ))
+	(pt -680 920)
+	(pt -568 920)
+)
+(connector
+	(pt -296 1112)
+	(pt -144 1112)
+)
+(connector
+	(pt -200 1088)
+	(pt 40 1088)
+	(bus)
+)
+(connector
+	(pt -1016 776)
+	(pt -968 776)
+)
+(connector
+	(pt -976 736)
+	(pt -984 736)
+)
 (junction (pt 24 896))
 (junction (pt 16 1232))
 (junction (pt 24 880))
 (junction (pt -1728 3328))
 (junction (pt -1760 3456))
 (junction (pt -1760 3496))
-(junction (pt -184 1088))
-(junction (pt -288 1112))
 (junction (pt -680 920))
 (junction (pt -2912 2976))
 (text "General I/O, clock pins, ect" (rect -3032 -904 -2798 -885)(font "Arial" (font_size 14)(bold)))
